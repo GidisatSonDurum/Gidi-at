@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#070A18">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Gidişat">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="manifest" id="mf">
 <title>Şube Gidişat</title>
 <style>
 /* Tasarım planı (v10) — "Skorbord", üç sekme (Gidişat | Gereken | Giriş), telefon + tablet + bilgisayar
@@ -1890,7 +1897,10 @@ function normUrl(s){
 }
 function tokenOf(c){ return 'GK1~' + c.u.replace(/^https?:\/\//, '') + '~' + c.k; }
 function parseToken(s){
-  var m = /^GK1~([a-zA-Z0-9.-]+)~([a-z0-9]{20,64})$/.exec(String(s || '').replace(/[\s"']/g, ''));
+  s = String(s || '').replace(/[\s"']/g, '');
+  var q = /[#?&]gk=([^&#]+)/.exec(s);                                      /* linkin tamamı yapıştırıldıysa içindeki kodu al */
+  if (q){ try { s = decodeURIComponent(q[1]); } catch(e){ s = q[1]; } }
+  var m = /^GK1~([a-zA-Z0-9.-]+)~([a-z0-9]{20,64})$/.exec(s);
   if (!m) return null;
   var u = normUrl('https://' + m[1].toLowerCase());
   return u ? { u:u, k:m[2] } : null;
@@ -1907,7 +1917,7 @@ function loadCfg(){
   var u = normUrl(c.u); if (!u || !/^[a-z0-9]{20,64}$/.test(c.k)) return null;
   return { u:u, k:c.k };
 }
-function saveCfg(c){ E.cfg = c; if (c) jset('gk_cfg', c); else LS.del('gk_cfg'); }
+function saveCfg(c){ E.cfg = c; if (c) jset('gk_cfg', c); else LS.del('gk_cfg'); pwaUpdate(); }
 function base(){ return E.cfg.u + '/g/' + E.cfg.k; }
 function xhr(m, url, body, cb){
   var x = new XMLHttpRequest(), done = false;
@@ -2122,7 +2132,7 @@ function onSheetClick(e){
   var act = b.getAttribute('data-act');
   if (act === 'close') closeSheet();
   else if (act === 'copytok') copyText(tokenOf(E.cfg), function(ok){ sheetMsg(ok ? 'Kod kopyalandı. WhatsApp\'a yapıştırabilirsin.' : 'Kopyalanamadı. Kodu elle seç: ' + tokenOf(E.cfg), ok); });
-  else if (act === 'copylink') copyText(window.location.href.split('#')[0] + '#gk=' + encodeURIComponent(tokenOf(E.cfg)), function(ok){ sheetMsg(ok ? 'Link kopyalandı. Personel bu linki açınca otomatik bağlanır.' : 'Kopyalanamadı.', ok); });
+  else if (act === 'copylink') copyText(window.location.href.split('#')[0].split('?')[0] + '?gk=' + encodeURIComponent(tokenOf(E.cfg)), function(ok){ sheetMsg(ok ? 'Link kopyalandı. Personel bu linki açınca otomatik bağlanır.' : 'Kopyalanamadı.', ok); });
   else if (act === 'copyrules') copyText(RULES, function(ok){ sheetMsg(ok ? 'Kurallar kopyalandı.' : 'Kopyalanamadı. Kutudaki yazıyı seçip kopyala.', ok); });
   else if (act === 'test') connectWith(E.cfg, false);
   else if (act === 'unlink'){
@@ -2427,7 +2437,7 @@ function setTab(t, first){
   playIn($(TABID[t][1])); playIn($(TABID[t][2]));
 }
 function startTab(){
-  if (/[#&?]gk=/.test(String(window.location.hash))) return 'gir';
+  if (/[#&?]gk=/.test(String(window.location.search) + String(window.location.hash))) return 'gir';
   var t = LS.get('gk_tab'); return TABS.indexOf(t) >= 0 ? t : 'gid';
 }
 function initTabs(){
@@ -2445,12 +2455,32 @@ function initTabs(){
   setTab(startTab(), true);
 }
 
+/* ---------- uygulama gibi kurulum (ana ekrana ekle) ----------
+   Manifest burada üretilir: başlangıç adresi mağaza kodunu taşır, böylece ikondan açılan uygulama da aynı mağazaya bağlanır
+   (iPhone'da ana ekran uygulamasının saklama alanı Safari'den ayrıdır; kod adreste gelmezse bağlantı kaybolurdu). */
+function isStandalone(){
+  try { return window.navigator.standalone === true || !!(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches); } catch(e){ return false; }
+}
+function pwaUpdate(){
+  try {
+    var lk = document.getElementById('mf'), W = window.location;
+    if (!lk || !/^https?:$/.test(W.protocol) || !window.Blob || !window.URL || !window.URL.createObjectURL) return;
+    var root = W.protocol + '//' + W.host + W.pathname.replace(/[^\/]*$/, ''), page = W.protocol + '//' + W.host + W.pathname;
+    var m = {
+      name: 'Şube Gidişat', short_name: 'Gidişat', lang: 'tr',
+      start_url: page + (E.cfg ? '?gk=' + encodeURIComponent(tokenOf(E.cfg)) : ''), scope: root, display: 'standalone',
+      background_color: '#070A18', theme_color: '#070A18',
+      icons: [{ src: root + 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }]
+    };
+    lk.setAttribute('href', window.URL.createObjectURL(new Blob([JSON.stringify(m)], { type: 'application/manifest+json' })));
+  } catch(e){}
+}
+
 /* ---------- giriş sekmesini başlat ---------- */
 function initEntry(){
   E.day = dayKey();
   E.cfg = loadCfg();
-  var hm = /[#&?]gk=([^&]+)/.exec(String(window.location.hash)), tk = null;
-  if (hm){ try { tk = parseToken(decodeURIComponent(hm[1])); } catch(e){} }
+  var tk = parseToken(String(window.location.search) + String(window.location.hash));      /* link ?gk=… veya #gk=… biçiminde olabilir */
   if (tk && !E.cfg) saveCfg(tk);
   else if (tk && E.cfg && (tk.k !== E.cfg.k || tk.u !== E.cfg.u)) E.linkDiff = true;     /* bu cihaz başka bir mağazaya bağlı: sessizce geçme, uyar */
   var me = LS.get('gk_me'); E.me = me != null && /^\d+$/.test(me) && +me < NP ? +me : null;
@@ -2473,6 +2503,7 @@ function initEntry(){
   setInterval(function(){ checkDay(); watchStream(); applyDeferred(); }, 15000);
   if (E.cfg) startNet(); else setState('local');
   if (E.linkDiff){ openSheet(); sheetMsg('Bu link başka bir mağazaya ait; bu cihaz hâlâ eskisine bağlı. Geçmek için “Bağlantıyı kaldır”a dokun, sonra sayfayı yenile.', false); }
+  else if (!E.cfg && isStandalone()){ openSheet(); sheetMsg('Bu uygulama henüz bir mağazaya bağlı değil. Mağaza kodunu veya giriş linkinin tamamını yapıştırıp “Kodla bağlan”a dokun.', false); }
 }
 
 /* ---------- ekranları kur (ilk açılışta ve yeni veri gelince) ---------- */
@@ -2507,6 +2538,7 @@ function init(){
   loadSnap(); SNAP.t = V.meta.stamp || 0; setData(V);
   $('#defs').innerHTML = defsHTML();
   initEntry();
+  pwaUpdate();
   buildViews();
   initTabs();
   fitAll();
