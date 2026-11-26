@@ -2543,7 +2543,7 @@ function commit(p, k, x){
   if (v) o[k] = v; else delete o[k];
   o.son = nowSec();
   saveDay();
-  if (E.cfg){ queue(E.day, RID[p], k, v); queue(E.day, RID[p], 'son', o.son); ntfyNote(p, k); }
+  if (E.cfg){ queue(E.day, RID[p], k, v); queue(E.day, RID[p], 'son', o.son); ntfyNote(p, k, old); }
   syncInput(p, k); refreshCard(p); refreshPanel(); refreshLast();
 }
 function onListClick(e){
@@ -3664,22 +3664,40 @@ function remNotify(sn){
   for (p = 0; p < NP; p++){
     if (p === E.me) continue;                                               /* bu telefondaki kişinin kendi kartı: haber verme */
     GF.forEach(function(a){
-      if ((sn[p] ? sn[p][a.k] : 0) !== now[p][a.k]){ (E.nb[p] || (E.nb[p] = {}))[a.k] = 1; any = true; }
+      if ((sn[p] ? sn[p][a.k] : 0) !== now[p][a.k]){
+        var o = E.nb[p] || (E.nb[p] = {});
+        if (!o[a.k]) o[a.k] = { b: sn[p] ? sn[p][a.k] : 0 };                /* uyarı penceresindeki İLK önceki değer: geri alınırsa uyarı çıkmaz */
+        any = true;
+      }
     });
   }
   if (any){ clearTimeout(E.nbT); E.nbT = setTimeout(remShow, 900); }          /* art arda gelen alanlar tek uyarı olsun */
 }
-function headList(ks){
-  var l = GF.filter(function(a){ return ks[a.k]; }).map(function(a){ return a.ad; });
-  return l.length > 3 ? l.slice(0, 3).join(', ') + ' +' + (l.length - 3) : l.join(', ');
+/* bildirim metni: alan adı değil GÜNCEL rakam. Sayı alanı "2 adet Superbox", tutar alanı "Aksesuar toplam 6.000 TL".
+   Toplam bir kişinin o gün o alandaki toplamıdır; biri eksiltirse yeni toplam "(düzeltildi)" ile yazılır; yazıp geri alınırsa hiç yazılmaz. */
+var NTF_AD = { sprbox:'Superbox', aksadet:'Aksesuar' };
+function ntfVal(p, k){
+  var a = GBY[k], v = gv(p, k), nm = NTF_AD[k] || a.ad;
+  return a.u === 'tl' ? nm + ' toplam ' + fTL2(v) + ' TL' : fInt(v) + ' adet ' + nm;
+}
+function valList(p, ks, max){
+  var l = [];
+  GF.forEach(function(a){
+    var o = ks[a.k], b, v;
+    if (!o) return;
+    b = o.b || 0; v = gv(p, a.k);
+    if (v === b) return;
+    l.push(ntfVal(p, a.k) + (v < b ? ' (düzeltildi)' : ''));
+  });
+  return l.length > max ? l.slice(0, max).join(', ') + ' +' + (l.length - max) : l.join(', ');
 }
 function remShow(){
   var nb = E.nb, ps = [], p, nm, title, sub, av;
   E.nb = {}; E.nbT = 0;
-  for (p = 0; p < NP; p++) if (nb[p]) ps.push(p);
+  for (p = 0; p < NP; p++) if (nb[p] && valList(p, nb[p], 9)) ps.push(p);     /* alanların hepsi eski değerine dönmüşse o kişi için uyarı yok */
   if (!ps.length) return;
   if (ps.length === 1){
-    nm = V.kisiler[ps[0]].adT; title = nm + ' veri girdi'; sub = headList(nb[ps[0]]); av = iniOf(nm);
+    nm = V.kisiler[ps[0]].adT; title = nm + ' veri girdi'; sub = valList(ps[0], nb[ps[0]], 4); av = iniOf(nm);
   } else {
     title = ps.length + ' kişi veri girdi';
     sub = ps.slice(0, 2).map(function(q){ return V.kisiler[q].adT; }).join(', ') + (ps.length > 2 ? ' ve ' + (ps.length - 2) + ' kişi daha' : '');
@@ -3738,19 +3756,24 @@ function ntfySend(title, msg, cb, beacon){
     x.send(msg);
   } catch(e){ fin(false); }
 }
-function ntfyNote(p, k){
+function ntfyNote(p, k, old){
   if (!E.cfg) return;                                /* mağazaya bağlı HER cihaz haber gönderir; kimsenin ayar açması gerekmez */
-  (E.np[p] || (E.np[p] = {}))[k] = 1;
+  var o = E.np[p] || (E.np[p] = {});
+  if (!o[k]) o[k] = { b: old || 0 };                 /* 20 sn penceresindeki İLK önceki değer */
   if (!E.npT) E.npT = setTimeout(function(){ ntfyFlush(false); }, 20000);   /* 20 sn içindeki girişler tek bildirim */
 }
 function ntfyFlush(beacon){
-  var np = E.np, ps = [], p, parts;
+  var np = E.np, parts = [], p, t;
   clearTimeout(E.npT); E.npT = 0; E.np = {};
-  for (p = 0; p < NP; p++) if (np[p]) ps.push(p);
-  if (!ps.length || !E.cfg) return;
-  parts = ps.slice(0, 3).map(function(q){ return V.kisiler[q].adT + ': ' + headList(np[q]); });
-  if (ps.length > 3) parts.push('+' + (ps.length - 3) + ' kişi daha');
-  ntfySend(ntfyName(), parts.join(' · ') + ' (veri girdi)', null, beacon);
+  if (!E.cfg) return;
+  for (p = 0; p < NP; p++){
+    if (!np[p]) continue;
+    t = valList(p, np[p], 4);
+    if (t) parts.push(V.kisiler[p].adT + ': ' + t);                          /* yazıp geri alınan alan için bildirim yok */
+  }
+  if (!parts.length) return;
+  if (parts.length > 3) parts = parts.slice(0, 3).concat('+' + (parts.length - 3) + ' kişi daha');
+  ntfySend(ntfyName(), parts.join(' · '), null, beacon);
 }
 
 /* ----- Ayarlar penceresi: tema, bildirim ----- */
@@ -3778,19 +3801,29 @@ function prefHTML(){
   else h += '<p class="shs sm" style="margin-top:8px">Uygulama kapalıyken bildirim için önce aşağıdan mağazaya bağlan.</p>';
   return h;
 }
+function isIOS(){ var ua = navigator.userAgent || ''; return /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1); }
 function ntfyHTML(){
-  var tp = ntfyTopic();
-  return '<div class="shh"><h2 id="shtitle">Telefona bildirim</h2><button class="shx" type="button" data-act="close" aria-label="Kapat">×</button></div>'
-    + '<p class="shs">Uygulama kapalıyken de ses ve titreşimle haber gelsin. 3 adımda biter.</p>'
-    + '<ol class="stp">'
-    + '<li><span class="sn">1</span><div class="sb"><b>ntfy uygulamasını kur</b><span>Bedava. App Store veya Google Play\'de "ntfy" yaz. Hesap açmak gerekmez.</span></div></li>'
-    + '<li><span class="sn">2</span><div class="sb"><b>Bu şubeyi ekle</b><span>Aşağıdaki düğmeye dokun. iPhone\'da düğme konu adını kopyalar; ntfy\'de + işaretine basıp yapıştır.</span><span class="topic" id="ntfTopic">' + esc(tp) + '</span>'
-    + '<button class="shb" type="button" data-act="ntfadd">Şubeyi ekle</button><button class="shb g" type="button" data-act="ntfcopy">Konu adını kopyala</button></div></li>'
-    + '<li><span class="sn">3</span><div class="sb"><b>Dene</b><span>Düğmeye bas. Telefonuna ses ve titreşimle bir bildirim düşmeli.</span><button class="shb" type="button" data-act="ntftest">Test bildirimi gönder</button>'
-    + '<div class="okline" id="ntfOk" hidden>' + IC.chk + 'Gönderildi. Telefonuna bak.</div></div></li></ol>'
+  var tp = ntfyTopic(), ios = isIOS(), n = ios ? 4 : 3, t, h;
+  t = '<span class="topic" id="ntfTopic">' + esc(tp) + '</span>';
+  function li(k, title, body, extra){ return '<li><span class="sn">' + k + '</span><div class="sb"><b>' + title + '</b><span>' + body + '</span>' + (extra || '') + '</div></li>'; }
+  function test(k){ return li(k, 'Dene', 'Düğmeye bas. Telefonuna ses ve titreşimle bir bildirim düşmeli.', '<button class="shb" type="button" data-act="ntftest">Test bildirimi gönder</button><div class="okline" id="ntfOk" hidden>' + IC.chk + 'Gönderildi. Telefonuna bak.</div>'); }
+  h = '<div class="shh"><h2 id="shtitle">Telefona bildirim</h2><button class="shx" type="button" data-act="close" aria-label="Kapat">×</button></div>'
+    + '<p class="shs">Uygulama kapalıyken de ses ve titreşimle haber gelsin. ' + n + ' adımda biter.</p><ol class="stp">';
+  if (ios){           /* iPhone: App Store'daki ntfy bazı telefonlarda kilit ekranına düşürmüyor; ana ekrana eklenen web sürümü düşürüyor */
+    h += li(1, 'Konu adını kopyala', 'Aşağıdaki düğmeye dokun.', t + '<button class="shb g" type="button" data-act="ntfcopy">Konu adını kopyala</button>')
+      + li(2, 'ntfy\'yi ana ekrana ekle', 'Safari\'yi aç, adres çubuğuna <strong style="color:var(--ink);font-weight:850">ntfy.sh/app</strong> yaz. Alttaki Paylaş düğmesine bas → «Ana Ekrana Ekle» → Ekle.')
+      + li(3, 'Konuyu ekle', 'Ana ekrandaki yeni ntfy simgesini aç. Sol üstteki üç çizgiye (☰) bas → «Şimdi ver» → iPhone sorarsa «İzin Ver». Sonra ☰ → «Konuya abone ol» → kutuya yapıştır → «Abone ol».')
+      + test(4);
+  } else {
+    h += li(1, 'ntfy uygulamasını kur', 'Bedava. App Store veya Google Play\'de "ntfy" yaz. Hesap açmak gerekmez.')
+      + li(2, 'Bu şubeyi ekle', 'Aşağıdaki düğmeye dokun. iPhone\'da düğme konu adını kopyalar; ntfy\'de + işaretine basıp yapıştır.', t + '<button class="shb" type="button" data-act="ntfadd">Şubeyi ekle</button><button class="shb g" type="button" data-act="ntfcopy">Konu adını kopyala</button>')
+      + test(3);
+  }
+  return h + '</ol>'
     + '<div class="shmsg" id="shmsg" role="status" aria-live="polite"></div>'
     + '<p class="shs sm" id="ntfState" style="margin-top:6px">Bu mağazada biri veri girince, ntfy\'ye eklediğin her telefona haber gider. Diğer cihazlarda ayar açmak gerekmez.</p>'
-    + '<p class="shs sm">Bildirimde yalnızca kısa bilgi olur: kim veri girdi, hangi başlık. Telefon numarası ve kişisel bilgi olmaz.</p>';
+    + (ios ? '<p class="shs sm">App Store\'daki ntfy uygulaması bazı iPhone\'larda bildirimi kilit ekranına düşürmüyor. Bu yüzden web sürümü kullanılır.</p>' : '')
+    + '<p class="shs sm">Bildirimde yalnızca kısa bilgi olur: kim, hangi alan, güncel adet ya da toplam tutar. Telefon numarası ve kişisel bilgi olmaz.</p>';
 }
 function openNtfy(){ stashXl(); $('#sheet').innerHTML = ntfyHTML(); try { $('#sheet').scrollTop = 0; } catch(e){} }
 function setTema(k){
