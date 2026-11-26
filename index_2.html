@@ -3722,7 +3722,7 @@ function ntfySend(title, msg, cb, beacon){
   } catch(e){ fin(false); }
 }
 function ntfyNote(p, k){
-  if (!PF.ntfy || !E.cfg) return;
+  if (!E.cfg) return;                                /* mağazaya bağlı HER cihaz haber gönderir; kimsenin ayar açması gerekmez */
   (E.np[p] || (E.np[p] = {}))[k] = 1;
   if (!E.npT) E.npT = setTimeout(function(){ ntfyFlush(false); }, 20000);   /* 20 sn içindeki girişler tek bildirim */
 }
@@ -3730,7 +3730,7 @@ function ntfyFlush(beacon){
   var np = E.np, ps = [], p, parts;
   clearTimeout(E.npT); E.npT = 0; E.np = {};
   for (p = 0; p < NP; p++) if (np[p]) ps.push(p);
-  if (!ps.length || !PF.ntfy || !E.cfg) return;
+  if (!ps.length || !E.cfg) return;
   parts = ps.slice(0, 3).map(function(q){ return V.kisiler[q].adT + ': ' + headList(np[q]); });
   if (ps.length > 3) parts.push('+' + (ps.length - 3) + ' kişi daha');
   ntfySend(ntfyName(), parts.join(' · ') + ' (veri girdi)', null, beacon);
@@ -3755,7 +3755,7 @@ function prefHTML(){
     + swRow('bil', 'Başkası veri girince haber ver', 'Ekranda uyarı çıkar.')
     + swRow('ses', 'Ses', 'Haber gelince kısa bir ses çalar.')
     + swRow('tit', 'Titreşim', 'Android telefonda çalışır. iPhone\'da telefonun kendi ayarına bağlıdır.') + '</div>';
-  if (E.cfg) h += '<div class="pcard"><div class="pt"><b>Uygulama kapalıyken de haber gelsin</b><span class="chip' + (PF.ntfy ? ' ok' : '') + '">' + (PF.ntfy ? 'Açık' : 'Kapalı') + '</span></div>'
+  if (E.cfg) h += '<div class="pcard"><div class="pt"><b>Uygulama kapalıyken de haber gelsin</b><span class="chip' + (PF.ntfy ? ' ok' : '') + '">' + (PF.ntfy ? 'Kuruldu' : 'Kurulmadı') + '</span></div>'
     + '<p>Telefonuna ses ve titreşimle bildirim düşer. Bedava, hesap açmak gerekmez.</p>'
     + '<button class="shb" type="button" data-act="ntf" style="width:100%;margin-right:0">' + (PF.ntfy ? 'Bildirim ayarı' : 'Bildirimi aç') + '</button></div>';
   else h += '<p class="shs sm" style="margin-top:8px">Uygulama kapalıyken bildirim için önce aşağıdan mağazaya bağlan.</p>';
@@ -3772,9 +3772,8 @@ function ntfyHTML(){
     + '<li><span class="sn">3</span><div class="sb"><b>Dene</b><span>Düğmeye bas. Telefonuna ses ve titreşimle bir bildirim düşmeli.</span><button class="shb" type="button" data-act="ntftest">Test bildirimi gönder</button>'
     + '<div class="okline" id="ntfOk" hidden>' + IC.chk + 'Gönderildi. Telefonuna bak.</div></div></li></ol>'
     + '<div class="shmsg" id="shmsg" role="status" aria-live="polite"></div>'
-    + '<p class="shs sm" style="margin-top:6px">Bildirimde yalnızca kısa bilgi olur: kim veri girdi, hangi başlık. Telefon numarası ve kişisel bilgi olmaz.</p>'
-    + '<p class="shs sm" id="ntfState">' + (PF.ntfy ? 'Bu telefonda girilen veriler için bildirim gönderiliyor.' : 'Test başarılı olunca bu telefon için bildirim açılır.') + '</p>'
-    + (PF.ntfy ? '<button class="shb g r" type="button" data-act="ntfoff">Bildirimi kapat</button>' : '');
+    + '<p class="shs sm" id="ntfState" style="margin-top:6px">Bu mağazada biri veri girince, ntfy\'ye eklediğin her telefona haber gider. Diğer cihazlarda ayar açmak gerekmez.</p>'
+    + '<p class="shs sm">Bildirimde yalnızca kısa bilgi olur: kim veri girdi, hangi başlık. Telefon numarası ve kişisel bilgi olmaz.</p>';
 }
 function openNtfy(){ stashXl(); $('#sheet').innerHTML = ntfyHTML(); try { $('#sheet').scrollTop = 0; } catch(e){} }
 function setTema(k){
@@ -3809,15 +3808,12 @@ function prefAct(act, b){
     ntfySend(ntfyName(), 'Deneme bildirimi: ses ve titreşimle geldiyse hazırsın.', function(ok){
       var okl = $('#ntfOk');
       if (!ok){ if (okl) okl.hidden = true; sheetMsg('Gönderilemedi. İnternet bağlantını kontrol edip tekrar dene.', false); return; }
-      PF.ntfy = true; prefSave();
+      PF.ntfy = true; prefSave();                      /* yalnızca "bu telefonda kurulum denendi" işareti; göndermeyi etkilemez */
       if (okl) okl.hidden = false;
       sheetMsg('', true);
-      var st = $('#ntfState'); if (st) st.textContent = 'Bu telefonda girilen veriler için bildirim gönderiliyor.';
-      if (!$('[data-act="ntfoff"]')){ var bt = el('button', 'shb g r', 'Bildirimi kapat'); bt.type = 'button'; bt.setAttribute('data-act', 'ntfoff'); $('#sheet').appendChild(bt); }
     });
     return true;
   }
-  if (act === 'ntfoff'){ PF.ntfy = false; prefSave(); E.np = {}; clearTimeout(E.npT); E.npT = 0; renderSheet(); return true; }
   return false;
 }
 function prefInit(){
