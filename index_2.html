@@ -871,7 +871,6 @@ body[data-tab="krt"] .tabpill{background:linear-gradient(90deg,#E5435F,#C42343);
   .tbr.top1{box-shadow:inset 3px 0 0 #FFD24A}
   .tbr.top2{box-shadow:inset 3px 0 0 #DCE4F5}
   .tbr.top3{box-shadow:inset 3px 0 0 #E59A5C}
-  .tbr:not(.tbh):active{background:rgba(255,255,255,.06)}
   .tbl{display:flex;justify-content:space-between;align-items:center;margin:9px 3px 0;gap:8px}
   .tbl .lg{display:flex;align-items:center}
   .tbl .cn{font-size:10.5px;font-weight:650;color:var(--ink2)}
@@ -903,21 +902,6 @@ body[data-tab="krt"] .tabpill{background:linear-gradient(90deg,#E5435F,#C42343);
   .wide .tbr.sube .tc,.wide .tbr.sube .xc{height:24px}
   .wide .tbr.sube{margin-top:4px;padding:2px 2px}
   .wide .tbl{margin-top:5px}
-  .tbr.sel{box-shadow:inset 3px 0 0 #FFD24A,0 0 0 1.5px rgba(var(--cyRgb),.85)}
-  #dim{position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(4,6,16,.66);z-index:50}
-  #dsheet{position:fixed;left:0;right:0;bottom:0;top:240px;z-index:60;border-radius:22px 22px 0 0;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.02)),var(--card);border:1px solid var(--line2);border-bottom:0;box-shadow:0 -18px 44px rgba(0,0,0,.65);overflow:hidden}
-  #dsheet .grab{width:38px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);margin:8px auto 4px}
-  #dsheet .shh{display:flex;align-items:center;padding:6px 14px 10px}
-  #dsheet .shh .bd{width:22px;height:22px;font-size:12px}
-  #dsheet .shh .sn{flex:1;min-width:0;margin-left:9px;font-size:17px;font-weight:780;line-height:1.15}
-  #dsheet .shh .sg{display:flex;flex-direction:column;align-items:flex-end}
-  #dsheet .shh .sg b{font-size:23px;font-weight:850;letter-spacing:-.03em;line-height:1.05;color:var(--cy);text-shadow:0 0 16px rgba(var(--cyRgb),.55)}
-  #dsheet .shh .sg i{font-style:normal;font-size:11px;color:var(--ink2);margin-top:1px}
-  #dsheet .shx{width:30px;height:30px;margin-left:10px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.07);color:var(--ink2);flex:none}
-  #dsheet .shx svg{width:13px;height:13px}
-  #dsheet .scr{position:absolute;left:0;right:0;top:78px;bottom:0;overflow:hidden;border-top:1px solid var(--line)}
-  #dsheet .scr::after{content:"";position:absolute;left:0;right:0;bottom:0;height:70px;background:linear-gradient(180deg,rgba(16,22,55,0),var(--card));pointer-events:none}
-  #dsheet .pc{border:0;background:none;box-shadow:none;margin:0;border-radius:0}
   
 /* ---- app13: ek kurallar (yeni sekmeler, başlık, tablo yerleşimi, ayarlar penceresi) ---- */
 [hidden]{display:none!important}
@@ -942,7 +926,6 @@ body.wide .segrow{display:flex;align-items:center;justify-content:space-between}
 body.wide .segrow #lgw{display:block;flex:1 1 auto;margin-left:16px}
 body.wide .segrow #lgw .tbl{margin:0 3px 0 0;justify-content:flex-end}
 body.wide #tbv>.tbl{display:none}
-button.tbr{font:inherit;color:inherit;cursor:pointer}
 /* yatay telefon: sekmeler başlık satırına çıkar */
 body.wide .trow{height:auto;min-height:0;margin-bottom:5px}
 body.wide .trow .tabs{flex:0 1 auto;width:auto;margin:0 0 0 auto}
@@ -1146,6 +1129,68 @@ html[data-theme="light"] .xlact .xlyes{border-color:var(--line2)}
 html[data-theme="light"] .xlbtn:focus-within,html[data-theme="light"] .xlact button:focus-visible{outline-color:var(--cy)}
 html[data-theme="light"] .toast{box-shadow:0 12px 30px rgba(var(--LshRgb),.28),0 0 0 1px rgba(var(--La1Rgb),.25)}
 
+/* ================= app15: şube sohbeti ================= */
+:root{--chk0:#FF8AD0;--chk1:#FFC857;--chk2:#3CD7FF;--chk3:#34F0A0;--chk4:#B7A6FF;--chk5:#FF9A6B;--chk6:#7BE0D0;--chk7:#E6A8FF}
+html[data-theme="light"]{--chk0:#C2307E;--chk1:#8F6200;--chk2:#0A74B8;--chk3:#0A8056;--chk4:#5B3FD0;--chk5:#B5500F;--chk6:#0E7A70;--chk7:#8E3BB0}
+.hbtn[hidden]{display:none}
+#btnChat[hidden]+.hbtn{margin-left:0}
+.cbadge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#E8334F;color:#fff;font-size:11.5px;font-weight:850;line-height:20px;text-align:center;box-shadow:0 0 0 2px var(--bg)}
+.cbadge[hidden]{display:none}
+html.chopen,html.chopen body{overflow:hidden}
+#chat{position:fixed;left:0;right:0;top:0;height:100%;z-index:62;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
+#chat[hidden]{display:none}
+.anim #chat:not([hidden]){animation:chatin .28s cubic-bezier(.2,.8,.2,1)}
+@keyframes chatin{from{opacity:0;transform:translateY(28px)}}
+.ch-wrap{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;width:100%;max-width:640px;margin:0 auto}
+.ch-top{flex:none;display:flex;align-items:center;padding:calc(8px + env(safe-area-inset-top)) 12px 10px 6px;border-bottom:1px solid var(--line2);background:var(--topbg)}
+.ch-back{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:var(--ink);background:none;cursor:pointer}
+.ch-back svg{width:24px;height:24px}
+.ch-ti{margin-left:4px;min-width:0}
+.ch-ti b{display:block;font-size:19px;font-weight:850;letter-spacing:-.02em}
+.ch-ti span{display:block;margin-top:1px;font-size:13px;color:var(--ink2)}
+.ch-list{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:10px 12px 8px}
+.ch-day{display:flex;justify-content:center;margin:16px 0 10px}
+.ch-day span{padding:5px 14px;border-radius:999px;background:var(--fill);border:1px solid var(--line2);font-size:13px;font-weight:750;color:var(--ink2)}
+.cm{display:flex;margin:6px 0}
+.cm .cb{max-width:84%;padding:9px 14px 7px;border-radius:18px 18px 18px 8px;background:var(--card);border:1px solid var(--line2);font-size:16px;line-height:1.38}
+.cm.own{justify-content:flex-end}
+.cm.own .cb{border-radius:18px 18px 8px 18px;border-color:transparent;background:linear-gradient(135deg,var(--cy),var(--vi));color:var(--onacc)}
+.cm.wait .cb{opacity:.72}
+.cn{display:block;margin-bottom:2px;font-size:14.5px;font-weight:850}
+.cn.k0{color:var(--chk0)}.cn.k1{color:var(--chk1)}.cn.k2{color:var(--chk2)}.cn.k3{color:var(--chk3)}.cn.k4{color:var(--chk4)}.cn.k5{color:var(--chk5)}.cn.k6{color:var(--chk6)}.cn.k7{color:var(--chk7)}
+.cx{display:block;white-space:pre-wrap;word-break:break-word;overflow-wrap:anywhere}
+.ct{display:block;margin-top:3px;text-align:right;font-size:12px;color:var(--muted)}
+.cm.own .ct{color:inherit;opacity:.7}
+.ch-empty,.ch-old{margin:28px 16px;text-align:center;font-size:14px;color:var(--ink2)}
+.ch-old{margin:8px 0 4px;font-size:13px}
+.ch-oldb{display:block;margin:6px auto 4px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--fill);border:1px solid var(--line2);font-size:13.5px;font-weight:750;color:var(--ink2);cursor:pointer}
+.ch-msg{flex:none;margin:0 12px 6px;font-size:13.5px;font-weight:700;line-height:1.45}
+.ch-msg:empty{display:none}
+.ch-msg.er{color:#FF9DB0}
+.ch-msg.ok{color:#34F0A0}
+.ch-lnk{display:inline;min-height:0;padding:0;font:inherit;font-weight:850;color:var(--cy);text-decoration:underline;text-underline-offset:3px;background:none;cursor:pointer}
+.ch-foot{flex:none;padding:6px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:var(--topbg)}
+.ch-as{position:relative;display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:14px;color:var(--ink2)}
+.ch-as b{color:var(--ink);font-weight:850}
+.ch-chg{flex:none;margin-left:10px;font-weight:800;color:var(--cy);text-decoration:underline;text-underline-offset:3px}
+.ch-as.todo .ch-ast{color:var(--cy);font-weight:800}
+.ch-as select{position:absolute;left:0;top:0;width:100%;height:100%;opacity:0;font-size:16px;cursor:pointer}
+.ch-in{display:flex;align-items:flex-end;margin-top:4px}
+.ch-in textarea{flex:1 1 0;min-width:0;display:block;resize:none;font:inherit;font-size:16px;line-height:1.35;color:var(--ink);background:var(--fill);border:1px solid var(--line2);border-radius:24px;padding:11px 16px;min-height:48px;max-height:120px;overflow-y:auto}
+.ch-in textarea::placeholder{color:var(--muted)}
+.ch-send{flex:none;display:grid;place-items:center;width:48px;height:48px;margin-left:8px;border-radius:50%;background:linear-gradient(135deg,var(--cy),var(--vi));color:var(--onacc);cursor:pointer}
+.ch-send svg{width:22px;height:22px}
+.ch-send:active{transform:scale(.95)}
+.ch-note{margin:7px 4px 0;font-size:12.5px;color:var(--muted)}
+.ch-back:focus-visible,.ch-send:focus-visible,.ch-oldb:focus-visible,.ch-lnk:focus-visible,.ch-in textarea:focus-visible{outline:2px solid var(--cy);outline-offset:2px}
+.ch-as:focus-within .ch-chg{outline:2px solid var(--cy);outline-offset:3px;border-radius:4px}
+html[data-theme="light"] .cm .cb{background:#fff;border-color:var(--line)}
+html[data-theme="light"] .cm.own .cb{border-color:transparent;background:linear-gradient(135deg,var(--La1),var(--La2))}
+html[data-theme="light"] .ch-in textarea{background:#fff}
+html[data-theme="light"] .ch-msg.er{color:#CC2748}
+html[data-theme="light"] .ch-msg.ok{color:#077A50}
+html[data-theme="light"] .cbadge{box-shadow:0 0 0 2px #fff}
+
 </style>
 </head>
 <body>
@@ -1155,7 +1200,7 @@ html[data-theme="light"] .toast{box-shadow:0 12px 30px rgba(var(--LshRgb),.28),0
   <div class="wrap">
     <div class="trow">
       <div class="brand"><h1 id="h1"></h1><span id="donem"></span><div class="lastin" id="lastin"><i></i><span id="lastTxt">Bugün henüz giriş yok</span></div></div>
-      <div class="hicons"><button class="hbtn" id="btnSet" type="button" aria-label="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><i class="gdot" id="gdot"></i></button></div>
+      <div class="hicons"><button class="hbtn" id="btnChat" type="button" aria-label="Şube sohbeti" hidden></button><button class="hbtn" id="btnSet" type="button" aria-label="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><i class="gdot" id="gdot"></i></button></div>
     </div>
     <div class="tabrow" id="tabrow">
       <div class="tabs" id="tabs" role="tablist" aria-label="Sekmeler">
@@ -2168,7 +2213,7 @@ var WDAY = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'C
 var MAXN = 999, MAXT = 999999.99;
 var HOST_RE = /^[a-z0-9][a-z0-9-]*(\.[a-z0-9-]+)*\.(firebaseio\.com|firebasedatabase\.app)$/;
 var DEFAULT_DB = 'https://capitol-a361b-default-rtdb.europe-west1.firebasedatabase.app';                                                         /* derlemede yazılır: bu adrese bağlı mağazaların link ve kodu kısa olur, adres ekranda gösterilmez */
-var RULES = "{\n  \"rules\": {\n    \".read\": false,\n    \".write\": false,\n    \"g\": {\n      \"$kod\": {\n        \".read\": \"$kod.length >= 20 && $kod.length <= 64\",\n        \".write\": \"$kod.length >= 20 && $kod.length <= 64\",\n        \"ping\": {\n          \".validate\": \"newData.isNumber()\"\n        },\n        \"v\": {\n          \".validate\": \"newData.hasChildren(['t','j'])\",\n          \"t\": {\n            \".validate\": \"newData.isNumber()\"\n          },\n          \"j\": {\n            \".validate\": \"newData.isString() && newData.val().length < 400000\"\n          },\n          \"$x\": {\n            \".validate\": false\n          }\n        },\n        \"d\": {\n          \"$gun\": {\n            \".validate\": \"$gun.matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)\",\n            \"$kisi\": {\n              \".validate\": \"$kisi.matches(/^([0-9]|1[01])$/)\",\n              \"$alan\": {\n                \".validate\": \"$alan.matches(/^[a-z]{2,10}$/) && newData.isNumber() && newData.val() >= 0 && newData.val() <= 99999999\"\n              }\n            }\n          }\n        },\n        \"$diger\": {\n          \".validate\": false\n        }\n      }\n    }\n  }\n}";
+var RULES = "{\n  \"rules\": {\n    \".read\": false,\n    \".write\": false,\n    \"g\": {\n      \"$kod\": {\n        \".read\": \"$kod.length >= 20 && $kod.length <= 64\",\n        \".write\": \"$kod.length >= 20 && $kod.length <= 64\",\n        \"ping\": {\n          \".validate\": \"newData.isNumber()\"\n        },\n        \"v\": {\n          \".validate\": \"newData.hasChildren(['t','j'])\",\n          \"t\": {\n            \".validate\": \"newData.isNumber()\"\n          },\n          \"j\": {\n            \".validate\": \"newData.isString() && newData.val().length < 400000\"\n          },\n          \"$x\": {\n            \".validate\": false\n          }\n        },\n        \"d\": {\n          \"$gun\": {\n            \".validate\": \"$gun.matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)\",\n            \"$kisi\": {\n              \".validate\": \"$kisi.matches(/^([0-9]|1[01])$/)\",\n              \"$alan\": {\n                \".validate\": \"$alan.matches(/^[a-z]{2,10}$/) && newData.isNumber() && newData.val() >= 0 && newData.val() <= 99999999\"\n              }\n            }\n          }\n        },\n        \"c\": {\n          \".indexOn\": [\n            \"t\"\n          ],\n          \"$id\": {\n            \".validate\": \"$id.matches(/^[0-9a-z]{10,40}$/) && newData.hasChildren(['t','n','m'])\",\n            \"t\": {\n              \".validate\": \"newData.isNumber() && newData.val() == now\"\n            },\n            \"n\": {\n              \".validate\": \"newData.isString() && newData.val().length >= 1 && newData.val().length <= 40\"\n            },\n            \"m\": {\n              \".validate\": \"newData.isString() && newData.val().length >= 1 && newData.val().length <= 500\"\n            },\n            \"$x\": {\n              \".validate\": false\n            }\n          }\n        },\n        \"$diger\": {\n          \".validate\": false\n        }\n      }\n    }\n  }\n}";
 
 var LS = (function(){
   var ok = false, mem = {}, P = (function(){ var b = V && V.meta ? bayiKey(V.meta.bayi) : ''; return b ? 'b' + b + ':' : ''; })();
@@ -2447,6 +2492,7 @@ function setMe(i){
   if (i == null) LS.del('gk_me2'); else LS.set('gk_me2', String(RID[i]));
   LS.del('gk_me');
   reorder(); if (i != null){ openCard(E.cards[i], true); }
+  chMeChanged();
 }
 function refreshCard(p){
   var c = E.cards[p], cs = calcP(p), o = E.vals[p] || {}, pe = V.kisiler[p];
@@ -2601,7 +2647,7 @@ function loadCfg(){
   var u = normUrl(c.u); if (!u || !/^[a-z0-9]{20,64}$/.test(c.k)) return null;
   return { u:u, k:c.k };
 }
-function saveCfg(c){ E.cfg = c; if (c) jset('gk_cfg', c); else LS.del('gk_cfg'); pwaUpdate(); }
+function saveCfg(c){ E.cfg = c; if (c) jset('gk_cfg', c); else LS.del('gk_cfg'); pwaUpdate(); chCfg(); }
 function base(){ return E.cfg.u + '/g/' + E.cfg.k; }
 function xhr(m, url, body, cb){
   var x = new XMLHttpRequest(), done = false;
@@ -2845,6 +2891,7 @@ function openStream(){
   };
 }
 function stopNet(){
+  chStop();
   closeStream(); clearTimeout(E.wd);
   if (E.poll){ clearInterval(E.poll); E.poll = 0; }
   if (E.repair){ clearInterval(E.repair); E.repair = 0; }
@@ -2855,7 +2902,7 @@ function startNet(){
   stopNet();
   if (!E.cfg){ setState('local'); return; }
   E.first = true; E.rm = null; E.stamped = ''; setState('connecting');
-  openStream();
+  openStream(); chStart();
   E.repair = setInterval(function(){ if (!document.hidden && E.cfg) pollOnce(); }, 90000);
   E.pvT = setInterval(function(){ if (!document.hidden && E.cfg) pollSnap(); }, 60000);
   flush(); pollSnap();
@@ -2900,7 +2947,7 @@ function renderSheet(){
   h += '<details class="shd"' + (cfg ? '' : ' open') + '><summary>Kurulum adımları (para gerekmez)</summary><ol>'
     + '<li>console.firebase.google.com adresini aç, Google hesabınla gir, <b>Proje oluştur</b> de (ad: gunluk). Google Analytics\'i kapat.</li>'
     + '<li>Sol menüde <b>Databases &amp; Storage → Realtime Database</b> (eski menüde Build), <b>Create database</b> (Veritabanı oluştur). Konum: Belçika (europe-west1). Başlangıç modu: <b>Locked mode</b> (kilitli). Bitir.</li>'
-    + '<li><b>Rules</b> (Kurallar) sekmesine geç, içindekini sil, aşağıdaki kuralları yapıştır, <b>Publish</b> (Yayınla). Daha önce yapıştırdıysan yeni kuralları yeniden yapıştır (Excel verisi için bir ekleme var).</li>'
+    + '<li><b>Rules</b> (Kurallar) sekmesine geç, içindekini sil, aşağıdaki kuralları yapıştır, <b>Publish</b> (Yayınla). Daha önce yapıştırdıysan yeni kuralları yeniden yapıştır (Excel verisi ve sohbet için eklemeler var).</li>'
     + '<li><b>Data</b> (Veri) sekmesinin en üstündeki adresi kopyala (https://…firebasedatabase.app veya …firebaseio.com).</li>'
     + '<li>Bu pencerede adresi yapıştırıp <b>Bağlan ve dene</b>. Sonra <b>Personel kodunu kopyala</b> ile kodu personele gönder.</li></ol>'
     + '<span class="shl">Kurallar</span><pre class="shpre" id="rulesPre">' + esc(RULES) + '</pre><button class="shb g" type="button" data-act="copyrules">Kuralları kopyala</button></details>';
@@ -3262,11 +3309,11 @@ function tbRow(o, i, isS){
   if (isS){ a = 'Şube'; b = 'gidişatı'; }
   var rk = isS ? 0 : (o.rank || (i + 1));                          /* kartlardaki sıra (eşit başarıda aynı sıra) */
   var bd = isS ? '<span class="bd sb">' + (o.sico || '') + '</span>' : '<span class="bd r' + (rk <= 3 ? rk : 0) + '">' + rk + '</span>';
-  return '<button type="button" class="tbr' + (isS ? ' sube' : '') + (!isS && rk <= 3 ? ' top' + rk : '') + '" data-i="' + (isS ? 's' : o.idx) + '" aria-label="' + hh((isS ? 'Şube gidişatı' : rk + '. sıra, ' + o.name) + ', genel ' + o.genel + '. Ayrıntılar için dokunun.') + '">'
+  return '<div role="group" class="tbr' + (isS ? ' sube' : '') + (!isS && rk <= 3 ? ' top' + rk : '') + '" aria-label="' + hh((isS ? 'Şube gidişatı' : rk + '. sıra, ' + o.name) + ', genel ' + o.genel + '.') + '">'
     + '<span class="tbn">' + bd + '<span class="nm"><b>' + hh(a) + '</b><i>' + hh(b) + '</i></span></span>'
     + '<span class="tbg"><b>' + hh(o.genel.replace('%', '')) + '</b></span>'
     + TB_COLS.map(function(c){ return tbCell(o, c[0]); }).join('')
-    + '<span class="sp"></span>' + TB_X.map(function(c){ return tbX(o, c[0]); }).join('') + '</button>';
+    + '<span class="sp"></span>' + TB_X.map(function(c){ return tbX(o, c[0]); }).join('') + '</div>';
 }
 function tbLegend(){
   return '<div class="tbl"><span class="lg">' + [['good', 'hedefte'], ['warn', 'sınırda'], ['bad', 'geride']].map(function(x){ return '<span class="cn ' + x[0] + '"><span class="d">' + IC[ST[x[0]].i] + '</span>' + x[1] + '</span>'; }).join('') + '</span><span class="lgn">Rakamlar % gidişat · MMA ortalama</span></div>';
@@ -3283,38 +3330,7 @@ function buildTable(){
   $('#list').parentNode.appendChild(sec);
   if (!lw){ lw = el('div', 'lgw'); lw.id = 'lgw'; sg.appendChild(lw); }
   lw.innerHTML = tbLegend();
-  sec.addEventListener('click', function(e){
-    var b = e.target; while (b && b !== sec && !(b.className && /(^|\s)tbr(\s|$)/.test(b.className))) b = b.parentNode;
-    if (!b || b === sec || /(^|\s)tbh(\s|$)/.test(b.className)) return;
-    openDetail(b.getAttribute('data-i'), b);
-  });
   sec.hidden = GVIEW !== 'tablo';
-}
-/* satıra dokununca ayrıntı: Gidişat kartındaki ayrıntının aynısı, alttan açılır */
-function closeDetail(){
-  var d = $('#dsheet'), m = $('#dim'), f = E.detFrom;
-  if (d && d.parentNode) d.parentNode.removeChild(d);
-  if (m && m.parentNode) m.parentNode.removeChild(m);
-  $$('.tbr.sel').forEach(function(x){ x.classList.remove('sel'); });
-  if (f && f.focus){ try { f.focus(); } catch(e){} }
-  E.detFrom = null;
-}
-function openDetail(id, from){
-  var isS = id === 's', o = isS ? V.sube : V.kisiler[+id], g = score(o, ALL), rank = 0, i, dim, sh, body, bd;
-  if (!o) return;
-  closeDetail(); E.detFrom = from || null; if (from) from.classList.add('sel');
-  if (!isS) for (i = 0; i < E.gi.length; i++) if (E.gi[i].i === +id) rank = E.gi[i].rank;
-  bd = isS ? '<span class="bd sb">' + IC.mag + '</span>' : '<span class="bd r' + (rank <= 3 ? rank : 0) + '">' + rank + '</span>';
-  dim = el('div'); dim.id = 'dim';
-  sh = el('div'); sh.id = 'dsheet'; sh.setAttribute('role', 'dialog'); sh.setAttribute('aria-modal', 'true');
-  sh.innerHTML = '<div class="grab"></div><div class="shh">' + bd + '<span class="sn">' + hh(isS ? 'Şube toplamı' : o.adT) + '</span><span class="sg"><b>' + hh(fg(g)) + '</b><i>Genel</i></span>'
-    + '<button type="button" class="shx" aria-label="Kapat"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l8 8M11 3l-8 8"/></svg></button></div><div class="scr"></div>';
-  body = detailBody(o); body.hidden = false; body.style.borderTop = '0';
-  var wrap = el('div', 'pc stg open'); wrap.appendChild(body); $('.scr', sh).appendChild(wrap);
-  document.body.appendChild(dim); document.body.appendChild(sh);
-  dim.addEventListener('click', closeDetail); $('.shx', sh).addEventListener('click', closeDetail);
-  playIn(body);
-  try { $('.shx', sh).focus(); } catch(e){}
 }
 
 /* ---------- Kritik Başlıklar: SW · REKONT · SOL · AKG · EGYG, şube ve personel, tek tablo ---------- */
@@ -3617,18 +3633,19 @@ function haber(){
 
 /* ----- ekranda uyarı ----- */
 function iniOf(nm){ var w = String(nm).replace(/\s+/g, ' ').trim().split(' '); return (w[0].charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : '')).toUpperCase(); }
-function showToast(av, title, sub){
+function showToast(av, title, sub, onTap){
   var t = $('#toast');
   if (!t){
     t = el('div', 'toast'); t.id = 'toast'; t.setAttribute('role', 'status'); t.setAttribute('aria-live', 'polite'); t.hidden = true;
-    t.addEventListener('click', hideToast); document.body.appendChild(t);
+    t.addEventListener('click', function(){ var f = E.ttTap; hideToast(); if (f) f(); }); document.body.appendChild(t);
   }
+  E.ttTap = onTap || null;
   t.innerHTML = '<span class="av">' + esc(av) + '</span><span class="tt"><b>' + esc(title) + '</b><span>' + esc(sub) + '</span></span><span class="tx3">şimdi</span>';
   t.style.top = (($('#top') ? $('#top').offsetHeight : 0) + 8) + 'px';
   t.hidden = false;
   clearTimeout(E.tt); E.tt = setTimeout(hideToast, 5200);
 }
-function hideToast(){ var t = $('#toast'); if (t) t.hidden = true; clearTimeout(E.tt); }
+function hideToast(){ var t = $('#toast'); if (t) t.hidden = true; E.ttTap = null; clearTimeout(E.tt); }
 
 /* ----- başkası veri girince: ortak kayıttan gelen değişikliği öncekiyle karşılaştır ----- */
 function remSnap(){
@@ -3752,7 +3769,7 @@ function prefHTML(){
   TEMALAR.forEach(function(t){ h += thBtn(t.k, t.n, t.sw, !t.dark); });
   h += '</div><p class="shs sm">Otomatik: telefonunun ayarına uyar. Seçim yalnızca bu telefonda kalır.</p>';
   h += '<span class="shl" style="margin-top:16px">Bildirim</span><div class="swlist">'
-    + swRow('bil', 'Başkası veri girince haber ver', 'Ekranda uyarı çıkar.')
+    + swRow('bil', 'Başkası veri girince haber ver', 'Ekranda uyarı çıkar. Sohbete mesaj gelince de.')
     + swRow('ses', 'Ses', 'Haber gelince kısa bir ses çalar.')
     + swRow('tit', 'Titreşim', 'Android telefonda çalışır. iPhone\'da telefonun kendi ayarına bağlıdır.') + '</div>';
   if (E.cfg) h += '<div class="pcard"><div class="pt"><b>Uygulama kapalıyken de haber gelsin</b><span class="chip' + (PF.ntfy ? ' ok' : '') + '">' + (PF.ntfy ? 'Kuruldu' : 'Kurulmadı') + '</span></div>'
@@ -3832,12 +3849,356 @@ function prefInit(){
   window.addEventListener('pagehide', function(){ ntfyFlush(true); });
 }
 
+/* ================= app15: şube sohbeti =================
+   Mesajlar ortak kayıtta g/<kod>/c/<kimlik> altında durur: { t: sunucu saati (ms), n: yazan adı, m: metin }.
+   Mesajlar silinmez; yukarı kaydırınca eskiler yüklenir. Ayrı canlı bağlantı AÇILMAZ (bağlantı sayısı sınırlı):
+   sohbet açıkken 3 sn'de bir, kapalıyken 20 sn'de bir yalnızca "son mesajdan sonrakiler" sorulur (birkaç yüz bayt).
+   İnternet yokken yazılan mesaj bekler, bağlanınca gider. */
+var CH = { map:{}, pend:{}, key:'', ready:false, open:false, readT:null, lastT:0, tm:0, busy:false, gen:0, more:false, old:false, err:'', bad:0, lastPush:0, rt:0, from:null };
+var CH_AY = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+var CH_MAX = 500, CH_FIRST = 200, CH_OLD = 100;
+IC.chat = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"/></svg>';
+IC.send = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
+IC.back = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>';
+
+function chBase(){ return E.cfg ? base() + '/c' : ''; }
+function chUrl(extra){ return chBase() + '.json?orderBy=%22t%22' + extra; }
+function chMe(){ return E.me != null && V.kisiler[E.me] ? V.kisiler[E.me].adT : ''; }
+function chOk(id, o){                                                         /* sunucudan gelen mesajı doğrula (kural: kimlik, t sayı, n 1–40, m 1–500 karakter) */
+  if (!/^[0-9a-z]{10,40}$/.test(id) || !o || typeof o !== 'object') return null;
+  if (typeof o.t !== 'number' || !isFinite(o.t) || typeof o.n !== 'string' || typeof o.m !== 'string') return null;
+  if (!o.n || o.n.length > 40 || !o.m || o.m.length > CH_MAX) return null;
+  return { id:id, t:o.t, n:o.n, m:o.m };
+}
+function chId(){
+  var r = '';
+  while (r.length < 6) r += Math.floor(Math.random() * 36).toString(36);
+  return Date.now().toString(36) + r;
+}
+function chSorted(){
+  var a = [], id;
+  for (id in CH.map) if (CH.map.hasOwnProperty(id)) a.push(CH.map[id]);
+  a.sort(function(x, y){ return x.t - y.t || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0); });
+  return a;
+}
+function chPendList(){
+  var a = [], id, p;
+  for (id in CH.pend) if (CH.pend.hasOwnProperty(id) && !CH.map[id]){ p = CH.pend[id]; a.push({ id:id, t:p.t, n:p.n, m:p.m, wait:!p.sent, fail:!p.sent && !!p.fail }); }   /* sunucu aldı ama geri okunmadı: normal mesaj gibi görünür */
+  a.sort(function(x, y){ return x.t - y.t; });
+  return a;
+}
+function chAll(){ return chSorted().concat(chPendList()); }                  /* gitmemiş mesajlar her zaman en altta */
+
+/* ----- gitmemiş mesajlar: sayfa yenilense de kaybolmaz ----- */
+function chSavePend(){
+  var o = {}, id, n = 0;
+  for (id in CH.pend) if (CH.pend.hasOwnProperty(id) && !CH.pend[id].sent){ o[id] = { t:CH.pend[id].t, n:CH.pend[id].n, m:CH.pend[id].m }; n++; }   /* sunucuya ulaşanlar kalıcı listede tutulmaz: yenilenince yeniden gitmesin */
+  if (E.cfg && n) LS.set('gk_cp', JSON.stringify({ k:E.cfg.k, p:o })); else LS.del('gk_cp');
+}
+function chLoadPend(){
+  var s = LS.get('gk_cp'), o = null, id, v;
+  CH.pend = {};
+  try { o = s ? JSON.parse(s) : null; } catch(e){ o = null; }
+  if (!o || !E.cfg || o.k !== E.cfg.k || !o.p || typeof o.p !== 'object') return;
+  for (id in o.p) if (o.p.hasOwnProperty(id)){ v = chOk(id, o.p[id]); if (v) CH.pend[id] = { t:v.t, n:v.n, m:v.m }; }
+}
+
+/* ----- okunmamış sayısı (bu telefonda en son görülen mesaj saatinden sonrakiler) ----- */
+function chLoadRead(){
+  var s = LS.get('gk_cr'), i = s ? s.indexOf(':') : -1;
+  CH.readT = i > 0 && E.cfg && s.slice(0, i) === E.cfg.k && isFinite(+s.slice(i + 1)) ? +s.slice(i + 1) : null;
+}
+function chSaveRead(){ if (E.cfg && CH.readT != null) LS.set('gk_cr', E.cfg.k + ':' + CH.readT); }
+function chUnread(){
+  var id, n = 0, me = chMe();
+  if (CH.readT == null) return 0;
+  for (id in CH.map) if (CH.map.hasOwnProperty(id) && CH.map[id].t > CH.readT && CH.map[id].n !== me) n++;
+  return n;
+}
+function chMarkRead(){
+  if (!CH.ready) return;
+  if (CH.readT == null || CH.readT < CH.lastT){ CH.readT = CH.lastT; chSaveRead(); }
+  chBadge();
+}
+function chBadge(){
+  var b = $('#chatBadge'), btn = $('#btnChat'), n;
+  if (!btn) return;
+  btn.hidden = !E.cfg;
+  n = E.cfg ? chUnread() : 0;
+  if (b){ b.hidden = !n; b.textContent = n > 99 ? '99+' : String(n); }
+  btn.setAttribute('aria-label', 'Şube sohbeti' + (n ? ', ' + n + ' yeni mesaj' : ''));
+}
+
+/* ----- sunucudan okuma ----- */
+function chGet(extra, cb){
+  var gen = CH.gen;
+  xhr('GET', chUrl(extra), null, function(st, j){ if (gen !== CH.gen || !E.cfg) return; cb(st, j); });
+}
+function chMerge(val){
+  var id, o, fresh = [], n = 0, gone = false;
+  if (val && typeof val === 'object') for (id in val) if (val.hasOwnProperty(id)){
+    o = chOk(id, val[id]); if (!o) continue;
+    n++;
+    if (!CH.map[id]) fresh.push(o);
+    CH.map[id] = o;
+    if (o.t > CH.lastT) CH.lastT = o.t;
+    if (CH.pend[id]){ delete CH.pend[id]; gone = true; }                       /* sunucuya ulaştı: bekleyenlerden çıkar */
+  }
+  if (gone) chSavePend();                                                      /* kalıcı kopya da silinsin (yoksa yenilenince aynı mesaj yeniden gider) */
+  return { n:n, fresh:fresh };
+}
+function chSched(){
+  var ms;
+  clearTimeout(CH.tm); CH.tm = 0;
+  if (!E.cfg || document.hidden) return;
+  ms = CH.err ? 60000 : (CH.open ? 3000 : 20000);
+  if (CH.bad > 2 && ms < 15000) ms = 15000;                                    /* bağlantı yokken sık sorma */
+  CH.tm = setTimeout(chTick, ms);
+}
+function chTick(){
+  clearTimeout(CH.tm); CH.tm = 0;
+  if (!E.cfg || document.hidden) return;
+  if (CH.busy){ chSched(); return; }
+  CH.busy = true;
+  chGet(CH.ready && CH.lastT ? '&startAt=' + CH.lastT : '&limitToLast=' + CH_FIRST, function(st, j){
+    var first = !CH.ready, r, pn = Object.keys(CH.pend).length;
+    CH.busy = false;
+    if (st === 200){
+      CH.err = ''; CH.bad = 0;
+      r = chMerge(j);
+      if (first){ CH.ready = true; CH.more = r.n >= CH_FIRST; if (CH.readT == null){ CH.readT = CH.lastT; chSaveRead(); } }
+      if (r.fresh.length || first || pn !== Object.keys(CH.pend).length) chAfter(first ? [] : r.fresh);
+      else if (CH.open) chState();
+    } else {
+      if ((st === 400 && /index/i.test(j && j.error ? String(j.error) : '')) || st === 401 || st === 403) CH.err = 'rules'; else CH.bad++;
+      chState();
+    }
+    chSched();
+  });
+}
+function chOlder(){
+  var oldest = 0, id, L = $('#chList'), h0, t0;
+  if (CH.old || !CH.more || !CH.ready) return;
+  for (id in CH.map) if (CH.map.hasOwnProperty(id) && (!oldest || CH.map[id].t < oldest)) oldest = CH.map[id].t;
+  if (!oldest){ CH.more = false; return; }
+  CH.old = true; chRender(false);
+  chGet('&endAt=' + oldest + '&limitToLast=' + (CH_OLD + 1), function(st, j){      /* endAt dahil: en eski bildiğimiz mesaj da döner, o yüzden +1 */
+    var r;
+    CH.old = false;
+    if (st === 200){ r = chMerge(j); CH.more = r.n >= CH_OLD + 1; }
+    L = $('#chList'); h0 = L ? L.scrollHeight : 0; t0 = L ? L.scrollTop : 0;
+    chRender(false);
+    if (L){ L.scrollTop = t0 + (L.scrollHeight - h0); }                        /* eski mesajlar eklenince bakılan yer kaymasın */
+    chBadge();
+  });
+}
+function chAfter(fresh){
+  var i, f = null, c = 0, me = chMe(), m;
+  for (i = 0; i < fresh.length; i++) if (fresh[i].n !== me){ c++; if (!f || fresh[i].t > f.t) f = fresh[i]; }
+  chRender(false);
+  if (CH.open) chMarkRead(); else chBadge();
+  if (c && !CH.open && !document.hidden && PF.bil){
+    m = f.m.length > 60 ? f.m.slice(0, 57) + '…' : f.m;
+    showToast(iniOf(f.n), c > 1 ? c + ' yeni sohbet mesajı' : f.n + ' sohbete yazdı', c > 1 ? 'Son: ' + f.n : m, chOpen);
+    haber();
+  }
+}
+
+/* ----- yazma ----- */
+function chNote(t, ok, rules){
+  var m = $('#chMsg');
+  if (!m) return;
+  m.className = 'ch-msg' + (t ? (ok ? ' ok' : ' er') : '');
+  m.innerHTML = t ? esc(t) + (rules ? ' <button type="button" class="ch-lnk" data-act="chset">Ayarlar\'ı aç</button>' : '') : '';
+}
+function chState(){
+  if (!CH.open) return;
+  if (CH.err === 'rules') chNote('Sohbet henüz açılmadı. Yeni kuralları bir kez Firebase\'e yapıştırmak gerekiyor (Ayarlar → Kurulum adımları).', false, true);
+  else if (CH.bad > 2) chNote('Bağlantı yok. Yazdıkların bağlanınca gider.', false);
+  else chNote('', true);
+}
+function chPutPend(id){
+  var o = CH.pend[id], body, gen = CH.gen;
+  if (!o || !E.cfg || o.busy || o.sent) return;
+  o.busy = true;
+  body = '{"t":{".sv":"timestamp"},"n":' + JSON.stringify(o.n) + ',"m":' + JSON.stringify(o.m) + '}';
+  xhr('PUT', chBase() + '/' + id + '.json?print=silent', body, function(st){
+    var p = CH.pend[id], ta;
+    if (gen !== CH.gen || !p) return;
+    p.busy = false;
+    if (st >= 200 && st < 300){
+      p.fail = false; p.sent = true; CH.err = ''; chSavePend();
+      if (Date.now() - CH.lastPush > 20000){ CH.lastPush = Date.now(); ntfySend(ntfyName(), p.n + ' sohbete mesaj yazdı', null, false); }
+      setTimeout(function(){ if (E.cfg) chTick(); }, 350);                      /* kendi mesajını sunucu saatiyle hemen geri al */
+    } else if (st === 400 || st === 401 || st === 403){                         /* kural güncellenmemiş: mesaj saklanmaz, yazı geri gelir */
+      delete CH.pend[id]; chSavePend(); CH.err = 'rules';
+      ta = $('#chIn'); if (ta && !ta.value){ ta.value = p.m; chGrow(); }
+      chState();
+    } else {
+      p.fail = true; chSavePend();
+      clearTimeout(CH.rt); CH.rt = setTimeout(chFlushPend, 6000);
+    }
+    chRender(false);
+  });
+}
+function chFlushPend(){ var id; for (id in CH.pend) if (CH.pend.hasOwnProperty(id)) chPutPend(id); }
+function chSend(){
+  var ta = $('#chIn'), txt, me = chMe(), id;
+  if (!ta || !E.cfg) return;
+  txt = ta.value.replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
+  if (!txt) return;
+  if (!me){ chNote('Önce aşağıdan adını seç.', false); try { $('#chAs').focus(); } catch(e){} return; }
+  chNote('', true);
+  id = chId(); CH.pend[id] = { t:Date.now(), n:me, m:txt.slice(0, CH_MAX) }; chSavePend();
+  ta.value = ''; chGrow(); chRender(true);
+  chPutPend(id);
+  try { ta.focus(); } catch(e){}
+}
+
+/* ----- görünüm ----- */
+function chDay(t){
+  var d = new Date(t), n = new Date(), y = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 1);
+  function same(a, b){ return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  if (same(d, n)) return 'Bugün';
+  if (same(d, y)) return 'Dün';
+  return d.getDate() + ' ' + CH_AY[d.getMonth()] + (d.getFullYear() !== n.getFullYear() ? ' ' + d.getFullYear() : '') + ' ' + WDAY[d.getDay()];
+}
+function chHue(nm){ var h = 0, i; for (i = 0; i < nm.length; i++) h = (h * 31 + nm.charCodeAt(i)) % 8; return h; }
+function chRender(stick){
+  var L = $('#chList'), a, i, h = '', last = '', m, own, me = chMe(), near, pn = '', pt = 0, d, dt;
+  if (!L || !CH.open) return;
+  a = chAll();
+  near = L.scrollHeight - L.scrollTop - L.clientHeight < 90;
+  if (CH.more) h += CH.old ? '<p class="ch-old">Eski mesajlar yükleniyor…</p>' : '<button type="button" class="ch-oldb" data-act="chold">Eski mesajları göster</button>';
+  if (!a.length) h += '<p class="ch-empty">' + (CH.ready ? 'Henüz mesaj yok. İlk mesajı sen yaz.' : (CH.err ? '' : 'Mesajlar yükleniyor…')) + '</p>';
+  for (i = 0; i < a.length; i++){
+    m = a[i]; d = chDay(m.t); dt = new Date(m.t); own = !!me && m.n === me;
+    if (d !== last){ h += '<div class="ch-day"><span>' + esc(d) + '</span></div>'; last = d; pn = ''; }
+    h += '<div class="cm' + (own ? ' own' : '') + (m.wait ? ' wait' : '') + '">'
+      + '<div class="cb">' + (!own && (m.n !== pn || m.t - pt > 300000) ? '<span class="cn k' + chHue(m.n) + '">' + esc(m.n) + '</span>' : '')
+      + '<span class="cx">' + esc(m.m) + '</span><span class="ct">' + pad2(dt.getHours()) + ':' + pad2(dt.getMinutes()) + (m.wait ? (m.fail ? ' · gitmedi, bağlanınca gider' : ' · gönderiliyor') : '') + '</span></div></div>';
+    pn = m.n; pt = m.t;
+  }
+  L.innerHTML = h;
+  if (stick || near) L.scrollTop = L.scrollHeight;
+}
+function chFill(){
+  var s = $('#chAs'), h = '<option value="">Adını seç</option>', i, w = $('#chAsW'), me = chMe();
+  if (!s) return;
+  for (i = 0; i < NP; i++) h += '<option value="' + i + '">' + esc(V.kisiler[i].adT) + '</option>';
+  s.innerHTML = h; s.value = E.me == null ? '' : String(E.me);
+  $('#chAsT').innerHTML = me ? '<b>' + esc(me) + '</b> olarak yazıyorsun' : 'Kim yazıyor?';
+  $('#chChg').textContent = me ? 'değiştir' : 'adını seç';
+  w.className = 'ch-as' + (me ? '' : ' todo');
+}
+function chGrow(){ var t = $('#chIn'); if (!t) return; t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 120) + 'px'; }
+function chFit(){
+  var c = $('#chat'), v = window.visualViewport, L;
+  if (!c || c.hidden) return;
+  if (v){ c.style.height = Math.round(v.height) + 'px'; c.style.top = Math.round(v.offsetTop) + 'px'; }
+  else { c.style.height = window.innerHeight + 'px'; c.style.top = '0px'; }
+  L = $('#chList'); if (L && L.scrollHeight - L.scrollTop - L.clientHeight < 140) L.scrollTop = L.scrollHeight;   /* klavye açılınca son mesaj görünür kalsın */
+}
+function chHTML(){
+  return '<div class="ch-wrap"><div class="ch-top"><button class="ch-back" type="button" data-act="chclose" aria-label="Geri">' + IC.back + '</button>'
+    + '<div class="ch-ti"><b id="chTitle">Şube sohbeti</b><span id="chSub"></span></div></div>'
+    + '<div class="ch-list" id="chList" role="region" aria-label="Mesajlar" tabindex="0"></div>'
+    + '<div class="ch-msg" id="chMsg" role="status" aria-live="polite"></div>'
+    + '<div class="ch-foot"><div class="ch-as" id="chAsW"><span class="ch-ast" id="chAsT"></span><span class="ch-chg" id="chChg"></span><select id="chAs" aria-label="Yazan kişiyi seç"></select></div>'
+    + '<div class="ch-in"><textarea id="chIn" rows="1" maxlength="' + CH_MAX + '" placeholder="Mesaj yaz" aria-label="Mesaj"></textarea>'
+    + '<button type="button" class="ch-send" id="chSend" data-act="chsend" aria-label="Gönder">' + IC.send + '</button></div>'
+    + '<p class="ch-note">Telefon numarası ve kişisel bilgi paylaşma.</p></div></div>';
+}
+function chSetMe(v){                                                          /* sohbette "değiştir": giriş sekmesindeki kişi seçimiyle aynı, ama kart açılmaz */
+  var i = v === '' || v == null ? null : parseInt(v, 10), s;
+  if (i != null && !(i >= 0 && i < NP)) i = null;
+  E.me = i; E.meRid = i == null ? null : RID[i];
+  if (i == null) LS.del('gk_me2'); else LS.set('gk_me2', String(RID[i]));
+  LS.del('gk_me');
+  reorder();
+  s = $('#meSel'); if (s) s.value = i == null ? '' : String(i);
+  chMeChanged();
+}
+function chOpen(){
+  var c = $('#chat');
+  if (!E.cfg) return;
+  if (!c){
+    c = el('div'); c.id = 'chat'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-modal', 'true'); c.setAttribute('aria-labelledby', 'chTitle'); c.hidden = true;
+    c.innerHTML = chHTML(); document.body.appendChild(c);
+    c.addEventListener('click', function(e){
+      var b = e.target, act;
+      while (b && b !== c && !(b.getAttribute && b.getAttribute('data-act'))) b = b.parentNode;
+      act = b && b !== c ? b.getAttribute('data-act') : '';
+      if (act === 'chclose') chClose();
+      else if (act === 'chsend') chSend();
+      else if (act === 'chold') chOlder();
+      else if (act === 'chset'){ chClose(); openSheet(); }
+    });
+    $('#chAs').addEventListener('change', function(){ chSetMe(this.value); });
+    $('#chIn').addEventListener('input', chGrow);
+    $('#chIn').addEventListener('focus', function(){ setTimeout(function(){ try { window.scrollTo(0, 0); } catch(e){} chFit(); }, 250); });
+    $('#chIn').addEventListener('keydown', function(e){
+      if ((e.key === 'Enter' || e.keyCode === 13) && !e.shiftKey && !e.isComposing && window.innerWidth >= 700){ e.preventDefault(); chSend(); }
+    });
+    $('#chList').addEventListener('scroll', function(){ if (this.scrollTop < 50 && CH.more && !CH.old) chOlder(); });
+  }
+  CH.from = document.activeElement; CH.open = true;
+  if (E.ttTap === chOpen) hideToast();                                        /* "sohbete yazdı" uyarısı: sohbet açılınca gizlenir */
+  c.hidden = false; document.documentElement.classList.add('chopen');
+  $('#chSub').textContent = NP + ' kişi · geçmiş saklanır';
+  chFill(); chFit(); chRender(true); chMarkRead(); chState();
+  chTick();                                                                   /* açılır açılmaz yeni mesaj var mı bak */
+  try { $('.ch-back', c).focus(); } catch(e){}
+}
+function chClose(){
+  var c = $('#chat');
+  CH.open = false;
+  if (c) c.hidden = true;
+  document.documentElement.classList.remove('chopen');
+  chBadge(); chSched();
+  if (CH.from && CH.from.focus){ try { CH.from.focus(); } catch(e){} }
+  CH.from = null;
+}
+function chMeChanged(){
+  if (CH.open){ chFill(); chRender(false); chMarkRead(); } else chBadge();
+}
+
+/* ----- bağlantı: Excel'deki ortak kayıtla aynı anda başlar/durur ----- */
+function chStop(){
+  var id;
+  CH.gen++; clearTimeout(CH.tm); CH.tm = 0; clearTimeout(CH.rt); CH.busy = false; CH.old = false;
+  for (id in CH.pend) if (CH.pend.hasOwnProperty(id)) CH.pend[id].busy = false;   /* yarıda kalan gönderim yeniden denenir (aynı kimlik: çift mesaj olmaz) */
+}
+function chReset(){
+  chStop(); CH.key = ''; CH.map = {}; CH.pend = {}; CH.ready = false; CH.readT = null; CH.lastT = 0; CH.more = false; CH.err = ''; CH.bad = 0;
+  if (CH.open) chClose();
+  chBadge();
+}
+function chStart(){
+  if (!E.cfg){ chReset(); return; }
+  if (CH.key !== E.cfg.k){ chReset(); CH.key = E.cfg.k; chLoadRead(); chLoadPend(); }
+  chBadge(); chTick(); chFlushPend();
+}
+function chCfg(){ if (!E.cfg) chReset(); else chBadge(); }
+function chWake(){ if (E.cfg && !document.hidden){ if (!CH.key) chStart(); else { chTick(); chFlushPend(); } } }
+function chInit(){
+  var b = $('#btnChat');
+  if (b){ b.innerHTML = IC.chat + '<span class="cbadge" id="chatBadge" hidden></span>'; b.addEventListener('click', chOpen); }
+  window.addEventListener('online', function(){ CH.bad = 0; chWake(); });
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) chWake(); });
+  document.addEventListener('keydown', function(e){ if (CH.open && (e.key === 'Escape' || e.keyCode === 27)) chClose(); });
+  window.addEventListener('resize', chFit);
+  if (window.visualViewport){ window.visualViewport.addEventListener('resize', chFit); window.visualViewport.addEventListener('scroll', chFit); }
+  chBadge();
+}
+
 /* ---------- başlat ---------- */
 function init(){
   loadSnap(); SNAP.t = V.meta.stamp || 0; setData(V);
   $('#defs').innerHTML = defsHTML();
   prefInit();
   initEntry();
+  chInit();
   pwaUpdate();
   buildViews();
   initTabs();
