@@ -4536,11 +4536,24 @@ function bgParse(s){
 }
 function bgStr(list){ return list.map(function(x){ return x.k ? x.s + '.' + x.k : x.s; }).join(','); }
 function bgListStr(){ return bgStr(BG.list); }
+/* Linkteki liste kayıttakini YENİLER ama sonradan eklenenleri SİLMEZ: ana ekran simgesi her seferinde ilk linkle açılır,
+   o linkte sonradan yapıştırılan şubeler yoktur. Aynı şubede linkteki kod kazanır; linkte kodsuzsa kayıttaki kod korunur. */
+function bgMerge(link, st){
+  var out = [], seen = {}, i, j, x;
+  for (i = 0; i < link.length; i++){
+    x = { s:link[i].s, k:link[i].k };
+    if (!x.k) for (j = 0; j < st.length; j++) if (st[j].s === x.s){ x.k = st[j].k; break; }
+    out.push(x); seen[x.s] = 1;
+  }
+  for (j = 0; j < st.length && out.length < 16; j++) if (!seen[st[j].s]){ seen[st[j].s] = 1; out.push({ s:st[j].s, k:st[j].k }); }
+  return out;
+}
 function bgLoad(){
-  var m = /[?&#]bolge=([^&#]+)/.exec(String(window.location.search) + String(window.location.hash)), u = m ? bgParse(m[1]) : [], l;
-  if (u.length){ jset('gk_bolge', bgStr(u)); return u; }                    /* link her açılışta kayıttakini yeniler */
-  l = jget('gk_bolge', '');
-  return typeof l === 'string' ? bgParse(l) : [];
+  var m = /[?&#]bolge=([^&#]+)/.exec(String(window.location.search) + String(window.location.hash)), u = m ? bgParse(m[1]) : [], l = jget('gk_bolge', ''), st = typeof l === 'string' ? bgParse(l) : [];
+  if (!u.length) return st;
+  u = bgMerge(u, st);
+  jset('gk_bolge', bgStr(u));
+  return u;
 }
 function bgSave(){ jset('gk_bolge', bgListStr()); }
 function bgName(slug){
