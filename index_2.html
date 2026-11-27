@@ -1191,6 +1191,55 @@ html[data-theme="light"] .ch-msg.er{color:#CC2748}
 html[data-theme="light"] .ch-msg.ok{color:#077A50}
 html[data-theme="light"] .cbadge{box-shadow:0 0 0 2px #fff}
 
+
+/* ================= app15: Bölge ekranı ================= */
+.bolge #sidew,.bolge #segrow,.bolge #viewGir,.bolge #viewGun,.bolge #viewGid,.bolge #viewKrt{display:none!important}
+.bgctl{display:flex;justify-content:space-between;align-items:center;margin:10px 2px 10px}
+.bgn{display:block;font-size:16px;font-weight:750;line-height:1.2;color:var(--ink)}
+.bgsub{display:flex;align-items:center;flex-wrap:wrap;margin-top:5px;min-height:15px}
+.bgcn{display:flex;align-items:center}
+.bgcn .cn{font-size:13px}
+.bgst{font-size:11.5px;font-weight:700;line-height:15px;color:var(--ink2)}
+.bgcn+.bgst{margin-left:10px}
+.bgst.warn,.bgst.none{color:#FFC94D}
+.bgxl{padding:10px 0 2px;font-size:12px;font-weight:650;color:var(--muted)}
+.bgnone .pbtn{padding:12px;cursor:default}
+.bgnone .bdg{width:44px;height:44px}
+.bgnone .bgst{white-space:normal}
+.bgjoin{margin-top:10px}
+.bgjoin .shi{margin-bottom:8px}
+.bgempty{display:flex;flex-direction:column;margin:18px 2px;padding:14px;border-radius:16px;background:var(--fill2);border:1px solid var(--line2)}
+.bgempty b{font-size:15px;font-weight:800;color:var(--ink)}
+.bgempty span{margin-top:6px;font-size:13px;line-height:1.45;color:var(--ink2)}
+.bgday{display:flex;align-items:baseline;justify-content:space-between;margin:12px 2px 0}
+.bgday b{font-size:15px;font-weight:800;color:var(--ink)}
+.bgday span{font-size:12px;font-weight:650;color:var(--ink2)}
+.bgb{margin-top:10px}
+.bgb .pbtn{cursor:pointer}
+.bgbody{padding:2px 10px 12px;border-top:1px solid var(--line)}
+.bgp{margin-top:8px}
+.bgp0 .pbtn{padding:9px 10px}
+.bgp0 .phead{min-height:20px}
+.bgr{cursor:pointer}
+.bgr.none{cursor:default}
+.bgrmsg{grid-column:3 / -1;align-self:center;padding:0 6px;font-size:10.5px;line-height:1.3;color:var(--ink2)}
+.hbtn.spin svg{animation:bgspin 1s linear infinite}
+@keyframes bgspin{to{transform:rotate(360deg)}}
+html[data-theme="light"] .bgst.warn,html[data-theme="light"] .bgst.none{color:#A86300}
+
+.tbr.old .bd.sb{border-color:rgba(255,201,77,.8);background:rgba(255,201,77,.16);color:#FFC94D}
+.bgold-n{display:flex;align-items:flex-start;margin:10px 3px 0;font-size:11.5px;font-weight:650;line-height:1.35;color:#FFC94D}
+.bgold-n i{flex:none;width:9px;height:9px;margin:4px 7px 0 0;border-radius:50%;background:#FFC94D}
+html[data-theme="light"] .bgold-n{color:#A86300}
+html[data-theme="light"] .bgold-n i{background:#E39A00}
+html[data-theme="light"] .tbr.old .bd.sb{border-color:rgba(227,154,0,.8);background:rgba(227,154,0,.14);color:#A86300}
+.tbr.old .nm b{color:#FFC94D}
+html[data-theme="light"] .tbr.old .nm b{color:#A86300}
+@media (max-width:340px){
+  .tbr.bgr .tbn .bd{display:none}
+  .bgn{font-size:15px}
+}
+
 </style>
 </head>
 <body>
@@ -1239,6 +1288,8 @@ html[data-theme="light"] .cbadge{box-shadow:0 0 0 2px #fff}
       <div id="list"></div>
     </div>
     <div id="viewKrt" role="tabpanel" aria-labelledby="tabKrt" hidden></div>
+    <div id="viewBG" role="tabpanel" aria-labelledby="tabBG" hidden></div>
+    <div id="viewBB" role="tabpanel" aria-labelledby="tabBB" hidden></div>
   </main>
 </div>
 <div id="xlStash" hidden></div>
@@ -3490,7 +3541,7 @@ function isStandalone(){
 }
 /* Mağaza ikonu: link "…?gk=KOD&s=ad-kodu" ise ana ekran ikonu ve adı o mağazanınkidir.
    İkon dosyaları sayfanın yanında durur (icon-ad-kodu.png); ad/dosya tablosu derlemede yazılır (gizli bir şey içermez). */
-var SUBE_IKON = {"uskudar-extra":{"ad":"Üsküdar Extra","ikon":"icon-uskudar-extra.png"}};
+var SUBE_IKON = {"uskudar-extra":{"ad":"Üsküdar Extra","ikon":"icon-uskudar-extra.png"},"istinyepark":{"ad":"İstinyePark","ikon":"icon-istinyepark.png"},"akasya":{"ad":"Akasya","ikon":"icon-akasya.png"},"uskudar-carsi":{"ad":"Üsküdar Çarşı","ikon":"icon-uskudar-carsi.png"},"umraniye-carsi":{"ad":"Ümraniye Çarşı","ikon":"icon-umraniye-carsi.png"},"capitol":{"ad":"Capitol","ikon":"icon-capitol.png"},"sariyer":{"ad":"Sarıyer","ikon":"icon-sariyer.png"},"ozdilek":{"ad":"Özdilek","ikon":"icon-ozdilek.png"},"bolge":{"ad":"Bölge","ikon":"icon-bolge.png"}};
 function ikonOf(){
   var m = /[?&]s=([a-z0-9-]{1,40})(?=[&#]|$)/.exec(String(window.location.search)), r;
   if (!m || !Object.prototype.hasOwnProperty.call(SUBE_IKON, m[1])) return null;
@@ -3507,10 +3558,10 @@ function pwaUpdate(){
     var lk = document.getElementById('mf'), W = window.location;
     if (!lk || !/^https?:$/.test(W.protocol) || !window.Blob || !window.URL || !window.URL.createObjectURL) return;
     var root = W.protocol + '//' + W.host + W.pathname.replace(/[^\/]*$/, ''), page = W.protocol + '//' + W.host + W.pathname;
-    var qs = (E.cfg ? '?gk=' + encodeURIComponent(tokenOf(E.cfg)) : '') + (ik ? (E.cfg ? '&' : '?') + 's=' + ik.slug : '');
+    var qs = BG.on ? '?bolge=' + bgListStr() + '&s=bolge' : (E.cfg ? '?gk=' + encodeURIComponent(tokenOf(E.cfg)) : '') + (ik ? (E.cfg ? '&' : '?') + 's=' + ik.slug : '');
     var bgc = window.__gkBg ? window.__gkBg() : '#070A18';
     var m = {
-      name: ik ? ik.ad + ' Şube Gerçekleşen' : 'Şube Gidişat', short_name: ik ? ik.ad : 'Gidişat', lang: 'tr',
+      name: ik ? ik.ad + (BG.on ? ' Gidişat' : ' Şube Gerçekleşen') : 'Şube Gidişat', short_name: ik ? ik.ad : 'Gidişat', lang: 'tr',
       start_url: page + qs, scope: root, display: 'standalone',
       background_color: bgc, theme_color: bgc,
       icons: [{ src: root + file, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }]
@@ -3743,8 +3794,8 @@ function sha256hex(msg){
 }
 function ntfyTopic(){ return E.cfg ? 'gk-' + sha256hex('gk-ntfy:' + E.cfg.k).slice(0, 24) : ''; }
 function ntfyName(){ var ik = ikonOf(); return ik ? ik.ad : (subeAdi() || 'Gidişat'); }
-function ntfySend(title, msg, cb, beacon){
-  var tp = ntfyTopic(), url, x, done = false;
+function ntfySend(title, msg, cb, beacon, topic){
+  var tp = topic || ntfyTopic(), url, x, done = false;
   function fin(ok){ if (!done){ done = true; if (cb) cb(ok); } }
   if (!tp){ fin(false); return; }
   url = NTFY + '/' + tp + '?title=' + encodeURIComponent(title) + '&tags=' + encodeURIComponent('bar_chart');
@@ -3789,15 +3840,18 @@ function swRow(k, t, s){
   var on = !!PF[k];
   return '<button type="button" class="swrow" role="switch" aria-checked="' + (on ? 'true' : 'false') + '" data-act="sw" data-k="' + k + '"><span class="tx2"><b>' + t + '</b><span>' + s + '</span></span><span class="swt' + (on ? '' : ' off') + '"></span></button>';
 }
-function prefHTML(){
+function themeHTML(){
   var h = '<span class="shl" style="margin-top:4px">Renk teması</span><div class="thgrid" role="radiogroup" aria-label="Renk teması">' + thBtn('otomatik', 'Otomatik', null, false);
   TEMALAR.forEach(function(t){ h += thBtn(t.k, t.n, t.sw, !t.dark); });
-  h += '</div><p class="shs sm">Otomatik: telefonunun ayarına uyar. Seçim yalnızca bu telefonda kalır.</p>';
+  return h + '</div><p class="shs sm">Otomatik: telefonunun ayarına uyar. Seçim yalnızca bu telefonda kalır.</p>';
+}
+function prefHTML(){
+  var h = themeHTML();
   h += '<span class="shl" style="margin-top:16px">Bildirim</span><div class="swlist">'
     + swRow('bil', 'Başkası veri girince haber ver', 'Ekranda uyarı çıkar. Sohbete mesaj gelince de.')
     + swRow('ses', 'Ses', 'Haber gelince kısa bir ses çalar.')
     + swRow('tit', 'Titreşim', 'Android telefonda çalışır. iPhone\'da telefonun kendi ayarına bağlıdır.') + '</div>';
-  if (E.cfg) h += '<div class="pcard" id="pushCard">' + pushCardInner() + '</div>';
+  if (pushReady()) h += '<div class="pcard" id="pushCard">' + pushCardInner() + '</div>';
   else h += '<p class="shs sm" style="margin-top:8px">Uygulama kapalıyken bildirim için önce aşağıdan mağazaya bağlan.</p>';
   return h;
 }
@@ -4335,12 +4389,24 @@ function pushPost(method, body, cb){
     x.send(JSON.stringify(body));
   } catch(e){ fin(false, 0); }
 }
+/* bu telefonun dinleyeceği konular: şube uygulamasında kendi mağazası; Bölge ekranında kapatılmamış şubelerin hepsi + yalnızca bu telefona giden deneme konusu */
+function pushReady(){ return BG.on ? BG.list.some(function(x){ return !!x.k; }) : !!E.cfg; }
+function pushTopics(){
+  var t = [], tp;
+  if (BG.on){
+    BG.list.forEach(function(x){ if (x.k && !BG.mute[x.s]) t.push(bgTopic(x.k)); });
+    tp = bgSelfTopic(); if (tp) t.push(tp);
+    return t;
+  }
+  tp = ntfyTopic(); return tp ? [tp] : [];
+}
+function pushId(){ return BG.on ? (pushReady() ? 'gk-' + sha256hex('bolge:' + pushTopics().join(',')).slice(0, 24) : '') : ntfyTopic(); }
 function pushSend(sub, cb){
-  var j = null, k, tp = ntfyTopic();
+  var j = null, k, tps = pushTopics();
   try { j = sub.toJSON(); } catch(e){}
   k = j && j.keys;
-  if (!tp || !sub.endpoint || !k || !k.auth || !k.p256dh){ cb(false, -1); return; }
-  pushPost('POST', { endpoint: sub.endpoint, auth: k.auth, p256dh: k.p256dh, topics: [tp] }, cb);
+  if (!tps.length || !sub.endpoint || !k || !k.auth || !k.p256dh){ cb(false, -1); return; }
+  pushPost('POST', { endpoint: sub.endpoint, auth: k.auth, p256dh: k.p256dh, topics: tps }, cb);
 }
 /* bildirime dokununca sw.js'nin açacağı adres ve bildirimde görünecek simge (mağaza kodu içermez) */
 function pushStash(){
@@ -4362,7 +4428,7 @@ function pushSync(cb){
     pushSub(reg, function(e2, sub){
       if (e2){ cb(e2); return; }
       pushSend(sub, function(ok, st){
-        if (ok){ PF.push = true; PF.pushT = Date.now(); PF.pushTp = ntfyTopic(); prefSave(); pushStash(); }
+        if (ok){ PF.push = true; PF.pushT = Date.now(); PF.pushTp = pushId(); prefSave(); pushStash(); }
         cb(ok ? null : { name:'ntfy', status: st });
       });
     });
@@ -4371,7 +4437,7 @@ function pushSync(cb){
 function pushEnable(){
   var why = pushSupport();
   if (why){ pushMsg(why === 'ios' ? 'Önce yukarıdaki gibi ana ekrana ekle, sonra o simgeden aç.' : pushWhy(why), false); return; }
-  if (!E.cfg){ pushMsg('Önce mağazaya bağlan.', false); return; }
+  if (!pushReady()){ pushMsg(BG.on ? 'Önce bir şubenin bağlantısını ekle.' : 'Önce mağazaya bağlan.', false); return; }
   if (pushPerm() === 'denied'){ pushMsg(pushDenied(), false); return; }
   pushMsg('İzin isteniyor…', true);
   askPerm(function(p){
@@ -4402,14 +4468,14 @@ function pushTest(){
   pushMsg('Gönderiliyor…', true);
   pushSync(function(e){                                   /* önce kaydı tazele: sunucudaki kayıt silinmişse düzelir */
     if (e){ pushMsg(pushErr(e), false); return; }
-    ntfySend(ntfyName(), 'Deneme bildirimi: bu telefona geldiyse hazırsın.', function(ok){
+    ntfySend(BG.on ? 'Bölge' : ntfyName(), 'Deneme bildirimi: bu telefona geldiyse hazırsın.', function(ok){
       pushMsg(ok ? 'Gönderildi. Telefonu kilitle; birkaç saniye içinde bildirim gelmeli.' : 'Gönderilemedi. İnternet bağlantını kontrol edip tekrar dene.', ok);
-    });
+    }, false, BG.on ? bgSelfTopic() : '');
   });
 }
 function pushRefresh(){
-  if (!PF.push || !E.cfg || pushSupport() || pushPerm() !== 'granted') return;
-  if (PF.pushTp === ntfyTopic() && Date.now() - (PF.pushT || 0) < PUSH_EVERY){ pushStash(); return; }
+  if (!PF.push || !pushReady() || pushSupport() || pushPerm() !== 'granted') return;
+  if (PF.pushTp === pushId() && Date.now() - (PF.pushT || 0) < PUSH_EVERY){ pushStash(); return; }
   pushSync(function(){});                                 /* sessiz: olmazsa bir sonraki açılışta yeniden dener */
 }
 /* uygulama her açıldığında */
@@ -4441,15 +4507,571 @@ function pushCardInner(){
   }
   h += '<div class="shmsg" id="pushMsg" role="status" aria-live="polite"></div>';
   if (on && PF.ntfy) h += '<p style="margin:10px 0 0">Eski ntfy simgesini ana ekrandan silebilirsin; yoksa bildirim iki kez gelir.</p>';
-  h += '<div style="margin-top:10px"><button class="lnk" type="button" data-act="ntf">Eski yöntem: ntfy uygulaması</button></div>';
+  if (!BG.on) h += '<div style="margin-top:10px"><button class="lnk" type="button" data-act="ntf">Eski yöntem: ntfy uygulaması</button></div>';
   return h;
 }
 function pushUi(){ var c = $('#pushCard'); if (c) c.innerHTML = pushCardInner(); }
+/* ================= app15: Bölge ekranı (bölge müdürü: bütün şubeler tek yerde) =================
+   Link: …/index_2.html?bolge=ad.kod,ad.kod,…&s=bolge     (ad = şubenin kısa adı, kod = o şubenin mağaza kodu)
+   Her şubenin Excel verisi (v) ve bugünkü girişleri (d/<gün>) ortak kayıttan yalnızca OKUNUR; hiçbir şey yazılmaz.
+   Rakamlar şube uygulamasındaki kutu işlevleriyle çizilir (aynı kod), burada ayrı bir hesap yoktur:
+   her şubenin verisi çizim sırasında geçici olarak "etkin veri" yapılır (bgWith), sonra eski haline döner. */
+function bgDetect(){
+  var q = String(window.location.search) + String(window.location.hash);
+  return /[?&#]bolge=/.test(q) || /[?&]s=bolge(?=[&#]|$)/.test(q);
+}
+var BG = { on:bgDetect(), list:[], mute:{}, st:{}, tab:'gid', view:'tablo', day:'', busy:0, last:0, open:{}, sig:{ g:'', b:'' }, rt:0, cards:[], info:null, hdr:'', played:{ g:false, b:false }, pt:0, t0:0 };
+
+/* ----- şube listesi ----- */
+function bgParse(s){
+  var out = [], seen = {}, a, i, m;
+  s = String(s || '');
+  try { s = decodeURIComponent(s); } catch(e){}
+  a = s.split(',');
+  for (i = 0; i < a.length && out.length < 16; i++){
+    m = /^([a-z0-9-]{1,40})(?:\.([a-z0-9]{20,64}))?$/.exec(a[i].replace(/\s/g, ''));
+    if (m && !seen[m[1]]){ seen[m[1]] = 1; out.push({ s:m[1], k:m[2] || '' }); }
+  }
+  return out;
+}
+function bgStr(list){ return list.map(function(x){ return x.k ? x.s + '.' + x.k : x.s; }).join(','); }
+function bgListStr(){ return bgStr(BG.list); }
+function bgLoad(){
+  var m = /[?&#]bolge=([^&#]+)/.exec(String(window.location.search) + String(window.location.hash)), u = m ? bgParse(m[1]) : [], l;
+  if (u.length){ jset('gk_bolge', bgStr(u)); return u; }                    /* link her açılışta kayıttakini yeniler */
+  l = jget('gk_bolge', '');
+  return typeof l === 'string' ? bgParse(l) : [];
+}
+function bgSave(){ jset('gk_bolge', bgListStr()); }
+function bgName(slug){
+  var r = Object.prototype.hasOwnProperty.call(SUBE_IKON, slug) ? SUBE_IKON[slug] : null;
+  if (r && typeof r.ad === 'string') return r.ad;
+  return slug.replace(/-/g, ' ').replace(/(^| )([a-z])/g, function(x, a, b){ return a + b.toUpperCase(); });
+}
+function bgReset(){
+  BG.st = {};
+  BG.list.forEach(function(it){ BG.st[it.s] = { t:0, v:null, nov:false, err:0, bad:false, rm:null, derr:0, got:false }; });
+}
+function bgTopic(code){ return 'gk-' + sha256hex('gk-ntfy:' + code).slice(0, 24); }
+function bgSelfTopic(){                                                       /* yalnızca bu telefonun deneme bildirimi için: bütün kodlardan türer, şubelere gitmez */
+  var c = BG.list.filter(function(x){ return x.k; }).map(function(x){ return x.k; }).sort().join(',');
+  return c ? 'gk-' + sha256hex('gk-ntfy:bolge:' + c).slice(0, 24) : '';
+}
+
+/* ----- bir şubenin verisini geçici olarak "etkin veri" yap (şube uygulamasının kutu işlevleri bunu kullanır) ----- */
+function bgWith(v, fn){
+  var o = { V:V, M:M, NP:NP, GI:GI, GF:GF, GPN:GPN, GNEED:GNEED, RID:RID, RIDX:RIDX, GBY:GBY, GROUPS:GROUPS }, r;
+  setData(v);
+  try { r = fn(); }
+  finally { V = o.V; M = o.M; NP = o.NP; GI = o.GI; GF = o.GF; GPN = o.GPN; GNEED = o.GNEED; RID = o.RID; RIDX = o.RIDX; GBY = o.GBY; GROUPS = o.GROUPS; }
+  return r;
+}
+
+/* ----- ortak kayıttan okuma ----- */
+function bgUrl(it, path){ return DEFAULT_DB + '/g/' + it.k + path; }
+function bgSnap(it, done){
+  var s = BG.st[it.s];
+  xhr('GET', bgUrl(it, '/v/t.json'), null, function(st, t){
+    if (st !== 200){ s.err = st || -1; done(); return; }
+    s.err = 0;
+    if (typeof t !== 'number'){ s.v = null; s.nov = true; s.t = 0; s.bad = false; done(); return; }
+    s.nov = false;
+    if (t === s.t && s.v){ done(); return; }
+    xhr('GET', bgUrl(it, '/v/j.json'), null, function(st2, j){
+      var v = null;
+      if (st2 !== 200 || typeof j !== 'string'){ s.err = st2 || -1; done(); return; }
+      try { v = JSON.parse(j); } catch(e){ v = null; }
+      if (v && !checkV(v)){ v.sube.mm = mmaOf(v.sube.d.mmaA, v.sube.d.mmaO); s.v = v; s.t = t; s.bad = false; }
+      else { s.bad = true; s.v = null; }
+      done();
+    });
+  });
+}
+function bgDay(it, done){
+  var s = BG.st[it.s];
+  xhr('GET', bgUrl(it, '/d/' + BG.day + '.json'), null, function(st, j){
+    if (st === 200){ s.rm = normNodes(j); s.derr = 0; } else s.derr = st || -1;
+    done();
+  });
+}
+function bgRefresh(){
+  var left, btn = $('#btnChat');
+  if (BG.busy && Date.now() - BG.t0 > 60000) BG.busy = 0;                    /* takılan istek varsa yeniden dene */
+  if (BG.busy || !BG.list.length) return;
+  if (!DEFAULT_DB) return;
+  left = BG.list.filter(function(x){ return x.k; }).length;
+  if (!left){ bgRender(true); return; }
+  BG.busy = left; BG.t0 = Date.now();
+  if (btn) btn.classList.add('spin');
+  function end(){
+    bgSoon();
+    BG.busy--;
+    if (BG.busy <= 0){ BG.busy = 0; BG.last = Date.now(); if (btn) btn.classList.remove('spin'); }
+  }
+  BG.list.forEach(function(it){
+    var s = BG.st[it.s];
+    if (!it.k) return;
+    bgSnap(it, function(){
+      if (!s.v){ s.got = true; end(); return; }
+      bgDay(it, function(){ s.got = true; end(); });
+    });
+  });
+}
+function bgNet(){
+  var n = 0, ok = 0, bad = 0, wait = 0, g = $('#gdot'), bs = $('#btnSet'), v, t;
+  BG.list.forEach(function(it){
+    var s = BG.st[it.s];
+    if (!it.k) return;
+    n++;
+    if (!s.got) wait++; else if (s.err) bad++; else ok++;
+  });
+  if (!n){ v = 'off'; t = 'Bağlı şube yok'; }
+  else if (bad && !ok){ v = 'err'; t = 'Bağlanılamadı'; }
+  else if (bad || wait){ v = 'warn'; t = wait && !bad ? 'Yükleniyor' : bad + ' şubeye ulaşılamadı'; }
+  else { v = ''; t = 'Hepsi güncel'; }
+  if (g) g.className = 'gdot' + (v ? ' ' + v : '');
+  if (bs) bs.setAttribute('aria-label', 'Ayarlar. Bağlantı: ' + t);
+}
+function bgSoon(){ clearTimeout(BG.rt); BG.rt = setTimeout(function(){ bgRender(false); }, 60); }
+function bgTick(force){
+  var d = dayKey(), age = Date.now() - BG.last;
+  if (document.hidden && force !== true) return;
+  if (d !== BG.day){
+    BG.day = d; BG.sig.b = '';
+    BG.list.forEach(function(it){ var s = BG.st[it.s]; if (s){ s.rm = null; s.derr = 0; } });
+    age = 1e9;
+  }
+  if (age > (force === true ? 8000 : 28000)) bgRefresh();
+}
+
+/* ----- kişilere yerleştirme (şube uygulamasındaki deriveRemote ile aynı kural: yer, kişiye KİMLİKLE bağlanır) ----- */
+function bgHas(o){ var k; for (k in o) if (o.hasOwnProperty(k)) return true; return false; }
+function bgPeople(s){
+  var rm = s.rm || {}, byR = {}, i, p, nd, out = [], vals, son;
+  for (i = 0; i < 12; i++){ nd = rm[i]; if (nd && nd.rid != null && byR[nd.rid] == null) byR[nd.rid] = i; }
+  function put(a){
+    var rv = nd[a.k], nv;
+    if (rv != null && isFinite(Number(rv))){ nv = cleanVal(a.k, rv); if (nv) vals[a.k] = nv; }
+  }
+  for (p = 0; p < NP; p++){
+    i = byR[RID[p]];
+    nd = i != null ? rm[i] : (rm[p] && rm[p].rid == null ? rm[p] : null);
+    vals = {}; son = null;
+    if (nd){ GF.forEach(put); if (sonOk(nd.son)) son = Math.floor(nd.son); }
+    out.push({ p:p, pe:V.kisiler[p], vals:vals, son:son, has:false });
+  }
+  return out;
+}
+function bgTotals(list){
+  var s = {}, o = { post:0, prep:0, tfs:0, sol:0 }, an = 0;
+  NEEDK.forEach(function(k){ s[k] = 0; });
+  list.forEach(function(q){
+    var c = calc(q.vals);
+    NEEDK.forEach(function(k){ s[k] += c[k]; });
+    o.post += q.vals.post || 0; o.prep += q.vals.prep || 0; o.tfs += q.vals.tfs || 0; o.sol += q.vals.sol || 0; an += q.vals.aksadet || 0;
+  });
+  s.aksesuar = Math.round(s.aksesuar * 100) / 100;
+  return { s:s, o:o, an:an };
+}
+
+/* ----- dönem (en yeni veri) ve eski veri uyarısı ----- */
+function bgPer(m){ return m.yil * 10000 + m.bugun.ayNo * 100 + m.gun; }
+function bgRef(){
+  var best = null, k = -1;
+  BG.list.forEach(function(it){
+    var s = BG.st[it.s], q;
+    if (!s || !s.v) return;
+    q = bgPer(s.v.meta);
+    if (q > k){ k = q; best = s; }
+  });
+  return best;
+}
+function bgStale(s, ref){
+  var m = s.v.meta, r = ref ? ref.v.meta : null;
+  if (!r) return '';
+  if (m.yil !== r.yil || m.bugun.ayNo !== r.bugun.ayNo) return m.ay + ' verisi';
+  if (m.gun < r.gun) return m.gun + '. gün verisi';
+  return '';
+}
+function bgStamp(s){ var ms = s.v.meta.stamp || s.t; return typeof ms === 'number' && ms > 0 ? 'Excel ' + fmtStamp(ms) : 'Excel'; }
+
+/* ----- çizim yardımcıları ----- */
+function bgPlay(root, animate){
+  var a = anim;
+  if (animate){ playIn(root); return; }
+  anim = false;
+  try { playIn(root); } finally { anim = a; }
+}
+function bgMsgOf(s, it){
+  if (!it.k) return 'Bağlı değil. Bu şubenin giriş linkini yapıştır.';
+  if (!s.got) return 'Yükleniyor…';
+  if (s.err === 401 || s.err === 403) return 'Okuma izni yok. Firebase kuralları yayınlanmış mı?';
+  if (s.err) return 'Bağlanılamadı (' + (s.err > 0 ? 'HTTP ' + s.err : 'internet yok') + ').';
+  if (s.bad) return 'Excel verisi okunamadı (beklenen biçimde değil).';
+  return 'Excel henüz yüklenmemiş. Şube müdürü yükleyince burada görünür.';
+}
+function bgCardNone(it, s){
+  var r = el('section', 'pc stg bgnone'), h;
+  r.setAttribute('data-i', it.s);
+  h = '<div class="pbtn"><span class="phead"><span class="bdg"><span class="rk sico" aria-hidden="true">' + IC.mag + '</span></span>'
+    + '<span class="pname"><b class="bgn">' + esc(bgName(it.s)) + '</b><span class="bgsub"><span class="bgst">' + esc(bgMsgOf(s, it)) + '</span></span></span></span>';
+  if (!it.k) h += '<div class="bgjoin"><input class="shi" type="text" data-slug="' + esc(it.s) + '" placeholder="Şube linki" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><button class="shb" type="button" data-act="bjoin" data-k="' + esc(it.s) + '">Bağla</button><div class="shmsg" role="status" aria-live="polite"></div></div>';
+  r.innerHTML = h + '</div>';
+  return r;
+}
+
+/* ----- Gidişatlar sekmesi: kartlar + tablo (şube uygulamasındaki Gidişat ekranının aynısı, şube başına bir kart/satır) ----- */
+function bgCardG(it, s, n, ref){
+  var o = s.v.sube, c = buildCard(o, 'bg' + n, true), g = score(o, ALL), k = { good:g.c.good, warn:g.c.warn, bad:g.c.bad }, nm = bgName(it.s), st = bgStale(s, ref), key = 'g:' + it.s, r = c.root;
+  if (o.mm.ok) k[o.mm.s]++;
+  r.setAttribute('data-i', it.s); r.className += ' bgc';
+  c.body.id = 'pb-bg' + n; c.btn.setAttribute('aria-controls', 'pb-bg' + n);
+  $('.pname', r).innerHTML = '<b class="bgn">' + esc(nm) + '</b><span class="bgsub"><span class="bgcn" role="img" aria-label="' + k.good + ' başlık hedefte, ' + k.warn + ' sınırda, ' + k.bad + ' geride">'
+    + cn('good', k.good) + cn('warn', k.warn) + cn('bad', k.bad) + '</span>' + (st ? '<span class="bgst warn">' + esc(st) + '</span>' : '') + '</span>';
+  c.bdg.innerHTML = ringHTML(g.n ? g.S / g.n / 100 : 0) + '<span class="rk sico" aria-hidden="true">' + IC.mag + '</span>';
+  c.btn.setAttribute('aria-label', nm + ', genel ' + fg(g) + '. Ayrıntılar için dokunun.');
+  c.body.insertBefore(el('div', 'bgxl', esc(M.gun + '/' + M.toplam + '. gün verisi · ' + bgStamp(s))), c.body.firstChild);
+  r.style.setProperty('--i', Math.min(n + 1, 10));
+  c.key = key; c.g = g; c.nm = nm; c.slug = it.s; c.stale = st;
+  c.btn.addEventListener('click', function(){ BG.open[key] = r.classList.contains('open'); fitAll(); });
+  if (BG.open[key]){ r.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; }
+  return c;
+}
+function bgRow(c){
+  var rd = readCard(c.root), p = c.nm.split(' '), a = p.length < 2 ? c.nm : p.slice(0, -1).join(' '), b = p.length < 2 ? '' : p[p.length - 1];
+  return '<div role="button" tabindex="0" class="tbr bgr' + (c.stale ? ' old' : '') + '" data-s="' + esc(c.slug) + '" aria-label="' + esc(c.nm + ', genel ' + fg(c.g) + (c.stale ? ', ' + c.stale : '') + '. Kartı açmak için dokun.') + '">'
+    + '<span class="tbn"><span class="bd sb">' + (rd.sico || '') + '</span><span class="nm"><b>' + esc(a) + '</b><i>' + esc(b) + '</i></span></span>'
+    + '<span class="tbg"><b>' + hh(fg(c.g).replace('%', '')) + '</b></span>'
+    + TB_COLS.map(function(x){ return tbCell(rd, x[0]); }).join('')
+    + '<span class="sp"></span>' + TB_X.map(function(x){ return tbX(rd, x[0]); }).join('') + '</div>';
+}
+function bgRowNone(it, s){
+  var p = bgName(it.s).split(' '), a = p.length < 2 ? p[0] : p.slice(0, -1).join(' '), b = p.length < 2 ? '' : p[p.length - 1];
+  return '<div class="tbr bgr none" data-s="' + esc(it.s) + '"><span class="tbn"><span class="bd sb">' + IC.mag + '</span><span class="nm"><b>' + esc(a) + '</b><i>' + esc(b) + '</i></span></span>'
+    + '<span class="bgrmsg">' + esc(bgMsgOf(s, it)) + '</span></div>';
+}
+function bgSegHTML(){
+  var sg = $('#segrow .seg');
+  return sg ? sg.innerHTML.replace(/ id="seg(Kart|Tablo)"/g, '') : '';
+}
+function bgBuildG(ref){
+  var root = $('#viewBG'), host = el('div', 'bgcards'), rows = [], tb = el('section'), seg, bts;
+  root.innerHTML = '';
+  BG.cards = [];
+  if (!BG.list.length){
+    root.appendChild(el('div', 'bgempty', '<b>Bölge bağlantısı yok.</b><span>Bölge linkini aç ya da sağ üstteki ayarlardan şube linki ekle.</span>'));
+    return;
+  }
+  BG.list.forEach(function(it, n){
+    var s = BG.st[it.s], c;
+    if (s.v){
+      c = bgWith(s.v, function(){ return bgCardG(it, s, n, ref); });
+      BG.cards.push(c); host.appendChild(c.root);
+      rows.push(bgRow(c));
+    } else { host.appendChild(bgCardNone(it, s)); rows.push(bgRowNone(it, s)); }
+  });
+  tb.id = 'tbv'; tb.setAttribute('aria-label', 'Şubelerin gidişat tablosu');
+  var old = BG.cards.filter(function(c){ return c.stale; }).map(function(c){ return c.nm + ' (' + c.stale + ')'; });
+  tb.innerHTML = '<div class="tbcard"><div class="tbr tbh"><span class="tbn"></span><span class="hc g"><span>Genel %</span></span>'
+    + TB_COLS.map(function(x){ return '<span class="hc"' + (x[0] === 'aks' ? ' data-s="Aks."' : '') + '><span>' + hh(x[1]) + '</span></span>'; }).join('')
+    + '<span class="sp"></span>' + TB_X.map(function(x){ return '<span class="hc x"><span>' + hh(x[1]) + '</span></span>'; }).join('') + '</div>'
+    + rows.join('') + '</div>' + (old.length ? '<p class="bgold-n"><i></i>Eski veri: ' + esc(old.join(', ')) + '. Şube müdürü güncel Excel\'i yüklemeli.</p>' : '') + tbLegend();
+  seg = el('div', 'bgctl', '<div class="seg" role="tablist" aria-label="Görünüm">' + bgSegHTML() + '</div><button class="lnk" id="bgAll" type="button">Tümünü aç</button>');
+  bts = seg.getElementsByTagName('button');
+  bts[0].setAttribute('data-v', 'kart'); bts[1].setAttribute('data-v', 'tablo');
+  root.appendChild(seg); root.appendChild(host); root.appendChild(tb);
+  bgSetView(BG.view, true);
+}
+function bgSetView(v, quiet){
+  var root = $('#viewBG'), bts, i, tb, hs, all;
+  if (v !== 'kart' && v !== 'tablo') v = 'tablo';
+  BG.view = v; LS.set('gk_bgv', v);
+  if (!root) return;
+  bts = root.querySelectorAll('.bgctl .seg button');
+  for (i = 0; i < bts.length; i++){ var on = bts[i].getAttribute('data-v') === v; bts[i].className = on ? 'on' : ''; bts[i].setAttribute('aria-selected', on ? 'true' : 'false'); }
+  hs = $('.bgcards', root); tb = $('#tbv', root); all = $('#bgAll', root);
+  if (hs) hs.hidden = v !== 'kart';
+  if (tb) tb.hidden = v !== 'tablo';
+  if (all) all.hidden = v !== 'kart';
+  if (!quiet){ fitAll(); bgPlay(root, true); }
+}
+function bgAllToggle(){
+  var open = !BG.cards.every(function(c){ return c.root.classList.contains('open'); });
+  BG.cards.forEach(function(c){
+    c.root.classList.toggle('open', open); c.btn.setAttribute('aria-expanded', open ? 'true' : 'false'); c.body.hidden = !open; BG.open[c.key] = open;
+  });
+  $('#bgAll').textContent = open ? 'Tümünü kapat' : 'Tümünü aç';
+  if (open) bgPlay($('#viewBG'), true);
+  fitAll();
+}
+function bgGoto(slug){
+  var c = null, i, top;
+  bgSetView('kart', true);
+  for (i = 0; i < BG.cards.length; i++) if (BG.cards[i].slug === slug) c = BG.cards[i];
+  if (!c) return;
+  c.root.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; BG.open[c.key] = true;
+  fitAll(); bgPlay($('#viewBG'), true);
+  top = c.root.getBoundingClientRect().top + (window.pageYOffset || 0) - ($('#top') ? $('#top').offsetHeight : 0) - 8;
+  window.scrollTo(0, Math.max(0, top));
+}
+
+/* ----- Bugün sekmesi: şubenin günlük toplamı; dokununca personelin tek tek girişleri ----- */
+function bgGrid(host, h, cs, p, m, dg, o, an){
+  buildGrid(h).forEach(function(r){ host.appendChild(r); });
+  refreshGrid(h, cs, p, m, dg, o, an);
+}
+function bgCardB(it, s, n){
+  var people = bgPeople(s), tot = bgTotals(people), nm = bgName(it.s), key = 'b:' + it.s, root = el('section', 'pc ec bgb stg'), btn = el('button', 'pbtn'),
+      coll = el('span', 'pcoll'), body = el('div', 'bgbody'), c = {}, act = 0, last = -1, who = -1, order, sub, cnt;
+  root.setAttribute('data-i', it.s);
+  people.forEach(function(q){
+    q.has = q.son != null || bgHas(q.vals);
+    if (q.has) act++;
+    if (q.son != null && q.son > last){ last = q.son; who = q.p; }
+  });
+  s.info = last >= 0 ? { m:last, ad:people[who].pe.adT, nm:nm } : null;
+  cnt = act + '/' + NP + ' kişi';
+  sub = act ? '<span class="bgst ok">' + esc(cnt) + (last >= 0 ? ' · son giriş ' + sonTxt(last) : '') + '</span>' : '<span class="bgst none">Bugün henüz giriş yok</span>';
+  btn.type = 'button'; btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-controls', 'pb-bb' + n);
+  btn.innerHTML = '<span class="phead"><span class="pname"><b class="bgn">' + esc(nm) + '</b><span class="bgsub">' + sub + '</span></span>' + IC.chev + '</span>';
+  bgGrid(coll, c, tot.s, null, V.sube.m, V.sube.dg, tot.o, tot.an);
+  btn.appendChild(coll);
+  body.id = 'pb-bb' + n; body.hidden = true;
+  order = people.slice().sort(function(a, b){
+    if (a.has !== b.has) return a.has ? -1 : 1;
+    if (a.has){ var d = (b.son == null ? -1 : b.son) - (a.son == null ? -1 : a.son); if (d) return d; }
+    return a.p - b.p;
+  });
+  order.forEach(function(q){
+    var pr = el('section', 'pc ec ro stg bgp' + (q.has ? '' : ' bgp0')), ph = el('div', 'pbtn'), pc = {}, pcoll;
+    ph.innerHTML = '<span class="phead"><span class="pname">' + esc(q.pe.adT) + '</span><span class="lastt' + (q.son == null ? ' none' : '') + '"><i></i>' + (q.son == null ? 'Giriş yok' : 'Son giriş ' + sonTxt(q.son)) + '</span></span>';
+    if (q.has){ pcoll = el('span', 'pcoll'); bgGrid(pcoll, pc, calc(q.vals), q.p, q.pe.m, q.pe.dg, q.vals, q.vals.aksadet || 0); ph.appendChild(pcoll); }
+    pr.appendChild(ph); body.appendChild(pr);
+  });
+  root.appendChild(btn); root.appendChild(body);
+  btn.addEventListener('click', function(){
+    var o = !root.classList.contains('open');
+    root.classList.toggle('open', o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); body.hidden = !o; BG.open[key] = o;
+    if (o){ bgPlay(body, true); }
+    fitAll();
+  });
+  if (BG.open[key]){ root.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); body.hidden = false; }
+  root.style.setProperty('--i', Math.min(n + 1, 10));
+  return root;
+}
+function bgBuildB(){
+  var root = $('#viewBB'), di = dayInfo(BG.day), q = BG.day.split('-'), ent = 0, h;
+  root.innerHTML = '';
+  if (!BG.list.length){ return; }
+  BG.list.forEach(function(it, i){
+    var s = BG.st[it.s], c;
+    if (s.v && s.rm){
+      c = bgWith(s.v, function(){ return bgCardB(it, s, i); });
+      root.appendChild(c);
+      if (s.info){ ent++; }
+    } else {
+      s.info = null;
+      c = bgCardNone(it, s);
+      if (s.v && !s.rm){ $('.bgst', c).textContent = s.derr ? 'Bugünkü veri alınamadı (' + (s.derr > 0 ? 'HTTP ' + s.derr : 'internet yok') + ').' : 'Yükleniyor…'; }
+      root.appendChild(c);
+    }
+  });
+  h = el('div', 'bgday', '<b>' + esc(di.wd) + ' ' + esc(di.dd) + '.' + esc(q[0].slice(2)) + '</b><span>' + ent + '/' + BG.list.length + ' şubede giriş var</span>');
+  root.insertBefore(h, root.firstChild);
+}
+function bgLastInfo(){
+  var best = null;
+  BG.list.forEach(function(it){ var s = BG.st[it.s]; if (s && s.info && (!best || s.info.m > best.m)) best = s.info; });
+  return best;
+}
+
+/* ----- başlık ----- */
+function bgHeader(ref){
+  var h1 = $('#h1'), dn = $('#donem'), dy = $('#days'), m, i, bl, key, li = bgLastInfo(), e = $('#lastTxt'), bx = $('#lastin');
+  key = ref ? ref.v.meta.ay + '|' + ref.v.meta.yil + '|' + ref.v.meta.gun + '|' + ref.v.meta.toplam + '|' + BG.list.length : 'x|' + BG.list.length;
+  if (key !== BG.hdr){
+    BG.hdr = key;
+    if (ref){
+      m = ref.v.meta;
+      h1.textContent = m.ay + ' ' + m.yil;
+      dn.textContent = 'Bölge · ' + BG.list.length + ' şube · ' + m.gun + '/' + m.toplam + '. gün';
+      dy.innerHTML = ''; dy.setAttribute('aria-label', 'Ayın ' + m.gun + '. günü, toplam ' + m.toplam + ' gün');
+      for (i = 1; i <= m.toplam; i++){ bl = el('i', 'bulb' + (i <= m.gun ? ' on' : '') + (i === m.gun ? ' now' : '')); bl.style.setProperty('--n', i); dy.appendChild(bl); }
+    } else {
+      h1.textContent = 'Bölge'; dn.textContent = BG.list.length ? BG.list.length + ' şube · veri bekleniyor' : 'Bağlantı yok'; dy.innerHTML = '';
+    }
+    document.title = 'Bölge Gidişat';
+  }
+  if (e) e.innerHTML = li ? 'Son giriş <b>' + sonTxt(li.m) + '</b> · ' + esc(li.nm) + ' · ' + esc(li.ad) : 'Bugün henüz giriş yok';
+  if (bx) bx.className = 'lastin' + (li ? '' : ' none');
+}
+function bgSigG(){
+  return JSON.stringify(BG.list.map(function(it){ var s = BG.st[it.s]; return [it.s, it.k ? 1 : 0, s.t, s.err, s.nov ? 1 : 0, s.bad ? 1 : 0, s.got ? 1 : 0]; }));
+}
+function bgSigB(){
+  return BG.day + JSON.stringify(BG.list.map(function(it){ var s = BG.st[it.s]; return [it.s, s.t, s.derr, s.rm, s.got ? 1 : 0, s.v ? 1 : 0]; }));
+}
+function bgRender(force){
+  var ref = bgRef(), sg = bgSigG(), sb = bgSigB(), y = window.pageYOffset || 0, redo = false, first;
+  bgNet();
+  if (force || sg !== BG.sig.g){
+    first = !BG.played.g && BG.tab === 'gid';
+    BG.sig.g = sg; bgBuildG(ref); redo = true;
+    if (BG.tab === 'gid'){ fitAll(); bgPlay($('#viewBG'), first); if (first) BG.played.g = true; }
+  }
+  if (force || sb !== BG.sig.b){
+    first = !BG.played.b && BG.tab === 'bb';
+    BG.sig.b = sb; bgBuildB(); redo = true;
+    if (BG.tab === 'bb'){ fitAll(); bgPlay($('#viewBB'), first); if (first) BG.played.b = true; }
+  }
+  bgHeader(ref);
+  if (redo && y > 0){ try { window.scrollTo(0, y); } catch(e){} }
+  setHH();
+}
+
+/* ----- sekmeler ----- */
+function bgSetTab(t, first){
+  var g = t === 'gid';
+  BG.tab = g ? 'gid' : 'bb'; LS.set('gk_btab', BG.tab); document.body.setAttribute('data-tab', g ? 'gid' : 'gun');
+  $('#tabBG').setAttribute('aria-selected', g ? 'true' : 'false'); $('#tabBG').tabIndex = g ? 0 : -1;
+  $('#tabBB').setAttribute('aria-selected', g ? 'false' : 'true'); $('#tabBB').tabIndex = g ? -1 : 0;
+  $('#viewBG').hidden = !g; $('#viewBB').hidden = g;
+  movePill(first);
+  fitAll();
+  if (first) return;
+  window.scrollTo(0, 0);
+  var mn = $('#main'); mn.classList.remove('enter'); void mn.offsetWidth;
+  if (anim){ mn.classList.add('enter'); setTimeout(function(){ mn.classList.remove('enter'); }, 1800); }
+  bgPlay($(g ? '#viewBG' : '#viewBB'), true);
+  if (g) BG.played.g = true; else BG.played.b = true;
+  bgTick(true);
+}
+
+/* ----- Ayarlar penceresi (Bölge) ----- */
+function bgSheetRender(){
+  var h = '', on = !!PF.push;
+  h += '<div class="shh"><h2 id="shtitle">Ayarlar</h2><button class="shx" type="button" data-act="close" aria-label="Kapat">×</button></div>';
+  h += themeHTML();
+  h += '<span class="shl" style="margin-top:16px">Bildirim</span>';
+  h += '<p class="shs">Şubelerde biri satış girince bu telefona bildirim düşer. Başlıkta şube adı, altında kişi ve rakamlar olur.</p>';
+  h += '<div class="pcard" id="pushCard">' + pushCardInner() + '</div>';
+  h += '<span class="shl" style="margin-top:16px">Hangi şubeden bildirim gelsin</span><div class="swlist">';
+  BG.list.forEach(function(it){
+    var m = !!BG.mute[it.s];
+    h += '<button type="button" class="swrow" role="switch" aria-checked="' + (m ? 'false' : 'true') + '" data-act="bmute" data-k="' + esc(it.s) + '"><span class="tx2"><b>' + esc(bgName(it.s)) + '</b><span>' + (it.k ? (m ? 'Bildirim kapalı' : 'Bildirim açık') : 'Bağlı değil') + '</span></span><span class="swt' + (m ? ' off' : '') + '"></span></button>';
+  });
+  h += '</div>';
+  h += '<span class="shl" style="margin-top:16px">Şube ekle veya değiştir</span><p class="shs">Bir şubenin giriş linkini yapıştır. O şube listeye girer; zaten varsa kodu yenilenir.</p>'
+    + '<input class="shi" id="bgAddIn" type="text" placeholder="Şube linki" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"><button class="shb" type="button" data-act="badd">Şubeyi ekle</button>';
+  h += '<span class="shl" style="margin-top:16px">Bu ekranı başka telefona kur</span><button class="shb g" type="button" data-act="bcopy">Bölge linkini kopyala</button>'
+    + '<p class="shs sm">Bu link bütün şubelerin kodunu taşır. Yalnızca kendin kullan, kimseyle paylaşma.</p>';
+  h += '<div class="shmsg" id="shmsg" role="status" aria-live="polite"></div>';
+  $('#sheet').innerHTML = h;
+}
+function bgOpenSheet(){ E.from = document.activeElement; $('#sheetw').hidden = false; bgSheetRender(); try { $('#sheet').focus(); } catch(e){} }
+function bgCloseSheet(){ $('#sheetw').hidden = true; if (E.from && E.from.focus){ try { E.from.focus(); } catch(e){} } }
+function bgPushSoon(){
+  clearTimeout(BG.pt);
+  BG.pt = setTimeout(function(){ if (PF.push && pushPerm() === 'granted' && !pushSupport()) pushSync(function(){}); }, 1500);
+}
+function bgLinkSlug(t){ var m = /[?&#]s=([a-z0-9-]{1,40})(?=[&#]|$)/.exec(String(t)); return m ? m[1] : ''; }
+function bgJoin(slug, text, msgEl){
+  var tk = parseToken(text), sl = bgLinkSlug(text) || slug, i, found = false;
+  function say(t, ok){ if (msgEl){ msgEl.className = 'shmsg ' + (ok ? 'ok' : 'er'); msgEl.textContent = t; } }
+  if (!tk){ say('Link anlaşılamadı. Şubenin giriş linkinin tamamını yapıştır.', false); return false; }
+  if (!sl){ say('Linkte şube adı (&s=…) yok. Şubenin giriş linkini yapıştır.', false); return false; }
+  if (slug && sl !== slug){ say('Bu link başka bir şubeye ait görünüyor.', false); return false; }
+  if (tk.u !== DEFAULT_DB){ say('Bu link başka bir veri tabanına ait.', false); return false; }
+  for (i = 0; i < BG.list.length; i++) if (BG.list[i].s === sl){ BG.list[i].k = tk.k; found = true; }
+  if (!found){ if (BG.list.length >= 16){ say('En çok 16 şube eklenebilir.', false); return false; } BG.list.push({ s:sl, k:tk.k }); }
+  bgSave(); bgReset(); BG.sig.g = ''; BG.sig.b = ''; BG.busy = 0; pwaUpdate(); bgPushSoon();
+  say('Eklendi: ' + bgName(sl) + '.', true);
+  bgRender(true); bgRefresh();
+  return true;
+}
+function bgSheetClick(e){
+  var b = e.target, act, k, m, inp;
+  if (b.id === 'shbg'){ bgCloseSheet(); return; }
+  while (b && b !== this && !(b.getAttribute && b.getAttribute('data-act'))) b = b.parentNode;
+  if (!b || b === this) return;
+  act = b.getAttribute('data-act'); k = b.getAttribute('data-k');
+  if (act === 'close') bgCloseSheet();
+  else if (prefAct(act, b)) return;
+  else if (act === 'bmute'){
+    BG.mute[k] = !BG.mute[k]; jset('gk_bmute', BG.mute); m = !!BG.mute[k];
+    b.setAttribute('aria-checked', m ? 'false' : 'true'); $('.swt', b).className = 'swt' + (m ? ' off' : ''); $('.tx2 span', b).textContent = m ? 'Bildirim kapalı' : 'Bildirim açık';
+    bgPushSoon();
+  }
+  else if (act === 'badd'){ inp = $('#bgAddIn'); if (inp && bgJoin('', inp.value, $('#shmsg'))){ inp.value = ''; bgSheetRender(); sheetMsg('Eklendi.', true); } }
+  else if (act === 'bcopy') copyText(window.location.href.split('#')[0].split('?')[0] + '?bolge=' + bgListStr() + '&s=bolge', function(ok){ sheetMsg(ok ? 'Bölge linki kopyalandı.' : 'Kopyalanamadı.', ok); });
+}
+function bgMainClick(e){
+  var b = e.target, act, row, inp;
+  while (b && b !== this && b.getAttribute){
+    act = b.getAttribute('data-act');
+    if (act === 'bjoin'){ inp = b.parentNode.querySelector('input'); bgJoin(b.getAttribute('data-k'), inp ? inp.value : '', b.parentNode.querySelector('.shmsg')); return; }
+    if (b.id === 'bgAll'){ bgAllToggle(); return; }
+    if (b.getAttribute('data-v') && b.parentNode && (' ' + b.parentNode.className + ' ').indexOf(' seg ') >= 0){ bgSetView(b.getAttribute('data-v')); return; }
+    if (b.className && (' ' + b.className + ' ').indexOf(' bgr ') >= 0 && b.getAttribute('data-s') && (' ' + b.className + ' ').indexOf(' none ') < 0){ bgGoto(b.getAttribute('data-s')); return; }
+    b = b.parentNode;
+  }
+}
+function bgInitUi(){
+  var tabs = $('#tabs'), rb = $('#btnChat');
+  document.documentElement.classList.add('bolge');
+  document.body.setAttribute('data-tab', 'gid');
+  tabs.innerHTML = '<i class="tabpill" id="pill" aria-hidden="true"></i>'
+    + '<button class="tab" id="tabBG" type="button" role="tab" aria-selected="true" aria-controls="viewBG">Gidişatlar</button>'
+    + '<button class="tab" id="tabBB" type="button" role="tab" aria-selected="false" aria-controls="viewBB" tabindex="-1">Bugün</button>';
+  $('#tabBG').addEventListener('click', function(){ if (BG.tab !== 'gid') bgSetTab('gid'); });
+  $('#tabBB').addEventListener('click', function(){ if (BG.tab !== 'bb') bgSetTab('bb'); });
+  tabs.addEventListener('keydown', function(e){
+    var k = e.key; if (k !== 'ArrowRight' && k !== 'ArrowLeft') return;
+    e.preventDefault(); bgSetTab(k === 'ArrowRight' ? 'bb' : 'gid'); $(BG.tab === 'gid' ? '#tabBG' : '#tabBB').focus();
+  });
+  rb.hidden = false; rb.className = 'hbtn'; rb.setAttribute('aria-label', 'Yenile');
+  rb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
+  rb.addEventListener('click', function(){ BG.last = 0; bgRefresh(); });
+  $('#btnSet').addEventListener('click', bgOpenSheet);
+  $('#sheetw').addEventListener('click', bgSheetClick);
+  document.addEventListener('keydown', function(e){ if ((e.key === 'Escape' || e.keyCode === 27) && !$('#sheetw').hidden) bgCloseSheet(); });
+  $('#main').addEventListener('click', bgMainClick);
+  $('#main').addEventListener('keydown', function(e){
+    var b = e.target; if ((e.key === 'Enter' || e.key === ' ') && b && b.className && (' ' + b.className + ' ').indexOf(' bgr ') >= 0 && b.getAttribute('data-s')){ e.preventDefault(); bgGoto(b.getAttribute('data-s')); }
+  });
+  layoutWide(); window.addEventListener('resize', layoutWide);
+  window.addEventListener('resize', setHH);
+  window.addEventListener('load', setHH);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setHH);
+  window.addEventListener('resize', function(){ movePill(true); });
+  window.addEventListener('load', function(){ movePill(true); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ movePill(true); });
+  setTimeout(function(){ $('#main').classList.remove('enter'); }, 3200);
+}
+function bgInit(){
+  var mu = jget('gk_bmute', {});
+  BG.list = bgLoad();
+  BG.mute = mu && typeof mu === 'object' && !(mu instanceof Array) ? mu : {};
+  BG.day = dayKey();
+  BG.view = LS.get('gk_bgv') === 'kart' ? 'kart' : 'tablo';
+  bgReset();
+  bgInitUi();
+  pwaUpdate();
+  bgSetTab(LS.get('gk_btab') === 'bb' ? 'bb' : 'gid', true);
+  bgRender(true);
+  pushBoot();
+  applyAnim();
+  bgRefresh();
+  setInterval(function(){ bgTick(false); }, 15000);
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) bgTick(true); });
+  window.addEventListener('online', function(){ bgTick(true); });
+}
 /* ---------- başlat ---------- */
 function init(){
   loadSnap(); SNAP.t = V.meta.stamp || 0; setData(V);
   $('#defs').innerHTML = defsHTML();
   prefInit();
+  if (BG.on){ bgInit(); return; }
   initEntry();
   chInit();
   pushBoot();
