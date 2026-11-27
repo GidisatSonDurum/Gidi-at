@@ -1137,9 +1137,9 @@ html[data-theme="light"]{--chk0:#C2307E;--chk1:#8F6200;--chk2:#0A74B8;--chk3:#0A
 .cbadge{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#E8334F;color:#fff;font-size:11.5px;font-weight:850;line-height:20px;text-align:center;box-shadow:0 0 0 2px var(--bg)}
 .cbadge[hidden]{display:none}
 html.chopen,html.chopen body{overflow:hidden}
-#chat{position:fixed;left:0;right:0;top:0;height:100%;z-index:62;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
-#chat[hidden]{display:none}
-.anim #chat:not([hidden]){animation:chatin .28s cubic-bezier(.2,.8,.2,1)}
+#chat,#bchat{position:fixed;left:0;right:0;top:0;height:100%;z-index:62;display:flex;flex-direction:column;background:var(--bg);color:var(--ink)}
+#chat[hidden],#bchat[hidden]{display:none}
+.anim #chat:not([hidden]),.anim #bchat:not([hidden]){animation:chatin .28s cubic-bezier(.2,.8,.2,1)}
 @keyframes chatin{from{opacity:0;transform:translateY(28px)}}
 .ch-wrap{display:flex;flex-direction:column;flex:1 1 auto;min-height:0;width:100%;max-width:640px;margin:0 auto}
 .ch-top{flex:none;display:flex;align-items:center;padding:calc(8px + env(safe-area-inset-top)) 12px 10px 6px;border-bottom:1px solid var(--line2);background:var(--topbg)}
@@ -1315,6 +1315,36 @@ html[data-theme="light"] .bmmeta .warn{color:#A86300}
 html[data-theme="light"] .bmcf{background:rgba(227,154,0,.12);border-color:rgba(227,154,0,.55)}
 html[data-theme="light"] .bmw{background:rgba(204,39,72,.08);border-color:rgba(204,39,72,.45)}
 @media (max-width:380px){ .bmc{padding:12px} .bmhi{padding:10px 11px} }
+
+
+/* ================= app17: Bölge ▸ Mesaj ▸ Yazışmalar ================= */
+#viewBM .bglv{margin:12px 2px 0}
+#viewBM .seg.full button{position:relative}
+.bcsb{display:inline-block;min-width:18px;height:18px;margin-left:7px;padding:0 5px;border-radius:9px;background:#E8334F;color:#fff;font-size:11px;font-weight:850;line-height:18px;text-align:center}
+.bcsb[hidden]{display:none}
+.tab .tbd{position:absolute;top:-4px;right:-2px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#E8334F;color:#fff;font-size:10.5px;font-weight:850;line-height:17px;text-align:center;box-shadow:0 0 0 2px var(--bg)}
+.tab .tbd[hidden]{display:none}
+.bcl{margin:12px 0 0;border-radius:18px;background:var(--fill2);border:1px solid var(--line2);overflow:hidden}
+.bcr{display:flex;align-items:center;width:100%;min-height:68px;padding:10px 14px;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);font:inherit;color:var(--ink);cursor:pointer}
+.bcr:last-child{border-bottom:0}
+.bcr:active{background:rgba(255,255,255,.06)}
+.bcr:focus-visible{outline:2px solid var(--cy);outline-offset:-2px}
+.bca{flex:none;display:grid;place-items:center;width:44px;height:44px;margin-right:12px;border-radius:50%;background:var(--fill);border:1px solid var(--line2);font-size:15px;font-weight:850}
+.bca.k0{color:var(--chk0)}.bca.k1{color:var(--chk1)}.bca.k2{color:var(--chk2)}.bca.k3{color:var(--chk3)}.bca.k4{color:var(--chk4)}.bca.k5{color:var(--chk5)}.bca.k6{color:var(--chk6)}.bca.k7{color:var(--chk7)}
+.bcm{flex:1 1 auto;min-width:0}
+.bcn{display:block;font-size:16px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bcs{display:block;margin-top:2px;font-size:13.5px;line-height:1.3;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bcs.un{color:var(--ink);font-weight:700}
+.bcw{flex:none;display:flex;flex-direction:column;align-items:flex-end;margin-left:10px;min-width:34px}
+.bct{font-size:12px;color:var(--muted)}
+.bct.un{color:var(--cy);font-weight:800}
+.bcb{display:inline-block;min-width:22px;height:22px;margin-top:5px;padding:0 6px;border-radius:11px;background:#E8334F;color:#fff;font-size:12px;font-weight:850;line-height:22px;text-align:center}
+.bcnone{margin:16px 2px}
+html[data-theme="light"] .bcr:active{background:rgba(0,0,0,.05)}
+html[data-theme="light"] .bca{background:#fff}
+html[data-theme="light"] .bcsb,html[data-theme="light"] .tab .tbd,html[data-theme="light"] .bcb{background:#D8213E}
+html[data-theme="light"] .tab .tbd{box-shadow:0 0 0 2px #fff}
+@media (max-width:380px){ .bcr{padding:9px 11px} .bca{width:40px;height:40px;margin-right:10px} }
 
 </style>
 </head>
@@ -3301,6 +3331,7 @@ function rebuildAll(v){
   setData(v);
   E.pend = cleanPend(E.pend); jset('gk_q', E.pend);
   E.me = E.meRid != null && RIDX[E.meRid] != null ? RIDX[E.meRid] : null;
+  pushSoon();                                                                 /* kişi listesi/kimlik değişmiş olabilir: bildirim konuları da */
   loadDay(); deriveRemote(false);
   buildViews();
   openE.forEach(function(o, i){ if (o && E.cards[i] && E.cards[i].root.classList.contains('me')) openCard(E.cards[i], true); });
@@ -4195,7 +4226,7 @@ function chPutPend(id){
     p.busy = false;
     if (st >= 200 && st < 300){
       p.fail = false; p.sent = true; CH.err = ''; chSavePend();
-      if (Date.now() - CH.lastPush > 20000){ CH.lastPush = Date.now(); ntfySend(ntfyName(), p.n + ' sohbete mesaj yazdı', null, false); }
+      if (Date.now() - CH.lastPush > 20000){ CH.lastPush = Date.now(); chPush(p.n); }
       setTimeout(function(){ if (E.cfg) chTick(); }, 350);                      /* kendi mesajını sunucu saatiyle hemen geri al */
     } else if (st === 400 || st === 401 || st === 403){                         /* kural güncellenmemiş: mesaj saklanmaz, yazı geri gelir */
       delete CH.pend[id]; chSavePend(); CH.err = 'rules';
@@ -4207,6 +4238,13 @@ function chPutPend(id){
     }
     chRender(false);
   });
+}
+/* Sohbet bildirimi (mesajın metni YOK). Şube küçükse (tpNamed): yazanın kendi cihazı dinlemeyen "yazan" konusuna + müdürün "yukarı" konusuna gider,
+   böylece yazan kendi mesajının bildirimini almaz. Şube büyükse eski yol: şubenin genel konusu. */
+function chPush(who){
+  var t = ntfyName(), m = who + ' sohbete mesaj yazdı';
+  if (tpNamed() && who){ ntfySend(t, m, null, false, tpFrom(E.cfg.k, who)); ntfySend(t, m, null, false, tpUp(E.cfg.k)); }
+  else ntfySend(t, m, null, false);
 }
 function chFlushPend(){ var id; for (id in CH.pend) if (CH.pend.hasOwnProperty(id)) chPutPend(id); }
 function chSend(){
@@ -4328,6 +4366,7 @@ function chClose(){
 }
 function chMeChanged(){
   if (CH.open){ chFill(); chRender(false); chMarkRead(); } else chBadge();
+  pushSoon();                                                                 /* kim olduğun değişti: bildirim konuları da değişir (kendi mesajının bildirimi gelmesin) */
 }
 
 /* ----- bağlantı: Excel'deki ortak kayıtla aynı anda başlar/durur ----- */
@@ -4352,7 +4391,7 @@ function chInit(){
   var b = $('#btnChat');
   if (b){ b.innerHTML = IC.chat + '<span class="cbadge" id="chatBadge" hidden></span>'; b.addEventListener('click', chOpen); }
   window.addEventListener('online', function(){ CH.bad = 0; chWake(); });
-  document.addEventListener('visibilitychange', function(){ if (!document.hidden) chWake(); });
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden){ chWake(); pushSoon(); } });
   document.addEventListener('keydown', function(e){ if (CH.open && (e.key === 'Escape' || e.keyCode === 27)) chClose(); });
   window.addEventListener('resize', chFit);
   if (window.visualViewport){ window.visualViewport.addEventListener('resize', chFit); window.visualViewport.addEventListener('scroll', chFit); }
@@ -4466,18 +4505,50 @@ function pushPost(method, body, cb){
     x.send(JSON.stringify(body));
   } catch(e){ fin(false, 0); }
 }
-/* bu telefonun dinleyeceği konular: şube uygulamasında kendi mağazası; Bölge ekranında kapatılmamış şubelerin hepsi + yalnızca bu telefona giden deneme konusu */
+/* Konular (ntfy). Hepsi mağaza kodundan türer; kodun kendisi dışarı çıkmaz.
+     T  (ntfyTopic/bgTopic): şubenin genel haberi (veri girişi, deneme). Şube cihazları + müdür dinler.
+     Yukarı  (tpUp):   şube → müdür (sohbet). YALNIZCA müdürün telefonu dinler.
+     Aşağı   (tpDown): müdür → şube (müdürün mesajı). YALNIZCA şube cihazları dinler; müdürün kendi telefonu dinlemez, kendi mesajı ona düşmez.
+     Yazan   (tpFrom): çalışanın sohbet bildirimi. Çalışanın kendi cihazı HARİÇ şubedeki herkes dinler, yazan kendi mesajının bildirimini almaz.
+   Bir telefon (abonelik) en çok 50 konu dinleyebilir (ntfy sınırı). */
+var PUSH_MAX = 48, PUSH_NAMES = 40;
+function tpHash(s){ return 'gk-' + sha256hex(s).slice(0, 24); }
+function tpUp(code){ return tpHash('gk-up:' + code); }
+function tpDown(code){ return tpHash('gk-down:' + code); }
+function tpFrom(code, name){ return tpHash('gk-from:' + code + '\n' + name); }
+function tpNamed(){ return !!E.cfg && NP > 0 && NP <= PUSH_NAMES; }          /* şube küçükse sohbet bildirimi yazana göre ayrılır; değilse eski yol (şube konusu) */
+function pushPeers(){                                                         /* bu cihazın dinleyeceği "yazan" konuları: kendi adı hariç herkes */
+  var t = [], me = chMe(), i, nm, tp, seen = {};
+  if (!tpNamed()) return t;
+  for (i = 0; i < NP; i++){
+    nm = V.kisiler[i] ? V.kisiler[i].adT : '';
+    if (!nm || nm === me) continue;
+    tp = tpFrom(E.cfg.k, nm);
+    if (!seen[tp]){ seen[tp] = 1; t.push(tp); }
+  }
+  return t;
+}
+/* bu telefonun dinleyeceği konular: şube uygulamasında kendi mağazası (genel + müdürden gelen + çalışan arkadaşlarından gelen);
+   Bölge ekranında kapatılmamış şubelerin genel ve "yukarı" konuları + yalnızca bu telefona giden deneme konusu */
 function pushReady(){ return BG.on ? BG.list.some(function(x){ return !!x.k; }) : !!E.cfg; }
 function pushTopics(){
-  var t = [], tp;
+  var t = [], tp, peers;
   if (BG.on){
-    BG.list.forEach(function(x){ if (x.k && !BG.mute[x.s]) t.push(bgTopic(x.k)); });
+    BG.list.forEach(function(x){ if (x.k && !BG.mute[x.s]){ t.push(bgTopic(x.k)); t.push(tpUp(x.k)); } });
     tp = bgSelfTopic(); if (tp) t.push(tp);
     return t;
   }
-  tp = ntfyTopic(); return tp ? [tp] : [];
+  tp = ntfyTopic(); if (!tp) return [];
+  t.push(tp); t.push(tpDown(E.cfg.k));
+  peers = pushPeers();
+  return t.length + peers.length <= PUSH_MAX ? t.concat(peers) : t;
 }
-function pushId(){ return BG.on ? (pushReady() ? 'gk-' + sha256hex('bolge:' + pushTopics().join(',')).slice(0, 24) : '') : ntfyTopic(); }
+function pushId(){
+  var t;
+  if (!pushReady()) return '';
+  t = pushTopics();
+  return t.length ? 'gk-' + sha256hex((BG.on ? 'bolge:' : 'sube:') + t.join(',')).slice(0, 24) : '';
+}
 function pushSend(sub, cb){
   var j = null, k, tps = pushTopics();
   try { j = sub.toJSON(); } catch(e){}
@@ -4561,11 +4632,17 @@ function pushBoot(){
   if (pushPerm() !== 'granted'){ PF.push = false; PF.pushT = 0; PF.pushTp = ''; prefSave(); return; }   /* izin geri alınmış */
   setTimeout(pushRefresh, 3000);
 }
+/* adı seçince / liste değişince: konu listesi değiştiyse kaydı hemen (kısa bekletmeyle) yenile */
+var PUSH_SOON = 0;
+function pushSoon(){
+  clearTimeout(PUSH_SOON);
+  PUSH_SOON = setTimeout(function(){ if (PF.push) pushRefresh(); }, 1500);
+}
 /* mağaza bağlantısı değişince (saveCfg içinden) */
 function pushCfg(){
   if (!PF.push) return;
   if (!E.cfg){ pushOff(null); return; }                   /* bağlantı kaldırıldı: bu telefona bildirim gelmesin */
-  if (PF.pushTp !== ntfyTopic()) pushSync(function(){});  /* başka mağazaya geçildi: yeni konuya kaydet (eskisinin yerine geçer) */
+  if (PF.pushTp !== pushId()) pushSync(function(){});     /* başka mağazaya geçildi: yeni konulara kaydet (eskisinin yerine geçer) */
 }
 
 /* Ayarlar penceresindeki kart */
@@ -4590,7 +4667,7 @@ function pushCardInner(){
 function pushUi(){ var c = $('#pushCard'); if (c) c.innerHTML = pushCardInner(); }
 /* ================= app15: Bölge ekranı (bölge müdürü: bütün şubeler tek yerde) =================
    Link: …/index_2.html?bolge=ad.kod,ad.kod,…&s=bolge     (ad = şubenin kısa adı, kod = o şubenin mağaza kodu)
-   Her şubenin Excel verisi (v) ve bugünkü girişleri (d/<gün>) ortak kayıttan yalnızca OKUNUR. Tek yazma: «Mesaj» sekmesinin şube sohbetine gönderdiği duyuru (js_bmsg.js).
+   Her şubenin Excel verisi (v) ve bugünkü girişleri (d/<gün>) ortak kayıttan yalnızca OKUNUR. Tek yazma: «Mesaj» sekmesinin şube sohbetine gönderdiği mesajlar (toplu duyuru js_bmsg.js, şubeyle yazışma js_bchat.js).
    Rakamlar şube uygulamasındaki kutu işlevleriyle çizilir (aynı kod), burada ayrı bir hesap yoktur:
    her şubenin verisi çizim sırasında geçici olarak "etkin veri" yapılır (bgWith), sonra eski haline döner. */
 function bgDetect(){
@@ -5307,7 +5384,7 @@ function bgInitUi(){
   tabs.innerHTML = '<i class="tabpill" id="pill" aria-hidden="true"></i>'
     + '<button class="tab" id="tabBG" type="button" role="tab" aria-selected="true" aria-controls="viewBG">Gidişatlar</button>'
     + '<button class="tab" id="tabBB" type="button" role="tab" aria-selected="false" aria-controls="viewBB" tabindex="-1">Bugün</button>'
-    + '<button class="tab" id="tabBM" type="button" role="tab" aria-selected="false" aria-controls="viewBM" tabindex="-1">Mesaj</button>';
+    + '<button class="tab" id="tabBM" type="button" role="tab" aria-selected="false" aria-controls="viewBM" tabindex="-1">Mesaj<span class="tbd" id="bcTab" hidden></span></button>';
   $('#tabBG').addEventListener('click', function(){ if (BG.tab !== 'gid') bgSetTab('gid'); });
   $('#tabBB').addEventListener('click', function(){ if (BG.tab !== 'bb') bgSetTab('bb'); });
   $('#tabBM').addEventListener('click', function(){ if (BG.tab !== 'msg') bgSetTab('msg'); });
@@ -5318,7 +5395,7 @@ function bgInitUi(){
     i = Math.max(0, Math.min(2, o.indexOf(BG.tab) + (k === 'ArrowRight' ? 1 : -1)));
     bgSetTab(o[i]); $('#tab' + ['BG', 'BB', 'BM'][i]).focus();
   });
-  bmInit();
+  bmInit(); bcInit();
   rb.hidden = false; rb.className = 'hbtn'; rb.setAttribute('aria-label', 'Yenile');
   rb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
   rb.addEventListener('click', function(){ BG.last = 0; bgRefresh(); });
@@ -5361,13 +5438,14 @@ function bgInit(){
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) bgTick(true); });
   window.addEventListener('online', function(){ bgTick(true); });
 }
-/* ================= app16: Bölge ▸ Mesaj (şubelerdeki çalışanlara duyuru) =================
+/* ================= app16: Bölge ▸ Mesaj ▸ Toplu mesaj (şubelerdeki çalışanlara duyuru) =================
    Mesaj her şubenin ortak kaydındaki sohbet düğümüne yazılır: g/<kod>/c/<kimlik> = { t: sunucu saati, n: gönderen adı, m: metin }.
    Şubede «Şube sohbeti»nde görünür; uygulaması açık olan şube cihazlarında rozet çıkar.
-   Mesaj şubeye ulaşınca o şubenin bildirim konusuna (ntfy) da kısa bir bildirim gider: «Şube sohbetinde yeni mesaj var».
+   Mesaj şubeye ulaşınca o şubenin "aşağı" bildirim konusuna (ntfy, tpDown) da kısa bir bildirim gider: «Şube sohbetinde yeni mesaj var».
+   Bu konuyu YALNIZCA şube cihazları dinler; müdürün kendi telefonu dinlemez, bu yüzden kendi mesajının bildirimi kendine düşmez.
    Bildirimde mesajın kendisi YOKTUR (ntfy üçüncü taraf sunucudur); içerik yalnızca şubenin ortak kaydında durur.
    Bildirim, şube telefonunda bildirim açıksa uygulama kapalıyken de görünür. Gidişatlar ve Bugün sekmeleri yalnızca okur;
-   ortak kayda yazılan TEK şey bu sekmenin sohbet mesajıdır.
+   ortak kayda yazılan TEK şey sohbet mesajıdır (bu sekme ve «Yazışmalar», js_bchat.js).
    Kural: sohbet düğümü (c) Firebase kurallarında vardır; yoksa yazma reddedilir ve ekranda tek seferlik ayar yönergesi çıkar. */
 var BM = { to:null, name:'Bölge Müdürü', confirm:false, busy:false, res:null, hist:[], rules:false, probeAt:0, probing:false, edit:false, sig:'', loaded:false };
 var BM_MAX = 500, BM_DEF = 'Bölge Müdürü', BM_HIST = 20;
@@ -5420,7 +5498,7 @@ function bmPrj(){ var m = /^https:\/\/([a-z0-9-]+)-default-rtdb\./.exec(String(D
 /* ----- görünüm ----- */
 function bmListSig(){ return BG.list.map(function(x){ return x.s + (x.k ? '1' : '0'); }).join(','); }
 function bmBuild(){
-  var root = $('#viewBM'), old = $('#bmIn'), v = old ? old.value : '', h = '', c = bmConn(), sel;
+  var root = $('#bmBox'), old = $('#bmIn'), v = old ? old.value : '', h = '', c = bmConn(), sel;
   if (!root) return;
   if (!BM.loaded) bmLoad();
   BM.sig = bmListSig(); BM.confirm = false;                                    /* şube listesi değiştiyse eski onay geçersiz */
@@ -5437,7 +5515,7 @@ function bmBuild(){
     + '<textarea class="bmin" id="bmIn" rows="4" maxlength="' + BM_MAX + '" placeholder="Çalışanlara yazacağın mesaj" aria-label="Mesaj"></textarea>'
     + '<div class="bmmeta"><span id="bmFrom"></span><span id="bmN"></span></div>'
     + '<div class="bmname" id="bmNameW" hidden><input class="shi" id="bmNameIn" type="text" maxlength="40" autocomplete="off" aria-label="Gönderen adı"><button class="shb g" type="button" data-bm="namesave">Kaydet</button></div>'
-    + '<p class="bmnote">Bildirimi açık olan telefonlara bildirim düşer (mesajın kendisi bildirimde yazmaz); diğerleri uygulamayı açınca «Şube sohbeti»nde görür. Cevapları da orada yazarlar, burada görünmez.</p>'
+    + '<p class="bmnote">Bildirimi açık olan telefonlara bildirim düşer (mesajın kendisi bildirimde yazmaz); diğerleri uygulamayı açınca «Şube sohbeti»nde görür. Çalışanların cevapları «Yazışmalar» sekmesinde çıkar.</p>'
     + '<button class="shb bmsend" id="bmSend" type="button" data-bm="send">Gönder</button>'
     + '<div class="bmcf" id="bmCf" hidden role="group" aria-label="Gönderimi onayla"><p id="bmCfT"></p><button class="shb" type="button" data-bm="yes">Evet, gönder</button><button class="shb g" type="button" data-bm="no">Vazgeç</button></div>'
     + '<div class="shmsg" id="bmMsg" role="status" aria-live="polite"></div></div>';
@@ -5531,8 +5609,8 @@ function bmProbe(force){
 }
 
 /* ----- gönderim ----- */
-/* Bildirim: şubenin ntfy konusuna kısa bir yazı. Mesaj metni YOLLANMAZ. Etiket (gk-bm-<gönderim kimliği>) aynı gönderimin bildirimlerini
-   birden çok şubeye kayıtlı telefonda (müdürün kendi telefonu) tek bildirimde birleştirir; sw.js bunu tanır. */
+/* Bildirim: şubenin "aşağı" ntfy konusuna kısa bir yazı. Mesaj metni YOLLANMAZ. Etiket (gk-bm-<gönderim kimliği>) aynı gönderimin bildirimlerini
+   bir telefonda tek bildirimde birleştirir; sw.js bunu tanır. */
 var BM_PUSH = 'Şube sohbetinde yeni mesaj var.';
 function bmNtfy(topic, title, id, cb){
   var x, done = false;
@@ -5549,7 +5627,7 @@ function bmNtfy(topic, title, id, cb){
 }
 function bmPush(res, row, it){
   row.ps = 'wait';
-  bmNtfy(bgTopic(it.k), res.n, res.id, function(ok){ row.ps = ok ? 'ok' : 'fail'; bmDone(res); });
+  bmNtfy(tpDown(it.k), res.n, res.id, function(ok){ row.ps = ok ? 'ok' : 'fail'; bmDone(res); });
 }
 function bmPut(res, row){
   var it = bmFind(row.s);
@@ -5644,11 +5722,8 @@ function bmClick(e){
   else if (act === 'hclear'){ if (!BM.busy){ BM.hist = []; bmSave(); bmRenderHist(); } }
   else if (act === 'rcopy') copyText(String(RULES), function(ok){ bmNote(ok ? 'Kural kopyalandı. Şimdi Firebase\'i aç.' : 'Kopyalanamadı.', ok); });
   else if (act === 'rcheck') bmProbe(true);
-}
-/* sekme açılınca / şube listesi değişince */
-function bmShow(){
-  if (!$('#bmIn') || BM.sig !== bmListSig()) bmBuild();
-  bmUpdate(); bmProbe(false);
+  else if (act === 'sub') bcSetSub(b.getAttribute('data-v'));
+  else if (act === 'open') bcOpen(b.getAttribute('data-k'));
 }
 function bmInit(){
   var main = $('#viewBM');
@@ -5657,6 +5732,413 @@ function bmInit(){
   main.addEventListener('keydown', function(e){
     if ((e.key === 'Enter') && (e.target && e.target.id === 'bmNameIn')){ e.preventDefault(); bmClick.call(main, { target:$('[data-bm="namesave"]', main) }); }
   });
+}
+/* ================= app17: Bölge ▸ Mesaj ▸ Yazışmalar (her şubeyle karşılıklı sohbet) =================
+   Şubenin ortak sohbeti (g/<kod>/c) ile AYNI düğüm: müdürün yazdığını şubedeki herkes «Şube sohbeti»nde görür, çalışanların cevapları buraya düşer.
+   Liste: her şube bir satır (son mesaj, saat, okunmamış sayısı). Satıra dokununca o şubeyle konuşma ekranı açılır; işin bitince geri çıkılır.
+   Okuma: ayrı canlı bağlantı AÇILMAZ; konuşma açıkken 3 sn'de bir, liste açıkken 15 sn'de bir, diğer ekranlarda 45 sn'de bir
+   yalnızca "son mesajdan sonrakiler" sorulur (birkaç yüz bayt). Okunmamış sayısı bu telefonda tutulur (gk_bcr).
+   Yazma: müdürün mesajı şube sohbetine yazılır (aynı kimlik tekrar denense de çift mesaj olmaz); ardından şubenin "aşağı" bildirim konusuna
+   mesajın metni OLMAYAN kısa bildirim gider (tpDown). O konuyu yalnızca şube cihazları dinler, müdürün telefonu dinlemez.
+   Gitmeyen mesaj telefonda saklanır (gk_bcp), bağlanınca gider. */
+var BC = { th:{}, rd:{}, cur:'', sub:'chat', tm:0, loaded:false, from:null, lastPush:{}, sig:'' };
+var BC_FIRST = 60, BC_OLD = 100, BC_MAX = 500, BC_FAST = 3000, BC_LIST = 15000, BC_BG = 45000;
+
+/* ----- konuşma kayıtları (şube başına) ----- */
+function bcTh(slug){
+  var t = BC.th[slug];
+  if (!t) t = BC.th[slug] = { map:{}, pend:{}, lastT:0, ready:false, more:false, old:false, err:'', bad:0, busy:false, at:0, gen:0, k:'', rt:0 };
+  return t;
+}
+function bcWipe(slug, th){                                                    /* şubenin kodu değişti: eski kayıtlar bu şubeye ait değil */
+  th.gen++; th.map = {}; th.pend = {}; th.lastT = 0; th.ready = false; th.more = false; th.old = false; th.err = ''; th.bad = 0; th.busy = false; th.at = 0;
+  delete BC.rd[slug];
+}
+function bcLoad(){
+  var r = jget('gk_bcr', {}), s;
+  BC.rd = {};
+  if (r && typeof r === 'object' && !(r instanceof Array))
+    for (s in r) if (r.hasOwnProperty(s) && bmSlugOk(s) && typeof r[s] === 'number' && isFinite(r[s]) && r[s] >= 0) BC.rd[s] = r[s];
+  BC.sub = LS.get('gk_bmsub') === 'all' ? 'all' : 'chat';
+  bcLoadPend();
+  BC.loaded = true;
+}
+function bcSaveRead(){ jset('gk_bcr', BC.rd); }
+
+/* ----- gitmemiş mesajlar: sayfa yenilense de kaybolmaz ----- */
+function bcSavePend(){
+  var o = {}, any = false, s, id, th, p;
+  for (s in BC.th) if (BC.th.hasOwnProperty(s)){
+    th = BC.th[s];
+    for (id in th.pend) if (th.pend.hasOwnProperty(id) && !th.pend[id].sent){
+      p = th.pend[id]; if (!o[s]) o[s] = {}; o[s][id] = { t:p.t, n:p.n, m:p.m }; any = true;
+    }
+  }
+  if (any) jset('gk_bcp', o); else LS.del('gk_bcp');
+}
+function bcLoadPend(){
+  var o = jget('gk_bcp', null), s, id, v;
+  if (!o || typeof o !== 'object' || o instanceof Array) return;
+  for (s in o) if (o.hasOwnProperty(s) && bmSlugOk(s) && o[s] && typeof o[s] === 'object' && !(o[s] instanceof Array))
+    for (id in o[s]) if (o[s].hasOwnProperty(id)){
+      v = chOk(id, o[s][id]);
+      if (v) bcTh(s).pend[id] = { t:v.t, n:v.n, m:v.m, busy:false, sent:false, fail:true };
+    }
+}
+
+/* ----- okuma ----- */
+function bcMerge(th, val){
+  var id, o, fresh = [], n = 0, gone = false;
+  if (val && typeof val === 'object') for (id in val) if (val.hasOwnProperty(id)){
+    o = chOk(id, val[id]); if (!o) continue;
+    n++;
+    if (!th.map[id]) fresh.push(o);
+    th.map[id] = o;
+    if (o.t > th.lastT) th.lastT = o.t;
+    if (th.pend[id]){ delete th.pend[id]; gone = true; }                       /* sunucuya ulaştı: bekleyenlerden çıkar */
+  }
+  if (gone) bcSavePend();
+  return { n:n, fresh:fresh };
+}
+function bcInitRead(slug, th){                                                /* ilk açılış: müdürün en son yazdığından sonraki cevaplar "yeni" sayılır; hiç yazmadıysa eskiler okunmuş */
+  var id, own = 0;
+  if (BC.rd[slug] != null) return;
+  for (id in th.map) if (th.map.hasOwnProperty(id) && th.map[id].n === BM.name && th.map[id].t > own) own = th.map[id].t;
+  BC.rd[slug] = own || th.lastT;
+  bcSaveRead();
+}
+function bcPoll(slug){
+  var it = bmFind(slug), th, gen, extra;
+  if (!it || !it.k || !DEFAULT_DB) return;
+  th = bcTh(slug);
+  if (th.k !== it.k){ if (th.k) bcWipe(slug, th); th.k = it.k; }
+  if (th.busy) return;
+  th.busy = true; th.at = Date.now(); gen = th.gen;
+  extra = th.ready && th.lastT ? '&startAt=' + th.lastT : '&limitToLast=' + BC_FIRST;
+  xhr('GET', bgUrl(it, '/c.json?orderBy=%22t%22' + extra), null, function(st, j){
+    var first, r;
+    if (gen !== th.gen) return;
+    th.busy = false; first = !th.ready;
+    if (st === 200){
+      th.err = ''; th.bad = 0;
+      r = bcMerge(th, j);
+      if (first){ th.ready = true; th.more = r.n >= BC_FIRST; bcInitRead(slug, th); }
+    } else if ((st === 400 && /index/i.test(j && j.error ? String(j.error) : '')) || st === 401 || st === 403){
+      th.err = 'rules'; BM.rules = true;
+    } else th.bad++;
+    bcAfter(slug);
+  });
+}
+function bcAfter(slug){
+  if (BC.cur === slug){ bcRenderThread(false); bcMark(slug); bcThState(); }
+  bcRenderList(); bcBadge();
+  if (BM.rules) bmRenderRules();
+}
+function bcTick(){
+  var now = Date.now(), c, i, th, iv;
+  clearTimeout(BC.tm); BC.tm = 0;
+  if (document.hidden) return;
+  c = bmConn();
+  for (i = 0; i < c.length; i++){
+    th = bcTh(c[i].s);
+    iv = BC.cur === c[i].s ? BC_FAST : (BG.tab === 'msg' && BC.sub === 'chat' ? BC_LIST : BC_BG);
+    if (th.err === 'rules') iv = 60000;
+    else if (th.bad > 2 && iv < 15000) iv = 15000;
+    if (!th.busy && now - th.at >= iv) bcPoll(c[i].s);
+  }
+  BC.tm = setTimeout(bcTick, 1000);
+}
+
+/* ----- okunmamış ----- */
+function bcUnread(slug){
+  var th = BC.th[slug], rt = BC.rd[slug], id, n = 0;
+  if (!th || rt == null) return 0;
+  for (id in th.map) if (th.map.hasOwnProperty(id) && th.map[id].t > rt && th.map[id].n !== BM.name) n++;
+  return n;
+}
+function bcUnreadAll(){ var n = 0; bmConn().forEach(function(x){ n += bcUnread(x.s); }); return n; }
+function bcMark(slug){
+  var th = BC.th[slug];
+  if (th && th.ready && (BC.rd[slug] == null || BC.rd[slug] < th.lastT)){ BC.rd[slug] = th.lastT; bcSaveRead(); }
+  bcBadge();
+}
+function bcBadge(){
+  var n = bcUnreadAll(), t = $('#bcTab'), s = $('#bcSw'), tab = $('#tabBM'), txt = n > 99 ? '99+' : String(n);
+  if (t){ t.hidden = !n; t.textContent = n ? txt : ''; }
+  if (s){ s.hidden = !n; s.textContent = n ? txt : ''; }
+  if (tab) tab.setAttribute('aria-label', 'Mesaj' + (n ? ', ' + n + ' okunmamış' : ''));
+}
+
+/* ----- yazma ----- */
+function bcPushDown(slug, it, id, who){                                      /* mesajın metni YOK; 20 sn içinde art arda yazılanlar tek bildirim */
+  if (Date.now() - (BC.lastPush[slug] || 0) < 20000) return;
+  BC.lastPush[slug] = Date.now();
+  bmNtfy(tpDown(it.k), who, id, function(){});
+}
+function bcPut(slug, id){
+  var it = bmFind(slug), th = bcTh(slug), p = th.pend[id], gen = th.gen;
+  if (!p || !it || !it.k || p.busy || p.sent) return;
+  p.busy = true;
+  xhr('PUT', bgUrl(it, '/c/' + id + '.json?print=silent'), bmBody(p.n, p.m), function(st){
+    var q = th.pend[id], ta;
+    if (gen !== th.gen || !q) return;
+    q.busy = false;
+    if (st >= 200 && st < 300){
+      q.fail = false; q.sent = true; th.err = ''; bcSavePend();
+      bcPushDown(slug, it, id, q.n);
+      setTimeout(function(){ bcPoll(slug); }, 350);                            /* kendi mesajını sunucu saatiyle hemen geri al */
+    } else if (st === 400 || st === 401 || st === 403){                        /* kural güncellenmemiş: mesaj saklanmaz, yazı geri gelir */
+      delete th.pend[id]; bcSavePend(); th.err = 'rules'; BM.rules = true; bmRenderRules();
+      ta = $('#bcIn'); if (ta && !ta.value && BC.cur === slug){ ta.value = q.m; bcGrow(); }
+    } else {
+      q.fail = true; bcSavePend();
+      clearTimeout(th.rt); th.rt = setTimeout(function(){ bcFlush(slug); }, 6000);
+    }
+    if (BC.cur === slug){ bcRenderThread(false); bcThState(); }
+    bcRenderList();
+  });
+}
+function bcFlush(slug){ var th = bcTh(slug), id; for (id in th.pend) if (th.pend.hasOwnProperty(id)) bcPut(slug, id); }
+function bcFlushAll(){ var s; for (s in BC.th) if (BC.th.hasOwnProperty(s)) bcFlush(s); }
+function bcSend(){
+  var ta = $('#bcIn'), slug = BC.cur, it = slug ? bmFind(slug) : null, th, txt, id;
+  if (!ta || !it || !it.k) return;
+  txt = bmClean(ta.value);
+  if (!txt) return;
+  th = bcTh(slug); id = chId();
+  th.pend[id] = { t:Date.now(), n:BM.name, m:txt.slice(0, BC_MAX), busy:false, sent:false, fail:false };
+  bcSavePend();
+  ta.value = ''; bcGrow(); bcRenderThread(true);
+  bcPut(slug, id);
+  try { ta.focus(); } catch(e){}
+}
+
+/* ----- liste ----- */
+function bcWhen(t){
+  var d = new Date(t), n = new Date(), y = new Date(n.getFullYear(), n.getMonth(), n.getDate() - 1);
+  function same(a, b){ return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+  if (same(d, n)) return pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+  if (same(d, y)) return 'Dün';
+  return d.getDate() + ' ' + CH_AY[d.getMonth()].slice(0, 3);
+}
+function bcLast(slug){
+  var th = BC.th[slug], id, best = null, p;
+  if (!th) return null;
+  for (id in th.map) if (th.map.hasOwnProperty(id) && (!best || th.map[id].t > best.t || (th.map[id].t === best.t && id > best.id))) best = th.map[id];
+  for (id in th.pend) if (th.pend.hasOwnProperty(id) && !th.map[id]){ p = th.pend[id]; if (!best || p.t >= best.t) best = { id:id, t:p.t, n:p.n, m:p.m }; }
+  return best;
+}
+function bcRows(){
+  var rows = bmConn().map(function(it, i){ return { it:it, i:i, th:BC.th[it.s] || null, last:bcLast(it.s), un:bcUnread(it.s) }; });
+  rows.sort(function(a, b){ return (b.last ? b.last.t : 0) - (a.last ? a.last.t : 0) || a.i - b.i; });
+  return rows;
+}
+function bcSnip(r){
+  var th = r.th, l = r.last, one;
+  if (!l){
+    if (th && th.ready) return 'Henüz mesaj yok';
+    return th && (th.err || th.bad > 2) ? 'Okunamadı' : 'Yükleniyor…';
+  }
+  one = String(l.m).replace(/\s+/g, ' ');
+  return (l.n === BM.name ? 'Sen: ' : l.n + ': ') + one;
+}
+function bcRenderList(){
+  var box = $('#bcBox'), rows, h = '', sg, bad = false;
+  if (!box || BC.sub !== 'chat') return;
+  rows = bcRows();
+  rows.forEach(function(r){ if (r.th && r.th.err === 'rules') bad = true; });
+  sg = rows.map(function(r){
+    return r.it.s + ':' + (r.last ? r.last.id + r.last.t : '') + ':' + r.un + ':' + (r.th ? (r.th.ready ? 1 : 0) + r.th.err + (r.th.bad > 2 ? 'b' : '') : '-');
+  }).join('|') + '|' + BM.name + '|' + (bad ? 1 : 0);
+  if (sg === BC.sig && box.firstChild) return;
+  BC.sig = sg;
+  if (!rows.length) h = '<p class="bmnone bcnone">Henüz bağlı şube yok. Ayarlar\'dan şube ekle.</p>';
+  else {
+    if (bad) h += '<div class="bmw" role="alert"><b>Yazışma için bir kez ayar gerekiyor</b><p>Firebase\'deki sohbet kuralı güncellenmemiş. «Toplu mesaj» sekmesinde adım adım yönerge var.</p><button class="shb" type="button" data-bm="sub" data-v="all">Yönergeyi göster</button></div>';
+    h += '<div class="bcl">';
+    rows.forEach(function(r){
+      var nm = bgName(r.it.s), sn = bcSnip(r), un = r.un, aria = nm + '. ' + sn + (un ? '. ' + un + ' okunmamış' : '');
+      h += '<button type="button" class="bcr" data-bm="open" data-k="' + esc(r.it.s) + '" aria-label="' + esc(aria) + '">'
+        + '<span class="bca k' + chHue(nm) + '" aria-hidden="true">' + esc(iniOf(nm)) + '</span>'
+        + '<span class="bcm"><span class="bcn">' + esc(nm) + '</span><span class="bcs' + (un ? ' un' : '') + '">' + esc(sn) + '</span></span>'
+        + '<span class="bcw"><span class="bct' + (un ? ' un' : '') + '">' + (r.last ? esc(bcWhen(r.last.t)) : '') + '</span>'
+        + (un ? '<span class="bcb">' + (un > 99 ? '99+' : un) + '</span>' : '') + '</span></button>';
+    });
+    h += '</div><p class="bmnote">Yazdığın mesajı şubedeki herkes görür; çalışanların cevapları da burada çıkar. Konuşman bitince geri dön, başka bir şey gerekmez.</p>';
+  }
+  box.innerHTML = h;
+}
+
+/* ----- konuşma ekranı ----- */
+function bcAllMsgs(th){
+  var a = [], pe = [], id, p;
+  for (id in th.map) if (th.map.hasOwnProperty(id)) a.push(th.map[id]);
+  a.sort(function(x, y){ return x.t - y.t || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0); });
+  for (id in th.pend) if (th.pend.hasOwnProperty(id) && !th.map[id]){ p = th.pend[id]; pe.push({ id:id, t:p.t, n:p.n, m:p.m, wait:!p.sent, fail:!p.sent && !!p.fail }); }
+  pe.sort(function(x, y){ return x.t - y.t; });
+  return a.concat(pe);                                                         /* gitmemiş mesajlar her zaman en altta */
+}
+function bcRenderThread(stick){
+  var L = $('#bcList'), th, a, i, h = '', last = '', m, own, near, pn = '', pt = 0, d, dt;
+  if (!L || !BC.cur) return;
+  th = bcTh(BC.cur); a = bcAllMsgs(th);
+  near = L.scrollHeight - L.scrollTop - L.clientHeight < 90;
+  if (th.more) h += th.old ? '<p class="ch-old">Eski mesajlar yükleniyor…</p>' : '<button type="button" class="ch-oldb" data-bc="old">Eski mesajları göster</button>';
+  if (!a.length) h += '<p class="ch-empty">' + (th.ready ? 'Henüz mesaj yok. İlk mesajı sen yaz.' : (th.err ? '' : 'Mesajlar yükleniyor…')) + '</p>';
+  for (i = 0; i < a.length; i++){
+    m = a[i]; d = chDay(m.t); dt = new Date(m.t); own = m.n === BM.name;
+    if (d !== last){ h += '<div class="ch-day"><span>' + esc(d) + '</span></div>'; last = d; pn = ''; }
+    h += '<div class="cm' + (own ? ' own' : '') + (m.wait ? ' wait' : '') + '">'
+      + '<div class="cb">' + (!own && (m.n !== pn || m.t - pt > 300000) ? '<span class="cn k' + chHue(m.n) + '">' + esc(m.n) + '</span>' : '')
+      + '<span class="cx">' + esc(m.m) + '</span><span class="ct">' + pad2(dt.getHours()) + ':' + pad2(dt.getMinutes()) + (m.wait ? (m.fail ? ' · gitmedi, bağlanınca gider' : ' · gönderiliyor') : '') + '</span></div></div>';
+    pn = m.n; pt = m.t;
+  }
+  L.innerHTML = h;
+  if (stick || near) L.scrollTop = L.scrollHeight;
+}
+function bcThState(){
+  var m = $('#bcMsg'), th, t = '', bad = false;
+  if (!m || !BC.cur) return;
+  th = bcTh(BC.cur);
+  if (th.err === 'rules'){ t = 'Yazışma henüz açılmadı. Firebase kuralını bir kez güncellemek gerekiyor («Toplu mesaj» sekmesinde yönerge var).'; bad = true; }
+  else if (th.bad > 2){ t = 'Bağlantı yok. Yazdıkların bağlanınca gider.'; bad = true; }
+  m.className = 'ch-msg' + (t ? (bad ? ' er' : ' ok') : '');
+  m.textContent = t;
+}
+function bcGrow(){ var t = $('#bcIn'); if (!t) return; t.style.height = 'auto'; t.style.height = Math.min(t.scrollHeight, 120) + 'px'; }
+function bcFit(){
+  var c = $('#bchat'), v = window.visualViewport, L;
+  if (!c || c.hidden) return;
+  if (v){ c.style.height = Math.round(v.height) + 'px'; c.style.top = Math.round(v.offsetTop) + 'px'; }
+  else { c.style.height = window.innerHeight + 'px'; c.style.top = '0px'; }
+  L = $('#bcList'); if (L && L.scrollHeight - L.scrollTop - L.clientHeight < 140) L.scrollTop = L.scrollHeight;
+}
+function bcHTML(){
+  return '<div class="ch-wrap"><div class="ch-top"><button class="ch-back" type="button" data-bc="close" aria-label="Konuşmadan çık">' + IC.back + '</button>'
+    + '<div class="ch-ti"><b id="bcTitle"></b><span id="bcSub"></span></div></div>'
+    + '<div class="ch-list" id="bcList" role="region" aria-label="Mesajlar" tabindex="0"></div>'
+    + '<div class="ch-msg" id="bcMsg" role="status" aria-live="polite"></div>'
+    + '<div class="ch-foot"><div class="ch-as"><span class="ch-ast" id="bcAs"></span></div>'
+    + '<div class="ch-in"><textarea id="bcIn" rows="1" maxlength="' + BC_MAX + '" placeholder="Mesaj yaz" aria-label="Mesaj"></textarea>'
+    + '<button type="button" class="ch-send" data-bc="send" aria-label="Gönder">' + IC.send + '</button></div></div></div>';
+}
+function bcShellThread(){
+  var c = $('#bchat');
+  if (c) return c;
+  c = el('div'); c.id = 'bchat'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-modal', 'true'); c.setAttribute('aria-labelledby', 'bcTitle'); c.hidden = true;
+  c.innerHTML = bcHTML(); document.body.appendChild(c);
+  c.addEventListener('click', function(e){
+    var b = e.target, act;
+    while (b && b !== c && !(b.getAttribute && b.getAttribute('data-bc'))) b = b.parentNode;
+    act = b && b !== c ? b.getAttribute('data-bc') : '';
+    if (act === 'close') bcClose();
+    else if (act === 'send') bcSend();
+    else if (act === 'old') bcOlder();
+  });
+  $('#bcIn').addEventListener('input', bcGrow);
+  $('#bcIn').addEventListener('focus', function(){ setTimeout(function(){ try { window.scrollTo(0, 0); } catch(e){} bcFit(); }, 250); });
+  $('#bcIn').addEventListener('keydown', function(e){
+    if ((e.key === 'Enter' || e.keyCode === 13) && !e.shiftKey && !e.isComposing && window.innerWidth >= 700){ e.preventDefault(); bcSend(); }
+  });
+  $('#bcList').addEventListener('scroll', function(){ var th = BC.cur ? bcTh(BC.cur) : null; if (th && this.scrollTop < 50 && th.more && !th.old) bcOlder(); });
+  return c;
+}
+function bcOlder(){
+  var slug = BC.cur, it = slug ? bmFind(slug) : null, th, oldest = 0, id, gen, L, h0, t0;
+  if (!it || !it.k) return;
+  th = bcTh(slug);
+  if (th.old || !th.more || !th.ready) return;
+  for (id in th.map) if (th.map.hasOwnProperty(id) && (!oldest || th.map[id].t < oldest)) oldest = th.map[id].t;
+  if (!oldest){ th.more = false; return; }
+  th.old = true; gen = th.gen; bcRenderThread(false);
+  xhr('GET', bgUrl(it, '/c.json?orderBy=%22t%22&endAt=' + oldest + '&limitToLast=' + (BC_OLD + 1)), null, function(st, j){   /* endAt dahil: en eski bildiğimiz mesaj da döner, o yüzden +1 */
+    var r;
+    if (gen !== th.gen) return;
+    th.old = false;
+    if (st === 200){ r = bcMerge(th, j); th.more = r.n >= BC_OLD + 1; }
+    if (BC.cur !== slug) return;
+    L = $('#bcList'); h0 = L ? L.scrollHeight : 0; t0 = L ? L.scrollTop : 0;
+    bcRenderThread(false);
+    L = $('#bcList'); if (L) L.scrollTop = t0 + (L.scrollHeight - h0);        /* eski mesajlar eklenince bakılan yer kaymasın */
+  });
+}
+function bcOpen(slug){
+  var it = bmFind(slug), c;
+  if (!it || !it.k) return;
+  if (!BM.loaded) bmLoad();
+  c = bcShellThread();
+  BC.from = document.activeElement; BC.cur = slug;
+  $('#bcTitle').textContent = bgName(slug);
+  $('#bcSub').textContent = 'Bu şubedeki herkes görür';
+  $('#bcAs').innerHTML = 'Gönderen: <b>' + esc(BM.name) + '</b>';
+  c.hidden = false; document.documentElement.classList.add('chopen');
+  bcFit(); bcRenderThread(true); bcMark(slug); bcThState();
+  bcPoll(slug);                                                               /* açılır açılmaz yeni mesaj var mı bak */
+  clearTimeout(BC.tm); BC.tm = setTimeout(bcTick, 1000);
+  try { $('.ch-back', c).focus(); } catch(e){}
+}
+function bcClose(){
+  var c = $('#bchat'), s = BC.cur, r = null;
+  BC.cur = ''; BC.sig = '';
+  if (c) c.hidden = true;
+  document.documentElement.classList.remove('chopen');
+  if (s) bcMark(s);                                                           /* konuşma açıkken gelenler de okunmuş sayılır */
+  bcRenderList(); bcBadge();
+  if (s && BC.sub === 'chat') r = $('#bcBox .bcr[data-k="' + s + '"]');       /* liste yeniden çizildi: odak yeni satıra döner */
+  if (!r && BC.from && document.body.contains(BC.from)) r = BC.from;
+  if (r && r.focus){ try { r.focus(); } catch(e){} }
+  BC.from = null;
+}
+
+/* ----- Mesaj sekmesi: «Yazışmalar | Toplu mesaj» ----- */
+function bcShell(){
+  var root = $('#viewBM');
+  if (!root || $('#bcBox')) return;
+  root.innerHTML = '<div class="bglv"><div class="seg full" role="tablist" aria-label="Mesaj türü">'
+    + '<button type="button" role="tab" data-bm="sub" data-v="chat">Yazışmalar<span class="bcsb" id="bcSw" hidden></span></button>'
+    + '<button type="button" role="tab" data-bm="sub" data-v="all">Toplu mesaj</button></div></div>'
+    + '<div id="bcBox"></div><div id="bmBox" hidden></div>';
+}
+function bcSubShow(){
+  var chat = BC.sub === 'chat', bs = $('#viewBM .bglv .seg') ? $('#viewBM .bglv .seg').querySelectorAll('button') : [], i, on;
+  if (!$('#bcBox')) return;
+  $('#bcBox').hidden = !chat; $('#bmBox').hidden = chat;
+  for (i = 0; i < bs.length; i++){
+    on = bs[i].getAttribute('data-v') === BC.sub;
+    bs[i].className = on ? 'on' : ''; bs[i].setAttribute('aria-selected', on ? 'true' : 'false');
+  }
+  if (chat){ BC.sig = ''; bcRenderList(); }
+  else { if (!$('#bmIn') || BM.sig !== bmListSig()) bmBuild(); bmUpdate(); bmProbe(false); }
+  bcBadge();
+  clearTimeout(BC.tm); BC.tm = setTimeout(bcTick, 0);                         /* liste açıkken daha sık sorulur */
+}
+function bcSetSub(v){
+  BC.sub = v === 'all' ? 'all' : 'chat';
+  LS.set('gk_bmsub', BC.sub);
+  bcSubShow();
+}
+/* sekme açılınca / şube listesi değişince / veri yenilenince */
+function bmShow(){
+  var fresh = !$('#bcBox');
+  if (!BM.loaded) bmLoad();
+  if (!BC.loaded) bcLoad();
+  bcShell();
+  if (fresh) bcSubShow();
+  else if (BC.sub === 'all'){ if (!$('#bmIn') || BM.sig !== bmListSig()) bmBuild(); bmUpdate(); bmProbe(false); }
+  else bcRenderList();
+}
+function bcInit(){
+  if (!BM.loaded) bmLoad();
+  if (!BC.loaded) bcLoad();
+  document.addEventListener('keydown', function(e){ if (BC.cur && (e.key === 'Escape' || e.keyCode === 27)) bcClose(); });
+  window.addEventListener('resize', bcFit);
+  if (window.visualViewport){ window.visualViewport.addEventListener('resize', bcFit); window.visualViewport.addEventListener('scroll', bcFit); }
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden){ clearTimeout(BC.tm); bcTick(); bcFlushAll(); } });
+  window.addEventListener('online', function(){
+    var s; for (s in BC.th) if (BC.th.hasOwnProperty(s)) BC.th[s].bad = 0;
+    clearTimeout(BC.tm); bcTick(); bcFlushAll();
+  });
+  bcTick(); bcFlushAll();
 }
 /* ---------- başlat ---------- */
 function init(){
