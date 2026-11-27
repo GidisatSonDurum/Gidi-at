@@ -1240,6 +1240,82 @@ html[data-theme="light"] .tbr.old .nm b{color:#A86300}
   .bgn{font-size:15px}
 }
 
+/* ---- Personel kırılımı: Şube | Personel anahtarı, şube süzgeci, şube bölümleri ---- */
+.bglv{margin:12px 2px 0}
+.seg.full{display:flex;width:100%;box-sizing:border-box}
+.seg.full button{flex:1 1 0;justify-content:center;min-height:36px}
+.bgchips{position:relative;display:flex;gap:6px;margin:0 -14px;padding:2px 14px 9px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.bgchips::-webkit-scrollbar{display:none}
+.bgchip{flex:none;padding:8px 13px;border-radius:999px;font-size:12.5px;font-weight:760;line-height:1.1;white-space:nowrap;color:var(--ink2);background:rgba(255,255,255,.06);border:1px solid var(--line2)}
+.bgchip.on{color:#06101C;background:linear-gradient(90deg,var(--cy),var(--vi));border-color:transparent;box-shadow:0 0 14px rgba(var(--cyRgb),.4)}
+.bgsec{margin-bottom:12px}
+.bgsh{position:sticky;top:var(--hh,0px);z-index:24;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 -14px 2px;padding:7px 16px;background:var(--sbg2);border-bottom:1px solid var(--line2)}
+.bgsh .bgn{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;font-weight:800}
+.bgsq{display:flex;align-items:baseline;flex:none;font-size:11.5px;font-weight:700;color:var(--ink2)}
+.bgsq em{margin-right:9px;font-style:normal;color:#FFC94D}
+.bgsq i{font-style:normal}
+.bgsq b{margin-left:9px;font-size:12.5px;font-weight:850;color:var(--cy)}
+.bgtn{margin-top:8px;padding:12px;font-size:12.5px;line-height:1.4;color:var(--ink2)}
+.bgpr{cursor:pointer}
+#tbp{margin:0 0 14px}
+#tbp .tbcard{margin-top:8px}
+html[data-theme="light"] .bgsq em{color:#A86300}
+@media (max-width:420px){
+  #tbp>.tbl{flex-wrap:wrap;row-gap:3px}
+  #tbp>.tbl .lgn{white-space:normal;flex:1 1 100%}
+}
+@media (max-width:380px){
+  .bgsh{margin:0 -11px 2px;padding:7px 13px}
+  .bgchips{margin:0 -11px;padding:2px 11px 9px}
+}
+
+
+/* ================= app16: Bölge ▸ Mesaj ================= */
+#viewBM{padding:2px 0 22px}
+.bmc{margin:12px 0 0;padding:14px;border-radius:18px;background:var(--fill2);border:1px solid var(--line2)}
+.bmc>.shl:first-child{margin-top:0}
+.bmto{display:flex;flex-wrap:wrap;gap:7px}
+.bmto .bgchip{cursor:pointer}
+.bmto .bgchip[disabled]{opacity:.45;cursor:default}
+.bmnone{font-size:13px;line-height:1.4;color:var(--ink2)}
+.bmcount{margin:8px 2px 0;font-size:12px;font-weight:700;color:var(--ink2);min-height:15px}
+.bmin{display:block;width:100%;resize:none;font:inherit;font-size:16px;line-height:1.4;color:var(--ink);background:var(--fill);border:1px solid var(--line2);border-radius:14px;padding:12px 14px;min-height:112px;max-height:240px;overflow-y:auto}
+.bmin::placeholder{color:var(--muted)}
+.bmmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:7px 2px 0;font-size:12px;color:var(--ink2)}
+.bmmeta b{font-weight:800;color:var(--ink)}
+.bmmeta .warn{color:#FFC94D;font-weight:800}
+.bmname{display:flex;align-items:center;gap:8px;margin-top:8px}
+.bmname .shi{flex:1 1 auto;min-width:0}
+.bmname .shb{flex:none;margin:0}
+.bmnote{margin:10px 2px 0;font-size:12.5px;line-height:1.45;color:var(--muted)}
+.bmsend{display:flex;width:100%;margin:12px 0 0}
+.bmsend[disabled]{opacity:.45}
+.bmcf{margin-top:12px;padding:12px;border-radius:14px;background:rgba(255,201,77,.1);border:1px solid rgba(255,201,77,.45)}
+.bmcf p{margin:0 0 8px;font-size:13.5px;line-height:1.45;color:var(--ink)}
+.bmcf .shb{margin:4px 8px 0 0}
+.bmw{margin:12px 0 0;padding:13px 14px;border-radius:16px;background:rgba(255,92,122,.1);border:1px solid rgba(255,92,122,.5)}
+.bmw>b{display:block;font-size:14.5px;font-weight:800;color:var(--ink)}
+.bmw p{margin:6px 0 0;font-size:13px;line-height:1.45;color:var(--ink2)}
+.bmw ol{margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.5;color:var(--ink2)}
+.bmw .shb{margin:10px 8px 0 0}
+.bmh{margin:16px 0 0}
+.bmh h3{margin:0 2px 8px;font-size:13px;font-weight:800;color:var(--ink2)}
+.bmhi{margin:0 0 8px;padding:11px 13px;border-radius:14px;background:var(--fill2);border:1px solid var(--line)}
+.bmhi .bmt{font-size:11.5px;font-weight:700;color:var(--muted)}
+.bmhi p{margin:4px 0 6px;font-size:14px;line-height:1.4;color:var(--ink);white-space:pre-wrap;word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.bmhi .bms{font-size:12px;font-weight:750;line-height:1.4}
+.bmhi .bms.ok{color:#34F0A0}
+.bmhi .bms.er{color:#FF9DB0}
+.bmhi .bms.wt{color:var(--ink2)}
+.bmrt{margin-top:8px;cursor:pointer}
+.bmclr{display:inline;margin:6px 2px 0}
+html[data-theme="light"] .bmhi .bms.ok{color:#0B8F5B}
+html[data-theme="light"] .bmhi .bms.er{color:#C42343}
+html[data-theme="light"] .bmmeta .warn{color:#A86300}
+html[data-theme="light"] .bmcf{background:rgba(227,154,0,.12);border-color:rgba(227,154,0,.55)}
+html[data-theme="light"] .bmw{background:rgba(204,39,72,.08);border-color:rgba(204,39,72,.45)}
+@media (max-width:380px){ .bmc{padding:12px} .bmhi{padding:10px 11px} }
+
 </style>
 </head>
 <body>
@@ -1290,6 +1366,7 @@ html[data-theme="light"] .tbr.old .nm b{color:#A86300}
     <div id="viewKrt" role="tabpanel" aria-labelledby="tabKrt" hidden></div>
     <div id="viewBG" role="tabpanel" aria-labelledby="tabBG" hidden></div>
     <div id="viewBB" role="tabpanel" aria-labelledby="tabBB" hidden></div>
+    <div id="viewBM" role="tabpanel" aria-labelledby="tabBM" hidden></div>
   </main>
 </div>
 <div id="xlStash" hidden></div>
@@ -4513,14 +4590,14 @@ function pushCardInner(){
 function pushUi(){ var c = $('#pushCard'); if (c) c.innerHTML = pushCardInner(); }
 /* ================= app15: Bölge ekranı (bölge müdürü: bütün şubeler tek yerde) =================
    Link: …/index_2.html?bolge=ad.kod,ad.kod,…&s=bolge     (ad = şubenin kısa adı, kod = o şubenin mağaza kodu)
-   Her şubenin Excel verisi (v) ve bugünkü girişleri (d/<gün>) ortak kayıttan yalnızca OKUNUR; hiçbir şey yazılmaz.
+   Her şubenin Excel verisi (v) ve bugünkü girişleri (d/<gün>) ortak kayıttan yalnızca OKUNUR. Tek yazma: «Mesaj» sekmesinin şube sohbetine gönderdiği duyuru (js_bmsg.js).
    Rakamlar şube uygulamasındaki kutu işlevleriyle çizilir (aynı kod), burada ayrı bir hesap yoktur:
    her şubenin verisi çizim sırasında geçici olarak "etkin veri" yapılır (bgWith), sonra eski haline döner. */
 function bgDetect(){
   var q = String(window.location.search) + String(window.location.hash);
   return /[?&#]bolge=/.test(q) || /[?&]s=bolge(?=[&#]|$)/.test(q);
 }
-var BG = { on:bgDetect(), list:[], mute:{}, st:{}, tab:'gid', view:'tablo', day:'', busy:0, last:0, open:{}, sig:{ g:'', b:'' }, rt:0, cards:[], info:null, hdr:'', played:{ g:false, b:false }, pt:0, t0:0 };
+var BG = { on:bgDetect(), list:[], mute:{}, st:{}, tab:'gid', view:'tablo', lv:'sube', pf:'*', day:'', busy:0, last:0, open:{}, sig:{ g:'', b:'' }, rt:0, cards:[], pcards:[], pdone:false, info:null, hdr:'', played:{ g:false, b:false }, pt:0, t0:0, rev:0, fk:'' };
 
 /* ----- şube listesi ----- */
 function bgParse(s){
@@ -4709,11 +4786,66 @@ function bgStale(s, ref){
 function bgStamp(s){ var ms = s.v.meta.stamp || s.t; return typeof ms === 'number' && ms > 0 ? 'Excel ' + fmtStamp(ms) : 'Excel'; }
 
 /* ----- çizim yardımcıları ----- */
-function bgPlay(root, animate){
+/* Çok kart varken (personel kartları: 60'a yakın) yazı sığdırma ve açılış oynatma ekrana yakın olandan başlar,
+   kalanı küçük dilimlerle arkadan gelir. Telefon donmaz; hepsi bitince sonuç eskisiyle birebir aynıdır. */
+var BG_FSEL = '.t .tl, .t .tv, .tx .txv, .tx .txs, .dt .ts';
+var BG_FIT = { gen:0, tm:0 }, BG_PL = { gen:0, tm:0 };
+var BG_SYNC = 700, BG_CARDS = 14, BG_SLICE = 40;
+var bgFitSync = fitAll;                                                       /* özgün (tek seferde) sığdırma */
+function bgDist(e, vh){ var r = e.getBoundingClientRect(); return r.bottom < 0 ? -r.bottom : (r.top > vh ? r.top - vh : 0); }
+function bgByDist(x, y){ return x.d - y.d; }
+function bgFitIn(root){ var els = root.querySelectorAll(BG_FSEL), i; for (i = 0; i < els.length; i++) fitOne(els[i]); }
+function bgFitAll(){
+  var els = document.querySelectorAll(BG_FSEL), vis = [], a = [], i, vh = window.innerHeight || 800, k = 0, gen;
+  clearTimeout(BG_FIT.tm); BG_FIT.tm = 0; gen = ++BG_FIT.gen;
+  BG.fk = bgFitKey();
+  for (i = 0; i < els.length; i++) if (els[i].offsetWidth) vis.push(els[i]);
+  if (vis.length <= BG_SYNC){ for (i = 0; i < vis.length; i++) fitOne(vis[i]); return; }
+  for (i = 0; i < vis.length; i++) a.push({ e:vis[i], d:bgDist(vis[i], vh) });
+  a.sort(bgByDist);
+  while (k < a.length && a[k].d <= vh * 0.6) fitOne(a[k++].e);                /* ekrana yakınlar hemen */
+  function step(){
+    var t = Date.now();
+    BG_FIT.tm = 0;
+    if (gen !== BG_FIT.gen) return;
+    while (k < a.length && Date.now() - t < BG_SLICE) fitOne(a[k++].e);
+    if (k < a.length) BG_FIT.tm = setTimeout(step, 4);
+  }
+  if (k < a.length) BG_FIT.tm = setTimeout(step, 4);
+}
+/* Sürekli tetiklenen (ör. her 15 sn'deki yenilemenin sonundaki) sığdırma, ekran genişliği, yazı tipi ya da kartlar değişmediyse atlanır */
+function bgFitKey(){ return (window.innerWidth || 0) + '|' + BG.rev + '|' + (document.fonts && document.fonts.status ? document.fonts.status : ''); }
+function bgFitIfNeeded(){ if (bgFitKey() !== BG.fk) fitAll(); }
+function bgFitSoon(){ clearTimeout(FIT_T); FIT_T = setTimeout(bgFitIfNeeded, 90); }
+if (BG.on){ fitAll = bgFitAll; fitSoon = bgFitSoon; }
+function bgPlayOne(root, animate){
   var a = anim;
   if (animate){ playIn(root); return; }
   anim = false;
   try { playIn(root); } finally { anim = a; }
+}
+function bgPlayMany(ds, animate){
+  var vh = window.innerHeight || 800, k = 0, gen;
+  clearTimeout(BG_PL.tm); BG_PL.tm = 0; gen = ++BG_PL.gen;
+  ds.sort(bgByDist);
+  while (k < ds.length && ds[k].d <= vh * 0.6) bgPlayOne(ds[k++].e, animate);   /* ekrandakiler animasyonlu */
+  function step(){
+    var t = Date.now();
+    BG_PL.tm = 0;
+    if (gen !== BG_PL.gen) return;
+    while (k < ds.length && Date.now() - t < BG_SLICE) bgPlayOne(ds[k++].e, false);   /* uzaktakiler sessizce, son hâline */
+    if (k < ds.length) BG_PL.tm = setTimeout(step, 4);
+  }
+  if (k < ds.length) BG_PL.tm = setTimeout(step, 4);
+}
+function bgPlay(root, animate){
+  var cs = root && root.querySelectorAll ? root.querySelectorAll('.pc') : [], ds = [], i, vh;
+  if (cs.length > BG_CARDS){
+    vh = window.innerHeight || 800;
+    for (i = 0; i < cs.length; i++) if (cs[i].offsetWidth) ds.push({ e:cs[i], d:bgDist(cs[i], vh) });
+    if (ds.length > BG_CARDS){ bgPlayMany(ds, animate); return; }
+  }
+  bgPlayOne(root, animate);
 }
 function bgMsgOf(s, it){
   if (!it.k) return 'Bağlı değil. Bu şubenin giriş linkini yapıştır.';
@@ -4746,7 +4878,7 @@ function bgCardG(it, s, n, ref){
   c.body.insertBefore(el('div', 'bgxl', esc(M.gun + '/' + M.toplam + '. gün verisi · ' + bgStamp(s))), c.body.firstChild);
   r.style.setProperty('--i', Math.min(n + 1, 10));
   c.key = key; c.g = g; c.nm = nm; c.slug = it.s; c.stale = st;
-  c.btn.addEventListener('click', function(){ BG.open[key] = r.classList.contains('open'); fitAll(); });
+  c.btn.addEventListener('click', function(){ BG.open[key] = r.classList.contains('open'); bgFitIn(r); });
   if (BG.open[key]){ r.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; }
   return c;
 }
@@ -4767,10 +4899,16 @@ function bgSegHTML(){
   var sg = $('#segrow .seg');
   return sg ? sg.innerHTML.replace(/ id="seg(Kart|Tablo)"/g, '') : '';
 }
+function bgTbHead(){                                                         /* tablo başlık satırı: şube tablosu ve personel tabloları aynı satırı kullanır */
+  return '<div class="tbr tbh"><span class="tbn"></span><span class="hc g"><span>Genel %</span></span>'
+    + TB_COLS.map(function(x){ return '<span class="hc"' + (x[0] === 'aks' ? ' data-s="Aks."' : '') + '><span>' + hh(x[1]) + '</span></span>'; }).join('')
+    + '<span class="sp"></span>' + TB_X.map(function(x){ return '<span class="hc x"><span>' + hh(x[1]) + '</span></span>'; }).join('') + '</div>';
+}
 function bgBuildG(ref){
-  var root = $('#viewBG'), host = el('div', 'bgcards'), rows = [], tb = el('section'), seg, bts;
+  BG.rev++;
+  var root = $('#viewBG'), host = el('div', 'bgcards'), rows = [], tb = el('section'), seg, bts, lv, ch, pc, pt;
   root.innerHTML = '';
-  BG.cards = [];
+  BG.cards = []; BG.pcards = []; BG.pdone = false;
   if (!BG.list.length){
     root.appendChild(el('div', 'bgempty', '<b>Bölge bağlantısı yok.</b><span>Bölge linkini aç ya da sağ üstteki ayarlardan şube linki ekle.</span>'));
     return;
@@ -4785,47 +4923,167 @@ function bgBuildG(ref){
   });
   tb.id = 'tbv'; tb.setAttribute('aria-label', 'Şubelerin gidişat tablosu');
   var old = BG.cards.filter(function(c){ return c.stale; }).map(function(c){ return c.nm + ' (' + c.stale + ')'; });
-  tb.innerHTML = '<div class="tbcard"><div class="tbr tbh"><span class="tbn"></span><span class="hc g"><span>Genel %</span></span>'
-    + TB_COLS.map(function(x){ return '<span class="hc"' + (x[0] === 'aks' ? ' data-s="Aks."' : '') + '><span>' + hh(x[1]) + '</span></span>'; }).join('')
-    + '<span class="sp"></span>' + TB_X.map(function(x){ return '<span class="hc x"><span>' + hh(x[1]) + '</span></span>'; }).join('') + '</div>'
-    + rows.join('') + '</div>' + (old.length ? '<p class="bgold-n"><i></i>Eski veri: ' + esc(old.join(', ')) + '. Şube müdürü güncel Excel\'i yüklemeli.</p>' : '') + tbLegend();
+  tb.innerHTML = '<div class="tbcard">' + bgTbHead() + rows.join('') + '</div>'
+    + (old.length ? '<p class="bgold-n"><i></i>Eski veri: ' + esc(old.join(', ')) + '. Şube müdürü güncel Excel\'i yüklemeli.</p>' : '') + tbLegend();
+  lv = el('div', 'bglv', '<div class="seg full" role="tablist" aria-label="Kırılım"><button type="button" role="tab" data-lv="sube">' + IC.mag + 'Şube</button><button type="button" role="tab" data-lv="per">' + BG_PER + 'Personel</button></div>');
   seg = el('div', 'bgctl', '<div class="seg" role="tablist" aria-label="Görünüm">' + bgSegHTML() + '</div><button class="lnk" id="bgAll" type="button">Tümünü aç</button>');
   bts = seg.getElementsByTagName('button');
   bts[0].setAttribute('data-v', 'kart'); bts[1].setAttribute('data-v', 'tablo');
-  root.appendChild(seg); root.appendChild(host); root.appendChild(tb);
-  bgSetView(BG.view, true);
+  ch = el('div', 'bgchips'); ch.setAttribute('role', 'tablist'); ch.setAttribute('aria-label', 'Şube seçimi');
+  ch.innerHTML = '<button type="button" role="tab" class="bgchip" data-f="*">Tümü</button>'
+    + BG.list.map(function(it){ return '<button type="button" role="tab" class="bgchip" data-f="' + esc(it.s) + '">' + esc(bgName(it.s)) + '</button>'; }).join('');
+  pc = el('div', 'bgpcards'); pt = el('section'); pt.id = 'tbp'; pt.setAttribute('aria-label', 'Personelin gidişat tablosu');
+  root.appendChild(lv); root.appendChild(seg); root.appendChild(ch);
+  root.appendChild(host); root.appendChild(tb); root.appendChild(pc); root.appendChild(pt);
+  if (BG.lv === 'per') bgBuildP(ref);
+  bgApply(true);
 }
-function bgSetView(v, quiet){
-  var root = $('#viewBG'), bts, i, tb, hs, all;
-  if (v !== 'kart' && v !== 'tablo') v = 'tablo';
-  BG.view = v; LS.set('gk_bgv', v);
+
+/* ----- Personel kırılımı: şube başına bir bölüm, içinde o şubenin kişileri.
+   Sıra, sıra rozeti, kart ve tablo satırı şube uygulamasındakiyle AYNI kodla çizilir (buildCard, rankBy, tbRow); burada ayrı bir hesap yoktur. ----- */
+var BG_PER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20c.7-3.9 3.6-5.9 7.2-5.9s6.5 2 7.2 5.9"/></svg>';
+function bgRowP(h, key, nm){                                                 /* tablo satırı dokunulabilir olur: o kişinin kartına götürür */
+  return h.replace('role="group" class="tbr', function(){ return 'role="button" tabindex="0" data-pk="' + esc(key) + '" class="tbr bgpr'; })
+    .replace('aria-label="', function(){ return 'aria-label="' + esc(nm) + ', '; });
+}
+function bgBand(r){                                                          /* bölüm başlığı (kaydırırken üstte kalır) */
+  return '<div class="bgsh"><b class="bgn">' + esc(r.nm) + '</b><span class="bgsq">' + (r.stale ? '<em>' + esc(r.stale) + '</em>' : '')
+    + '<i>' + r.np + ' kişi</i><b>Genel ' + esc(r.avg) + '</b></span></div>';
+}
+function bgSecP(it, s, n, ref){                                              /* bgWith içinde çalışır: V = bu şubenin verisi */
+  var nm = bgName(it.s), st = bgStale(s, ref), sg = score(V.sube, ALL), cards = [], rows = [], made, gi, sc;
+  gi = rankBy(function(q){ var g = score(q, ALL); return [g.n ? g.S / g.n : 0, g.c.good]; });
+  made = V.kisiler.map(function(p, i){ return buildCard(p, 'bp' + n + '_' + i, false); });
+  gi.forEach(function(o, pos){
+    var p = V.kisiler[o.i], c = made[o.i], g = score(p, ALL), key = 'p:' + it.s + ':' + RID[o.i];
+    setBadge(c.bdg, o.rank, g.n ? g.S / g.n / 100 : 0);
+    if (o.rank >= 1 && o.rank <= 3) c.root.classList.add('r' + o.rank);
+    c.root.style.setProperty('--i', Math.min(pos + 1, 10));
+    c.btn.setAttribute('aria-label', o.rank + '. sıra, ' + p.adT + ', genel ' + fg(g) + '. Ayrıntılar için dokunun.');
+    c.key = key; c.slug = it.s;
+    c.btn.addEventListener('click', function(){ BG.open[key] = c.root.classList.contains('open'); bgFitIn(c.root); });
+    if (BG.open[key]){ c.root.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; }
+    cards.push(c);
+    rows.push(bgRowP(tbRow(readCard(c.root), pos, false), key, nm + ', ' + p.adT));
+  });
+  sc = buildCard(V.sube, 'bps' + n, true);
+  sc.bdg.innerHTML = ringHTML(sg.n ? sg.S / sg.n / 100 : 0) + '<span class="rk sico" aria-hidden="true">' + IC.mag + '</span>';
+  return { it:it, nm:nm, stale:st, np:NP, avg:fg(sg), cards:cards, rows:rows, tot:tbRow(readCard(sc.root), 0, true) };
+}
+function bgBuildP(ref){
+  BG.rev++;
+  var root = $('#viewBG'), host = root ? $('.bgpcards', root) : null, tb = root ? $('#tbp', root) : null, th = '';
+  if (!host || !tb) return;
+  host.innerHTML = ''; BG.pcards = [];
+  BG.list.forEach(function(it, n){
+    var s = BG.st[it.s], r, sec = el('section', 'bgsec'), lst;
+    sec.setAttribute('data-i', it.s);
+    if (s.v){
+      r = bgWith(s.v, function(){ return bgSecP(it, s, n, ref); });
+      sec.innerHTML = bgBand(r);
+      lst = el('div', 'bgsl');
+      r.cards.forEach(function(c){ lst.appendChild(c.root); BG.pcards.push(c); });
+      sec.appendChild(lst);
+      th += '<section class="bgsec" data-i="' + esc(it.s) + '">' + bgBand(r) + '<div class="tbcard">' + bgTbHead() + r.rows.join('') + r.tot + '</div></section>';
+    } else {
+      sec.appendChild(bgCardNone(it, s));
+      th += '<section class="bgsec" data-i="' + esc(it.s) + '"><div class="bgsh"><b class="bgn">' + esc(bgName(it.s)) + '</b></div><div class="tbcard bgtn">' + esc(bgMsgOf(s, it)) + '</div></section>';
+    }
+    host.appendChild(sec);
+  });
+  tb.innerHTML = th + tbLegend();
+  BG.pdone = true;
+}
+
+/* ----- görünüm: kırılım (Şube | Personel) × görünüm (Kartlar | Tablo) × personelde şube süzgeci ----- */
+function bgNormPf(){
+  var i;
+  if (BG.pf === '*') return;
+  for (i = 0; i < BG.list.length; i++) if (BG.list[i].s === BG.pf) return;
+  BG.pf = '*';
+}
+function bgVisCards(){                                                       /* şu an ekranda olan kartlar */
+  var out = [];
+  if (BG.lv !== 'per') return BG.cards;
+  BG.pcards.forEach(function(c){ if (BG.pf === '*' || c.slug === BG.pf) out.push(c); });
+  return out;
+}
+function bgIsOpen(c){ return c.root.classList.contains('open'); }
+function bgChipShow(){
+  var ch = $('#viewBG .bgchips'), on = ch ? $('.bgchip.on', ch) : null;
+  if (!ch || !on || ch.hidden || !ch.clientWidth) return;
+  ch.scrollLeft = Math.max(0, on.offsetLeft - Math.round((ch.clientWidth - on.offsetWidth) / 2));
+}
+function bgApply(quiet){
+  var root = $('#viewBG'), per = BG.lv === 'per', kart = BG.view === 'kart', bts, i, on, x, secs, cs;
   if (!root) return;
+  bgNormPf();
+  bts = root.querySelectorAll('.bglv .seg button');
+  for (i = 0; i < bts.length; i++){ on = bts[i].getAttribute('data-lv') === BG.lv; bts[i].className = on ? 'on' : ''; bts[i].setAttribute('aria-selected', on ? 'true' : 'false'); }
   bts = root.querySelectorAll('.bgctl .seg button');
-  for (i = 0; i < bts.length; i++){ var on = bts[i].getAttribute('data-v') === v; bts[i].className = on ? 'on' : ''; bts[i].setAttribute('aria-selected', on ? 'true' : 'false'); }
-  hs = $('.bgcards', root); tb = $('#tbv', root); all = $('#bgAll', root);
-  if (hs) hs.hidden = v !== 'kart';
-  if (tb) tb.hidden = v !== 'tablo';
-  if (all) all.hidden = v !== 'kart';
+  for (i = 0; i < bts.length; i++){ on = bts[i].getAttribute('data-v') === BG.view; bts[i].className = on ? 'on' : ''; bts[i].setAttribute('aria-selected', on ? 'true' : 'false'); }
+  bts = root.querySelectorAll('.bgchips .bgchip');
+  for (i = 0; i < bts.length; i++){ on = bts[i].getAttribute('data-f') === BG.pf; bts[i].className = 'bgchip' + (on ? ' on' : ''); bts[i].setAttribute('aria-selected', on ? 'true' : 'false'); }
+  x = $('.bgchips', root); if (x) x.hidden = !per;
+  x = $('.bgcards', root); if (x) x.hidden = per || !kart;
+  x = $('#tbv', root); if (x) x.hidden = per || kart;
+  x = $('.bgpcards', root); if (x) x.hidden = !per || !kart;
+  x = $('#tbp', root); if (x) x.hidden = !per || kart;
+  secs = root.querySelectorAll('.bgpcards > .bgsec, #tbp > .bgsec');
+  for (i = 0; i < secs.length; i++) secs[i].hidden = BG.pf !== '*' && secs[i].getAttribute('data-i') !== BG.pf;
+  x = $('#bgAll', root);
+  if (x){ cs = bgVisCards(); x.hidden = !kart; x.textContent = cs.length && cs.every(bgIsOpen) ? 'Tümünü kapat' : 'Tümünü aç'; }
+  bgChipShow();
   if (!quiet){ fitAll(); bgPlay(root, true); }
 }
+function bgSetView(v, quiet){
+  if (v !== 'kart' && v !== 'tablo') v = 'tablo';
+  BG.view = v; LS.set('gk_bgv', v);
+  bgApply(quiet);
+}
+function bgSetLevel(l, quiet){
+  if (l !== 'per') l = 'sube';
+  BG.lv = l; LS.set('gk_blv', l);
+  if (l === 'per' && !BG.pdone) bgBuildP(bgRef());
+  bgApply(quiet);
+}
+function bgSetFilter(f, quiet){
+  BG.pf = /^(\*|[a-z0-9-]{1,40})$/.test(String(f)) ? String(f) : '*'; LS.set('gk_bpf', BG.pf);
+  bgApply(quiet);
+}
 function bgAllToggle(){
-  var open = !BG.cards.every(function(c){ return c.root.classList.contains('open'); });
-  BG.cards.forEach(function(c){
+  var cs = bgVisCards(), open = !cs.every(bgIsOpen);
+  cs.forEach(function(c){
     c.root.classList.toggle('open', open); c.btn.setAttribute('aria-expanded', open ? 'true' : 'false'); c.body.hidden = !open; BG.open[c.key] = open;
   });
-  $('#bgAll').textContent = open ? 'Tümünü kapat' : 'Tümünü aç';
+  $('#bgAll').textContent = cs.length && open ? 'Tümünü kapat' : 'Tümünü aç';
   if (open) bgPlay($('#viewBG'), true);
   fitAll();
 }
+function bgScrollTo(c){                                                      /* kartı üstte yapışan başlığın (ve bölüm başlığının) altına getir */
+  var sec = c.root.parentNode ? c.root.parentNode.parentNode : null, band = null, top;
+  if (sec && (' ' + sec.className + ' ').indexOf(' bgsec ') >= 0) band = $('.bgsh', sec);
+  top = c.root.getBoundingClientRect().top + (window.pageYOffset || 0) - ($('#top') ? $('#top').offsetHeight : 0) - (band ? band.offsetHeight : 0) - 8;
+  window.scrollTo(0, Math.max(0, top));
+}
 function bgGoto(slug){
-  var c = null, i, top;
-  bgSetView('kart', true);
+  var c = null, i;
+  bgSetLevel('sube', true); bgSetView('kart', true);
   for (i = 0; i < BG.cards.length; i++) if (BG.cards[i].slug === slug) c = BG.cards[i];
   if (!c) return;
   c.root.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; BG.open[c.key] = true;
+  bgScrollTo(c);
   fitAll(); bgPlay($('#viewBG'), true);
-  top = c.root.getBoundingClientRect().top + (window.pageYOffset || 0) - ($('#top') ? $('#top').offsetHeight : 0) - 8;
-  window.scrollTo(0, Math.max(0, top));
+}
+function bgGotoP(key){
+  var c = null, i;
+  bgSetLevel('per', true); bgSetView('kart', true);
+  for (i = 0; i < BG.pcards.length; i++) if (BG.pcards[i].key === key) c = BG.pcards[i];
+  if (!c) return;
+  c.root.classList.add('open'); c.btn.setAttribute('aria-expanded', 'true'); c.body.hidden = false; BG.open[c.key] = true;
+  bgApply(true);
+  bgScrollTo(c);
+  fitAll(); bgPlay($('#viewBG'), true);
 }
 
 /* ----- Bugün sekmesi: şubenin günlük toplamı; dokununca personelin tek tek girişleri ----- */
@@ -4866,13 +5124,14 @@ function bgCardB(it, s, n){
     var o = !root.classList.contains('open');
     root.classList.toggle('open', o); btn.setAttribute('aria-expanded', o ? 'true' : 'false'); body.hidden = !o; BG.open[key] = o;
     if (o){ bgPlay(body, true); }
-    fitAll();
+    bgFitIn(root);
   });
   if (BG.open[key]){ root.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); body.hidden = false; }
   root.style.setProperty('--i', Math.min(n + 1, 10));
   return root;
 }
 function bgBuildB(){
+  BG.rev++;
   var root = $('#viewBB'), di = dayInfo(BG.day), q = BG.day.split('-'), ent = 0, h;
   root.innerHTML = '';
   if (!BG.list.length){ return; }
@@ -4938,25 +5197,33 @@ function bgRender(force){
     if (BG.tab === 'bb'){ fitAll(); bgPlay($('#viewBB'), first); if (first) BG.played.b = true; }
   }
   bgHeader(ref);
+  if (BG.tab === 'msg') bmShow();
   if (redo && y > 0){ try { window.scrollTo(0, y); } catch(e){} }
   setHH();
 }
 
 /* ----- sekmeler ----- */
 function bgSetTab(t, first){
-  var g = t === 'gid';
-  BG.tab = g ? 'gid' : 'bb'; LS.set('gk_btab', BG.tab); document.body.setAttribute('data-tab', g ? 'gid' : 'gun');
-  $('#tabBG').setAttribute('aria-selected', g ? 'true' : 'false'); $('#tabBG').tabIndex = g ? 0 : -1;
-  $('#tabBB').setAttribute('aria-selected', g ? 'false' : 'true'); $('#tabBB').tabIndex = g ? -1 : 0;
-  $('#viewBG').hidden = !g; $('#viewBB').hidden = g;
+  var g = t === 'gid', m = t === 'msg', ids = ['BG', 'BB', 'BM'], cur = g ? 0 : (m ? 2 : 1), i, on, mn;
+  BG.tab = g ? 'gid' : (m ? 'msg' : 'bb');
+  if (!m) LS.set('gk_btab', BG.tab);                                         /* Mesaj sekmesi hatırlanmaz: uygulama hep Gidişatlar ya da Bugün ile açılır */
+  document.body.setAttribute('data-tab', g ? 'gid' : (m ? 'msg' : 'gun'));
+  for (i = 0; i < 3; i++){
+    on = i === cur;
+    $('#tab' + ids[i]).setAttribute('aria-selected', on ? 'true' : 'false'); $('#tab' + ids[i]).tabIndex = on ? 0 : -1;
+    $('#view' + ids[i]).hidden = !on;
+  }
   movePill(first);
+  if (m) bmShow();
   fitAll();
   if (first) return;
   window.scrollTo(0, 0);
-  var mn = $('#main'); mn.classList.remove('enter'); void mn.offsetWidth;
+  mn = $('#main'); mn.classList.remove('enter'); void mn.offsetWidth;
   if (anim){ mn.classList.add('enter'); setTimeout(function(){ mn.classList.remove('enter'); }, 1800); }
-  bgPlay($(g ? '#viewBG' : '#viewBB'), true);
-  if (g) BG.played.g = true; else BG.played.b = true;
+  if (!m){
+    bgPlay($(g ? '#viewBG' : '#viewBB'), true);
+    if (g) BG.played.g = true; else BG.played.b = true;
+  }
   bgTick(true);
 }
 
@@ -5019,13 +5286,17 @@ function bgSheetClick(e){
   else if (act === 'bcopy') copyText(window.location.href.split('#')[0].split('?')[0] + '?bolge=' + bgListStr() + '&s=bolge', function(ok){ sheetMsg(ok ? 'Bölge linki kopyalandı.' : 'Kopyalanamadı.', ok); });
 }
 function bgMainClick(e){
-  var b = e.target, act, row, inp;
+  var b = e.target, act, row, inp, cl;
   while (b && b !== this && b.getAttribute){
     act = b.getAttribute('data-act');
+    cl = ' ' + b.className + ' ';
     if (act === 'bjoin'){ inp = b.parentNode.querySelector('input'); bgJoin(b.getAttribute('data-k'), inp ? inp.value : '', b.parentNode.querySelector('.shmsg')); return; }
     if (b.id === 'bgAll'){ bgAllToggle(); return; }
     if (b.getAttribute('data-v') && b.parentNode && (' ' + b.parentNode.className + ' ').indexOf(' seg ') >= 0){ bgSetView(b.getAttribute('data-v')); return; }
-    if (b.className && (' ' + b.className + ' ').indexOf(' bgr ') >= 0 && b.getAttribute('data-s') && (' ' + b.className + ' ').indexOf(' none ') < 0){ bgGoto(b.getAttribute('data-s')); return; }
+    if (b.getAttribute('data-lv') && b.parentNode && (' ' + b.parentNode.className + ' ').indexOf(' seg ') >= 0){ bgSetLevel(b.getAttribute('data-lv')); return; }
+    if (b.getAttribute('data-f') && cl.indexOf(' bgchip ') >= 0){ bgSetFilter(b.getAttribute('data-f')); return; }
+    if (cl.indexOf(' bgr ') >= 0 && b.getAttribute('data-s') && cl.indexOf(' none ') < 0){ bgGoto(b.getAttribute('data-s')); return; }
+    if (cl.indexOf(' bgpr ') >= 0 && b.getAttribute('data-pk')){ bgGotoP(b.getAttribute('data-pk')); return; }
     b = b.parentNode;
   }
 }
@@ -5035,13 +5306,19 @@ function bgInitUi(){
   document.body.setAttribute('data-tab', 'gid');
   tabs.innerHTML = '<i class="tabpill" id="pill" aria-hidden="true"></i>'
     + '<button class="tab" id="tabBG" type="button" role="tab" aria-selected="true" aria-controls="viewBG">Gidişatlar</button>'
-    + '<button class="tab" id="tabBB" type="button" role="tab" aria-selected="false" aria-controls="viewBB" tabindex="-1">Bugün</button>';
+    + '<button class="tab" id="tabBB" type="button" role="tab" aria-selected="false" aria-controls="viewBB" tabindex="-1">Bugün</button>'
+    + '<button class="tab" id="tabBM" type="button" role="tab" aria-selected="false" aria-controls="viewBM" tabindex="-1">Mesaj</button>';
   $('#tabBG').addEventListener('click', function(){ if (BG.tab !== 'gid') bgSetTab('gid'); });
   $('#tabBB').addEventListener('click', function(){ if (BG.tab !== 'bb') bgSetTab('bb'); });
+  $('#tabBM').addEventListener('click', function(){ if (BG.tab !== 'msg') bgSetTab('msg'); });
   tabs.addEventListener('keydown', function(e){
-    var k = e.key; if (k !== 'ArrowRight' && k !== 'ArrowLeft') return;
-    e.preventDefault(); bgSetTab(k === 'ArrowRight' ? 'bb' : 'gid'); $(BG.tab === 'gid' ? '#tabBG' : '#tabBB').focus();
+    var k = e.key, o = ['gid', 'bb', 'msg'], i;
+    if (k !== 'ArrowRight' && k !== 'ArrowLeft') return;
+    e.preventDefault();
+    i = Math.max(0, Math.min(2, o.indexOf(BG.tab) + (k === 'ArrowRight' ? 1 : -1)));
+    bgSetTab(o[i]); $('#tab' + ['BG', 'BB', 'BM'][i]).focus();
   });
+  bmInit();
   rb.hidden = false; rb.className = 'hbtn'; rb.setAttribute('aria-label', 'Yenile');
   rb.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v5h-5"/></svg>';
   rb.addEventListener('click', function(){ BG.last = 0; bgRefresh(); });
@@ -5050,7 +5327,10 @@ function bgInitUi(){
   document.addEventListener('keydown', function(e){ if ((e.key === 'Escape' || e.keyCode === 27) && !$('#sheetw').hidden) bgCloseSheet(); });
   $('#main').addEventListener('click', bgMainClick);
   $('#main').addEventListener('keydown', function(e){
-    var b = e.target; if ((e.key === 'Enter' || e.key === ' ') && b && b.className && (' ' + b.className + ' ').indexOf(' bgr ') >= 0 && b.getAttribute('data-s')){ e.preventDefault(); bgGoto(b.getAttribute('data-s')); }
+    var b = e.target, c = b && b.className ? ' ' + b.className + ' ' : '';
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    if (c.indexOf(' bgr ') >= 0 && b.getAttribute('data-s')){ e.preventDefault(); bgGoto(b.getAttribute('data-s')); }
+    else if (c.indexOf(' bgpr ') >= 0 && b.getAttribute('data-pk')){ e.preventDefault(); bgGotoP(b.getAttribute('data-pk')); }
   });
   layoutWide(); window.addEventListener('resize', layoutWide);
   window.addEventListener('resize', setHH);
@@ -5062,11 +5342,13 @@ function bgInitUi(){
   setTimeout(function(){ $('#main').classList.remove('enter'); }, 3200);
 }
 function bgInit(){
-  var mu = jget('gk_bmute', {});
+  var mu = jget('gk_bmute', {}), pf = LS.get('gk_bpf');
   BG.list = bgLoad();
   BG.mute = mu && typeof mu === 'object' && !(mu instanceof Array) ? mu : {};
   BG.day = dayKey();
   BG.view = LS.get('gk_bgv') === 'kart' ? 'kart' : 'tablo';
+  BG.lv = LS.get('gk_blv') === 'per' ? 'per' : 'sube';
+  BG.pf = /^(\*|[a-z0-9-]{1,40})$/.test(String(pf)) ? String(pf) : '*';
   bgReset();
   bgInitUi();
   pwaUpdate();
@@ -5078,6 +5360,303 @@ function bgInit(){
   setInterval(function(){ bgTick(false); }, 15000);
   document.addEventListener('visibilitychange', function(){ if (!document.hidden) bgTick(true); });
   window.addEventListener('online', function(){ bgTick(true); });
+}
+/* ================= app16: Bölge ▸ Mesaj (şubelerdeki çalışanlara duyuru) =================
+   Mesaj her şubenin ortak kaydındaki sohbet düğümüne yazılır: g/<kod>/c/<kimlik> = { t: sunucu saati, n: gönderen adı, m: metin }.
+   Şubede «Şube sohbeti»nde görünür; uygulaması açık olan şube cihazlarında rozet çıkar.
+   Mesaj şubeye ulaşınca o şubenin bildirim konusuna (ntfy) da kısa bir bildirim gider: «Şube sohbetinde yeni mesaj var».
+   Bildirimde mesajın kendisi YOKTUR (ntfy üçüncü taraf sunucudur); içerik yalnızca şubenin ortak kaydında durur.
+   Bildirim, şube telefonunda bildirim açıksa uygulama kapalıyken de görünür. Gidişatlar ve Bugün sekmeleri yalnızca okur;
+   ortak kayda yazılan TEK şey bu sekmenin sohbet mesajıdır.
+   Kural: sohbet düğümü (c) Firebase kurallarında vardır; yoksa yazma reddedilir ve ekranda tek seferlik ayar yönergesi çıkar. */
+var BM = { to:null, name:'Bölge Müdürü', confirm:false, busy:false, res:null, hist:[], rules:false, probeAt:0, probing:false, edit:false, sig:'', loaded:false };
+var BM_MAX = 500, BM_DEF = 'Bölge Müdürü', BM_HIST = 20;
+
+/* ----- yardımcılar ----- */
+function bmClean(t){
+  return String(t == null ? '' : t).replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]+/g, ' ').replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').replace(/^\s+|\s+$/g, '');
+}
+function bmNameOk(n){
+  var s = String(n == null ? '' : n).replace(/[\u0000-\u001f]+/g, ' ').replace(/\s+/g, ' ').replace(/^ | $/g, '');
+  return s.length >= 1 && s.length <= 40 ? s : '';
+}
+function bmBody(name, text){ return '{"t":{".sv":"timestamp"},"n":' + JSON.stringify(name) + ',"m":' + JSON.stringify(text) + '}'; }
+function bmSlugOk(x){ return typeof x === 'string' && /^[a-z0-9-]{1,40}$/.test(x); }
+function bmConn(){ return BG.list.filter(function(x){ return !!x.k; }); }
+function bmSel(){
+  var c = bmConn(), t = BM.to;
+  if (!t) return c;
+  return c.filter(function(x){ return t.indexOf(x.s) >= 0; });
+}
+function bmFind(slug){ var i; for (i = 0; i < BG.list.length; i++) if (BG.list[i].s === slug) return BG.list[i]; return null; }
+function bmHistOk(o){
+  var i, all = [], ok = [], pk = [];
+  if (!o || typeof o !== 'object' || !/^[0-9a-z]{10,40}$/.test(o.id) || typeof o.t !== 'number' || !isFinite(o.t)) return null;
+  if (typeof o.m !== 'string' || !o.m || o.m.length > BM_MAX || typeof o.n !== 'string' || !o.n || o.n.length > 40) return null;
+  if (!(o.all instanceof Array) || !(o.ok instanceof Array)) return null;
+  for (i = 0; i < o.all.length && all.length < 16; i++) if (bmSlugOk(o.all[i]) && all.indexOf(o.all[i]) < 0) all.push(o.all[i]);
+  for (i = 0; i < o.ok.length; i++) if (all.indexOf(o.ok[i]) >= 0 && ok.indexOf(o.ok[i]) < 0) ok.push(o.ok[i]);
+  if (!all.length) return null;
+  if (o.v === 2 && o.pk instanceof Array){                                   /* bildirimli sürüm: bildirimi ntfy'ye ulaşan şubeler */
+    for (i = 0; i < o.pk.length; i++) if (ok.indexOf(o.pk[i]) >= 0 && pk.indexOf(o.pk[i]) < 0) pk.push(o.pk[i]);
+    return { id:o.id, t:o.t, n:o.n, m:o.m, all:all, ok:ok, pk:pk, v:2 };
+  }
+  return { id:o.id, t:o.t, n:o.n, m:o.m, all:all, ok:ok };                    /* eski kayıt: bildirim bilgisi yok, gösterilmez */
+}
+function bmLoad(){
+  var t = jget('gk_bmto', null), h = jget('gk_bmh', []), i, o, out = [];
+  BM.to = t instanceof Array ? t.filter(bmSlugOk) : null;
+  BM.name = bmNameOk(LS.get('gk_bmname')) || BM_DEF;
+  if (h instanceof Array) for (i = 0; i < h.length && out.length < BM_HIST; i++){ o = bmHistOk(h[i]); if (o) out.push(o); }
+  BM.hist = out;
+  BM.loaded = true;
+}
+function bmSave(){
+  if (BM.to) jset('gk_bmto', BM.to); else LS.del('gk_bmto');                 /* seçim hiç yapılmadıysa "tüm bağlı şubeler" kalır; boş liste "hiçbiri" demektir */
+  LS.set('gk_bmname', BM.name); jset('gk_bmh', BM.hist);
+}
+function bmPrj(){ var m = /^https:\/\/([a-z0-9-]+)-default-rtdb\./.exec(String(DEFAULT_DB)); return m ? m[1] : ''; }
+
+/* ----- görünüm ----- */
+function bmListSig(){ return BG.list.map(function(x){ return x.s + (x.k ? '1' : '0'); }).join(','); }
+function bmBuild(){
+  var root = $('#viewBM'), old = $('#bmIn'), v = old ? old.value : '', h = '', c = bmConn(), sel;
+  if (!root) return;
+  if (!BM.loaded) bmLoad();
+  BM.sig = bmListSig(); BM.confirm = false;                                    /* şube listesi değiştiyse eski onay geçersiz */
+  h += '<div class="bmc"><span class="shl">Kime?</span><div class="bmto" role="group" aria-label="Alıcı şubeler">';
+  if (!BG.list.length) h += '<span class="bmnone">Henüz şube yok. Ayarlar\'dan şube ekle.</span>';
+  else {
+    h += '<button type="button" class="bgchip" data-bm="all" aria-pressed="false">Tüm şubeler</button>';
+    BG.list.forEach(function(it){
+      h += '<button type="button" class="bgchip" data-bm="to" data-k="' + esc(it.s) + '" aria-pressed="false"' + (it.k ? '' : ' disabled title="Bağlı değil"') + '>' + esc(bgName(it.s)) + (it.k ? '' : ' · bağlı değil') + '</button>';
+    });
+  }
+  h += '</div><div class="bmcount" id="bmCnt" aria-live="polite"></div>';
+  h += '<span class="shl" style="margin-top:14px">Mesaj</span>'
+    + '<textarea class="bmin" id="bmIn" rows="4" maxlength="' + BM_MAX + '" placeholder="Çalışanlara yazacağın mesaj" aria-label="Mesaj"></textarea>'
+    + '<div class="bmmeta"><span id="bmFrom"></span><span id="bmN"></span></div>'
+    + '<div class="bmname" id="bmNameW" hidden><input class="shi" id="bmNameIn" type="text" maxlength="40" autocomplete="off" aria-label="Gönderen adı"><button class="shb g" type="button" data-bm="namesave">Kaydet</button></div>'
+    + '<p class="bmnote">Bildirimi açık olan telefonlara bildirim düşer (mesajın kendisi bildirimde yazmaz); diğerleri uygulamayı açınca «Şube sohbeti»nde görür. Cevapları da orada yazarlar, burada görünmez.</p>'
+    + '<button class="shb bmsend" id="bmSend" type="button" data-bm="send">Gönder</button>'
+    + '<div class="bmcf" id="bmCf" hidden role="group" aria-label="Gönderimi onayla"><p id="bmCfT"></p><button class="shb" type="button" data-bm="yes">Evet, gönder</button><button class="shb g" type="button" data-bm="no">Vazgeç</button></div>'
+    + '<div class="shmsg" id="bmMsg" role="status" aria-live="polite"></div></div>';
+  h += '<div id="bmRules"></div><div class="bmh" id="bmHist"></div>';
+  root.innerHTML = h;
+  $('#bmIn').value = v;
+  $('#bmIn').addEventListener('input', function(){ BM.confirm = false; bmGrow(); bmUpdate(); });
+  bmRenderRules(); bmRenderHist(); bmUpdate();
+  sel = c.length;
+  if (!sel && BG.list.length) bmNote('Mesaj göndermek için en az bir şubenin bağlantısı eklenmeli.', false);
+}
+function bmGrow(){ var t = $('#bmIn'); if (!t) return; t.style.height = 'auto'; t.style.height = Math.min(Math.max(t.scrollHeight, 112), 240) + 'px'; }
+function bmNote(t, ok){ var m = $('#bmMsg'); if (!m) return; m.className = 'shmsg' + (t ? (ok ? ' ok' : ' er') : ''); m.textContent = t || ''; }
+function bmUpdate(){
+  var root = $('#viewBM'), ta = $('#bmIn'), c = bmConn(), sel = bmSel(), txt, n, chips, i, on, slug, snd, ids = {}, cf, w;
+  if (!root || !ta) return;
+  txt = bmClean(ta.value); n = ta.value.length;
+  for (i = 0; i < sel.length; i++) ids[sel[i].s] = 1;
+  chips = root.querySelectorAll('.bmto button');
+  for (i = 0; i < chips.length; i++){
+    slug = chips[i].getAttribute('data-k');
+    on = slug ? !!ids[slug] : (c.length > 0 && sel.length === c.length);
+    chips[i].className = 'bgchip' + (on ? ' on' : ''); chips[i].setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  $('#bmCnt').textContent = c.length ? (sel.length ? sel.length + ' şube seçili' : 'Şube seçilmedi') : '';
+  $('#bmN').textContent = n + ' / ' + BM_MAX; $('#bmN').className = n > BM_MAX - 50 ? 'warn' : '';
+  $('#bmFrom').innerHTML = 'Gönderen: <b>' + esc(BM.name) + '</b> · <button type="button" class="ch-lnk" data-bm="name">değiştir</button>';
+  snd = $('#bmSend'); snd.disabled = BM.busy || !txt || !sel.length;
+  snd.textContent = BM.busy ? 'Gönderiliyor…' : (sel.length ? (sel.length === 1 ? '1 şubeye gönder' : sel.length + ' şubeye gönder') : 'Gönder');
+  cf = $('#bmCf'); cf.hidden = !BM.confirm || snd.disabled;
+  if (!cf.hidden) $('#bmCfT').innerHTML = '<b>' + (sel.length === c.length && c.length > 1 ? 'Tüm şubelere (' + sel.length + ')' : (sel.length === 1 ? esc(bgName(sel[0].s)) + ' şubesine' : sel.length + ' şubeye')) + '</b> gönderilecek ve telefonlarına bildirim düşecek. Gönderdikten sonra geri alınamaz.';
+  w = $('#bmNameW'); if (w) w.hidden = !BM.edit;
+}
+function bmDay(t){ var d = new Date(t); return chDay(t) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function bmNames(a){ return a.map(bgName).join(', '); }
+function bmStat(e){
+  var miss = e.all.filter(function(s){ return e.ok.indexOf(s) < 0; }), pm = [], t, bad;
+  if (BM.busy && BM.res && BM.res.id === e.id) return { t:'Gönderiliyor… ' + e.ok.length + '/' + e.all.length, c:'wt', retry:false, lbl:'' };
+  if (e.v === 2) pm = e.ok.filter(function(s){ return e.pk.indexOf(s) < 0; });
+  t = miss.length ? e.ok.length + '/' + e.all.length + ' şubeye iletildi · gitmeyen: ' + bmNames(miss) : (e.all.length === 1 ? 'İletildi: ' + bgName(e.all[0]) : e.all.length + ' şubeye iletildi');
+  if (e.v === 2){
+    if (pm.length) t += ' · bildirim gitmedi: ' + bmNames(pm);
+    else if (e.pk.length) t += ' · bildirim gönderildi';
+  }
+  bad = miss.length || pm.length;
+  return { t:t, c:bad ? 'er' : 'ok', retry:!!bad, lbl:miss.length ? 'Gitmeyenlere tekrar gönder' : 'Bildirimi tekrar gönder' };
+}
+function bmRenderHist(){
+  var box = $('#bmHist'), h = '';
+  if (!box) return;
+  if (!BM.hist.length){ box.innerHTML = ''; return; }
+  h += '<h3>Gönderilenler</h3>';
+  BM.hist.forEach(function(e){
+    var s = bmStat(e);
+    h += '<div class="bmhi" data-id="' + esc(e.id) + '"><div class="bmt">' + esc(bmDay(e.t)) + ' · ' + esc(e.n) + '</div><p>' + esc(e.m) + '</p>'
+      + '<div class="bms ' + s.c + '">' + esc(s.t) + '</div>'
+      + (s.retry ? '<button type="button" class="bgchip bmrt" data-bm="hretry" data-id="' + esc(e.id) + '">' + esc(s.lbl) + '</button>' : '') + '</div>';
+  });
+  h += '<button type="button" class="ch-lnk bmclr" data-bm="hclear">Geçmişi temizle</button>';
+  box.innerHTML = h;
+}
+function bmRenderRules(){
+  var box = $('#bmRules'), p = bmPrj(), h;
+  if (!box) return;
+  if (!BM.rules){ box.innerHTML = ''; return; }
+  h = '<div class="bmw" role="alert"><b>Mesaj için bir kez ayar gerekiyor</b>'
+    + '<p>Firebase\'e şube sohbetinin kuralını yapıştırman lazım. Bir kez yapılır, sonra bir daha sorulmaz.</p>'
+    + '<ol><li>«Kuralı kopyala»ya dokun.</li><li>«Firebase\'i aç» → <b>Kurallar</b> sekmesi → içindekilerin hepsini sil, yapıştır → <b>Yayınla</b>.</li><li>Buraya dön, «Tekrar dene»ye dokun.</li></ol>'
+    + '<button class="shb" type="button" data-bm="rcopy">Kuralı kopyala</button>'
+    + (p ? '<a class="shb g" id="bmFb" target="_blank" rel="noopener noreferrer">Firebase\'i aç</a>' : '')
+    + '<button class="shb g" type="button" data-bm="rcheck">Tekrar dene</button></div>';
+  box.innerHTML = h;
+  if (p && $('#bmFb')) $('#bmFb').href = 'https://console.firebase.google.com/project/' + p + '/database/' + p + '-default-rtdb/rules';   /* kullanıcının dokunduğu bağlantı; sayfa dış kaynak yüklemez */
+}
+
+/* ----- ayar denetimi: hiçbir şey yazmadan, sohbet düğümünü sorgula ----- */
+function bmProbe(force){
+  var it = bmConn()[0];
+  if (!it || BM.probing) return;
+  if (!force && Date.now() - BM.probeAt < 300000) return;
+  BM.probing = true; BM.probeAt = Date.now();
+  xhr('GET', bgUrl(it, '/c.json?orderBy=%22t%22&limitToLast=1'), null, function(st, j){
+    var need;
+    BM.probing = false;
+    if (st === 200) need = false;
+    else if (st === 401 || st === 403 || (st === 400 && /index/i.test(j && j.error ? String(j.error) : ''))) need = true;
+    else { BM.probeAt = 0; if (force) bmNote('Şimdi kontrol edilemedi. İnternetini kontrol edip tekrar dene.', false); return; }
+    BM.rules = need; bmRenderRules();
+    if (force) bmNote(need ? 'Kural henüz yayında görünmüyor. Yayınladıktan sonra birkaç saniye bekleyip tekrar dene.' : 'Tamam, kural yayında. Artık mesaj gönderebilirsin.', !need);
+  });
+}
+
+/* ----- gönderim ----- */
+/* Bildirim: şubenin ntfy konusuna kısa bir yazı. Mesaj metni YOLLANMAZ. Etiket (gk-bm-<gönderim kimliği>) aynı gönderimin bildirimlerini
+   birden çok şubeye kayıtlı telefonda (müdürün kendi telefonu) tek bildirimde birleştirir; sw.js bunu tanır. */
+var BM_PUSH = 'Şube sohbetinde yeni mesaj var.';
+function bmNtfy(topic, title, id, cb){
+  var x, done = false;
+  function fin(ok){ if (!done){ done = true; cb(ok); } }
+  if (!topic){ fin(false); return; }
+  try {
+    x = new XMLHttpRequest();
+    x.open('POST', NTFY + '/' + topic + '?title=' + encodeURIComponent(title) + '&tags=' + encodeURIComponent('gk-bm-' + id), true);
+    x.timeout = 15000; x.setRequestHeader('Content-Type', 'text/plain;charset=UTF-8');
+    x.onreadystatechange = function(){ if (x.readyState === 4) fin(x.status >= 200 && x.status < 300); };
+    x.ontimeout = function(){ fin(false); }; x.onerror = function(){ fin(false); };
+    x.send(BM_PUSH);
+  } catch(e){ fin(false); }
+}
+function bmPush(res, row, it){
+  row.ps = 'wait';
+  bmNtfy(bgTopic(it.k), res.n, res.id, function(ok){ row.ps = ok ? 'ok' : 'fail'; bmDone(res); });
+}
+function bmPut(res, row){
+  var it = bmFind(row.s);
+  if (!it || !it.k){ if (row.put) row.st = 'fail'; else row.ps = 'fail'; row.code = 0; bmDone(res); return; }
+  if (!row.put){ bmPush(res, row, it); return; }                               /* yalnız bildirim tekrarı: mesaj zaten şubede */
+  row.st = 'wait'; row.code = 0;
+  xhr('PUT', bgUrl(it, '/c/' + res.id + '.json?print=silent'), bmBody(res.n, res.m), function(st){
+    row.code = st;
+    row.st = st >= 200 && st < 300 ? 'ok' : (st === 400 || st === 401 || st === 403 ? 'rules' : 'fail');
+    if (row.st === 'ok' && res.push) bmPush(res, row, it);                     /* bildirim, mesaj şubeye ulaştıktan SONRA gider */
+    else bmDone(res);
+  });
+}
+function bmEntry(id){ var i; for (i = 0; i < BM.hist.length; i++) if (BM.hist[i].id === id) return BM.hist[i]; return null; }
+function bmDone(res){
+  var e = bmEntry(res.id), wait = 0, rules = 0, pbad = 0, i, r;
+  for (i = 0; i < res.rows.length; i++){
+    r = res.rows[i];
+    if (r.st === 'wait' || r.ps === 'wait') wait++;
+    if (r.st === 'rules') rules++;
+    if (r.ps === 'fail') pbad++;
+    if (r.st === 'ok' && e && e.ok.indexOf(r.s) < 0) e.ok.push(r.s);
+    if (r.ps === 'ok' && e && e.pk && e.pk.indexOf(r.s) < 0) e.pk.push(r.s);
+  }
+  if (wait){ bmRenderHist(); return; }
+  BM.busy = false;
+  if (rules){ BM.rules = true; bmRenderRules(); bmNote('Mesaj gitmedi: Firebase kuralı güncellenmemiş.', false); }
+  else if (e && e.ok.length < e.all.length) bmNote('Bazı şubelere gitmedi. Aşağıdan tekrar deneyebilirsin.', false);
+  else if (pbad) bmNote('Mesaj şubelere ulaştı ama bazı şubelere bildirim gönderilemedi. Aşağıdan bildirimi tekrar gönderebilirsin.', false);
+  else { bmNote('', true); }
+  bmSave(); bmRenderHist(); bmUpdate();
+}
+function bmRun(res){
+  var i;
+  BM.res = res; BM.busy = true;
+  bmRenderHist(); bmUpdate();
+  for (i = 0; i < res.rows.length; i++) bmPut(res, res.rows[i]);
+}
+function bmGo(){
+  var ta = $('#bmIn'), txt = ta ? bmClean(ta.value) : '', sel = bmSel(), res, e, i;
+  if (BM.busy || !txt || !sel.length) return;
+  BM.confirm = false; bmNote('', true);
+  res = { id:chId(), t:Date.now(), n:BM.name, m:txt.slice(0, BM_MAX), push:true, rows:[] };
+  e = { id:res.id, t:res.t, n:res.n, m:res.m, all:[], ok:[], pk:[], v:2 };
+  for (i = 0; i < sel.length; i++){ res.rows.push({ s:sel[i].s, st:'wait', code:0, put:true, ps:'' }); e.all.push(sel[i].s); }
+  BM.hist.unshift(e); if (BM.hist.length > BM_HIST) BM.hist.length = BM_HIST;
+  ta.value = ''; bmGrow();
+  bmSave();
+  bmRun(res);
+}
+function bmRetry(id){
+  var e = bmEntry(id), res, i;
+  if (!e || BM.busy) return;
+  res = { id:e.id, t:e.t, n:e.n, m:e.m, push:e.v === 2, rows:[] };
+  for (i = 0; i < e.all.length; i++){
+    if (e.ok.indexOf(e.all[i]) < 0) res.rows.push({ s:e.all[i], st:'wait', code:0, put:true, ps:'' });
+    else if (res.push && e.pk.indexOf(e.all[i]) < 0) res.rows.push({ s:e.all[i], st:'ok', code:0, put:false, ps:'' });   /* mesaj gitmiş, yalnız bildirim eksik */
+  }
+  if (!res.rows.length) return;
+  bmNote('', true);
+  bmRun(res);
+}
+
+/* ----- dokunuşlar ----- */
+function bmToggle(slug){
+  var cur = bmSel().map(function(x){ return x.s; }), i = cur.indexOf(slug);
+  if (i >= 0) cur.splice(i, 1); else cur.push(slug);
+  BM.to = cur; BM.confirm = false; bmSave(); bmUpdate();
+}
+function bmToggleAll(){
+  var c = bmConn();
+  BM.to = bmSel().length === c.length ? [] : c.map(function(x){ return x.s; });
+  BM.confirm = false; bmSave(); bmUpdate();
+}
+function bmClick(e){
+  var b = e.target, act, inp, nm;
+  while (b && b !== this && !(b.getAttribute && b.getAttribute('data-bm'))) b = b.parentNode;
+  if (!b || b === this) return;
+  act = b.getAttribute('data-bm');
+  if (act === 'all') bmToggleAll();
+  else if (act === 'to') bmToggle(b.getAttribute('data-k'));
+  else if (act === 'send'){ if (!b.disabled){ BM.confirm = true; bmUpdate(); try { $('#bmCf button').focus(); } catch(x){} } }
+  else if (act === 'yes') bmGo();
+  else if (act === 'no'){ BM.confirm = false; bmUpdate(); }
+  else if (act === 'name'){ BM.edit = true; bmUpdate(); inp = $('#bmNameIn'); if (inp){ inp.value = BM.name; try { inp.focus(); inp.select(); } catch(x){} } }
+  else if (act === 'namesave'){
+    inp = $('#bmNameIn'); nm = bmNameOk(inp ? inp.value : '');
+    if (!nm){ bmNote('Ad 1–40 harf olmalı.', false); return; }
+    BM.name = nm; BM.edit = false; bmNote('', true); bmSave(); bmUpdate();
+  }
+  else if (act === 'hretry') bmRetry(b.getAttribute('data-id'));
+  else if (act === 'hclear'){ if (!BM.busy){ BM.hist = []; bmSave(); bmRenderHist(); } }
+  else if (act === 'rcopy') copyText(String(RULES), function(ok){ bmNote(ok ? 'Kural kopyalandı. Şimdi Firebase\'i aç.' : 'Kopyalanamadı.', ok); });
+  else if (act === 'rcheck') bmProbe(true);
+}
+/* sekme açılınca / şube listesi değişince */
+function bmShow(){
+  if (!$('#bmIn') || BM.sig !== bmListSig()) bmBuild();
+  bmUpdate(); bmProbe(false);
+}
+function bmInit(){
+  var main = $('#viewBM');
+  if (!main) return;
+  main.addEventListener('click', bmClick);
+  main.addEventListener('keydown', function(e){
+    if ((e.key === 'Enter') && (e.target && e.target.id === 'bmNameIn')){ e.preventDefault(); bmClick.call(main, { target:$('[data-bm="namesave"]', main) }); }
+  });
 }
 /* ---------- başlat ---------- */
 function init(){

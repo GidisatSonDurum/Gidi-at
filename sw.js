@@ -29,10 +29,20 @@ function show(title, body, tag){
   });
 }
 
+/* Etiket: aynı etiketli bildirimler birbirinin yerine geçer.
+   Normalde her haber ayrıdır (ntfy kimliği). Bölge müdürünün mesajı ise birden çok şubenin konusuna aynı anda gider;
+   hepsine kayıtlı tek telefonda (müdürün kendi telefonu) sekiz ayrı bildirim yığılmasın diye, aynı gönderimin etiketi ortaktır. */
+function tagOf(m){
+  var t = m.tags, i;
+  if (Array.isArray(t)) for (i = 0; i < t.length; i++)
+    if (typeof t[i] === 'string' && /^gk-bm-[0-9a-z]{10,40}$/.test(t[i])) return t[i];
+  return m.id ? 'gk-' + clean(m.id, 40) : '';
+}
+
 function notice(data){
   var m = data && data.message;
   if (data && data.event === 'message' && m && (m.event === 'message' || m.event == null))
-    return show(clean(m.title, 80) || 'Gidişat', clean(m.message, 400), m.id ? 'gk-' + clean(m.id, 40) : '');
+    return show(clean(m.title, 80) || 'Gidişat', clean(m.message, 400), tagOf(m));
   if (data && data.event === 'subscription_expiring')
     return show('Bildirim süresi doluyor', 'Uygulamayı bir kez açman yeter.', 'gk-sure');
   return show('Yeni bildirim', 'Uygulamayı açıp bak.', 'gk-yeni');
